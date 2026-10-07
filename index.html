@@ -39,6 +39,16 @@ textarea.field-control{min-height:112px;resize:vertical}
 .email-group input::placeholder{color:#94a3b8}
 .email-group input:focus::placeholder{color:transparent}
 .email-group .suffix{display:flex;align-items:center;justify-content:center;min-width:170px;padding:0 24px;font-size:16px;font-weight:400;background:#f1f5f9;border-left:1px solid #cbd7e6;color:#475569;white-space:nowrap}
+.multi>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;user-select:none}
+.multi>summary::-webkit-details-marker{display:none}
+.multi>summary::after{content:'▾';color:#64748b;flex-shrink:0}
+.multi[open]>summary{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
+.multi>summary span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.multi>summary.is-placeholder{color:#94a3b8}
+.multi-panel{margin-top:6px;border:1px solid #cbd7e6;border-radius:11px;background:#fff;max-height:300px;overflow-y:auto;padding:6px}
+.multi-panel label{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border-radius:8px;cursor:pointer}
+.multi-panel label:hover{background:#eff6ff}
+.multi-panel input{accent-color:var(--blue);width:17px;height:17px;margin-top:4px;flex-shrink:0}
 .num{width:36px;height:36px;border-radius:8px;background:#eff6ff;color:var(--blue);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sec{padding:32px 0;border-bottom:1px solid var(--line)}
 .sec:last-of-type{border-bottom:0}
@@ -114,8 +124,11 @@ textarea.field-control{min-height:112px;resize:vertical}
       <p id="data-type-help" class="field-help">เลือกประเภทข้อมูลตามลักษณะและวิธีการจัดเก็บของชุดข้อมูล</p>
      </div>
      <div class="field sm:col-span-2">
-      <label for="objective" class="field-label">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span></label>
-      <select id="objective" name="objective" class="field-control" aria-describedby="objective-help"></select>
+      <label id="objective-label" class="field-label">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span></label>
+      <details id="objective" class="multi" aria-describedby="objective-help">
+       <summary id="objective-summary" class="field-control is-placeholder" aria-labelledby="objective-label"><span>เลือกวัตถุประสงค์ (เลือกได้มากกว่า 1 ข้อ)</span></summary>
+       <div id="objective-panel" class="multi-panel" role="group" aria-labelledby="objective-label"></div>
+      </details>
       <p id="objective-help" class="field-help">อธิบายที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
      </div>
     </div>
@@ -308,9 +321,10 @@ const OPTIONS = {
   data_format: ['เลือกรูปแบบข้อมูล','01= Database (ฐานข้อมูล)','02= CSV','03= XML','04= Image','05= Video','06= Audio (ไฟล์เสียง)','07= Text (ตัวหนังสือ ข้อความ)','08= JSON','09= HTML','10= XLS, XLSX (Ms.Excel File)','11= PDF','12= RDF','13= NoSQL','14= Vector เช่น Shapefile SVG GML','15= Raster เช่น GeoTiff JPEG2000','99= อื่นๆ'],
   update_frequency: [['','เลือกความถี่'],['A','A= รายปี'],['S','S= ทุกครึ่งปี'],['Q','Q= รายไตรมาส'],['M','M= รายเดือน'],['W','W= รายสัปดาห์'],['D','D= รายวัน'],['B','B= วันทำการ'],['H','H= รายชั่วโมง'],['N','N= ทุกนาที'],['R','R= ตามเวลาจริง'],['O','O= ไม่มีการปรับปรุงหลังจากการจัดเก็บข้อมูล'],['U','U= ไม่ทราบ'],['OTHER','อื่นๆ: ระบุ...']]
 };
-const FIELD_ID = {category:'category',data_type:'data-type',objective:'objective',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
+const FIELD_ID = {category:'category',data_type:'data-type',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
 
 for (const [key, list] of Object.entries(OPTIONS)) {
+  if (!FIELD_ID[key]) continue;
   const sel = document.getElementById(FIELD_ID[key]);
   list.forEach((item, i) => {
     const [value, label] = Array.isArray(item) ? item : [i === 0 ? '' : item, item];
@@ -321,6 +335,25 @@ for (const [key, list] of Object.entries(OPTIONS)) {
 const $ = id => document.getElementById(id);
 const form = $('metadata-form'), modal = $('result-modal'), submitButton = $('submit-button');
 let submitting = false, previousFocus = null;
+
+// ---------- Objective: เลือกได้หลายข้อ ----------
+const OBJ_PLACEHOLDER = 'เลือกวัตถุประสงค์ (เลือกได้มากกว่า 1 ข้อ)';
+OPTIONS.objective.slice(1).forEach(text => {
+  const label = document.createElement('label');
+  const cb = document.createElement('input'); cb.type = 'checkbox'; cb.name = 'objective'; cb.value = text;
+  const span = document.createElement('span'); span.textContent = text;
+  label.append(cb, span); $('objective-panel').appendChild(label);
+});
+function refreshObjective() {
+  const picked = [...form.querySelectorAll('input[name="objective"]:checked')].map(c => c.value);
+  const sum = $('objective-summary');
+  sum.firstElementChild.textContent = picked.length ? picked.join(', ') : OBJ_PLACEHOLDER;
+  sum.classList.toggle('is-placeholder', !picked.length);
+}
+$('objective-panel').addEventListener('change', refreshObjective);
+form.addEventListener('reset', () => setTimeout(refreshObjective));
+document.addEventListener('click', e => { if (!$('objective').contains(e.target)) $('objective').open = false; });
+$('objective').addEventListener('keydown', e => { if (e.key === 'Escape') { $('objective').open = false; $('objective-summary').focus(); } });
 
 // ---------- Dropdown placeholder tone ----------
 function updateTone(sel) { sel.classList.toggle('select-placeholder', sel.value === ''); }
@@ -369,13 +402,15 @@ function setError(id, msg) {
   if (id === 'maintainer-email') $('maintainer-email-group').dataset.invalid = msg ? 'true' : 'false';
 }
 const REQUIRED = {
-  1: [['dataset-name','กรุณาระบุชื่อชุดข้อมูล'],['description','กรุณาระบุคำอธิบายรายละเอียด'],['tagstring','กรุณาระบุคำสำคัญ'],['category','กรุณาเลือกหมวดหมู่ข้อมูล'],['data-type','กรุณาเลือกประเภทข้อมูล'],['objective','กรุณาเลือกวัตถุประสงค์'],['data-owner','กรุณาเลือกองค์กรเจ้าของข้อมูล'],['data-custodian','กรุณาเลือกหน่วยงานผู้ดูแล'],['maintainer-email','กรุณาระบุอีเมลผู้ติดต่อ'],['data-source','กรุณาระบุแหล่งที่มา']],
+  1: [['dataset-name','กรุณาระบุชื่อชุดข้อมูล'],['description','กรุณาระบุคำอธิบายรายละเอียด'],['tagstring','กรุณาระบุคำสำคัญ'],['category','กรุณาเลือกหมวดหมู่ข้อมูล'],['data-type','กรุณาเลือกประเภทข้อมูล'],['objective','กรุณาเลือกวัตถุประสงค์อย่างน้อย 1 ข้อ'],['data-owner','กรุณาเลือกองค์กรเจ้าของข้อมูล'],['data-custodian','กรุณาเลือกหน่วยงานผู้ดูแล'],['maintainer-email','กรุณาระบุอีเมลผู้ติดต่อ'],['data-source','กรุณาระบุแหล่งที่มา']],
   3: [['submitter-name','กรุณาระบุชื่อ - นามสกุล / เบอร์ติดต่อ ผู้กรอกข้อมูล'],['submitter-email','กรุณาระบุอีเมลผู้กรอกข้อมูล']],
   2: [['data-format','กรุณาเลือกรูปแบบไฟล์ / การจัดเก็บ'],['update-frequency','กรุณาเลือกความถี่ในการอัปเดต'],['geo-coverage','กรุณาเลือกขอบเขตเชิงภูมิศาสตร์หรือเชิงพื้นที่'],['access-url','กรุณาระบุ URL / API Endpoint'],['classification','กรุณาเลือกหมวดหมู่ข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ'],['pdpa','กรุณาเลือกว่ามีข้อมูลส่วนบุคคลหรือไม่'],['access-level','กรุณาเลือกการจัดระดับชั้นความลับของข้อมูล'],['right-of-usage','กรุณาเลือกสัญญาอนุญาตให้ใช้ข้อมูล']]
 };
 function fieldError(id, emptyMsg) {
-  const v = id === 'pdpa' ? (form.querySelector('input[name="pdpa"]:checked')?.value || '') : $(id).value.trim();
-  if (!v) return id === 'access-url' ? ['', null] : [emptyMsg, $(id === 'pdpa' ? 'pdpa' : id)]; // URL ไม่บังคับกรอก
+  const v = id === 'pdpa' ? (form.querySelector('input[name="pdpa"]:checked')?.value || '')
+    : id === 'objective' ? (form.querySelector('input[name="objective"]:checked') ? 'x' : '')
+    : $(id).value.trim();
+  if (!v) return id === 'access-url' ? ['', null] : [emptyMsg, $(id === 'objective' ? 'objective-summary' : id === 'pdpa' ? 'pdpa' : id)]; // URL ไม่บังคับกรอก
   if (id === 'data-owner' && v === 'OTHER' && !$('other-owner').value.trim()) return ['กรุณาระบุชื่อองค์กรเพิ่มเติม', $('other-owner')];
   if (id === 'data-source' && v === 'OTHER' && !$('other-source').value.trim()) return ['กรุณาระบุแหล่งที่มาเพิ่มเติม', $('other-source')];
   if (id === 'update-frequency' && v === 'OTHER' && !$('other-frequency').value.trim()) return ['กรุณาระบุความถี่ในการอัปเดตเพิ่มเติม', $('other-frequency')];
@@ -467,7 +502,7 @@ form.addEventListener('submit', async e => {
   const d = new FormData(form), v = k => String(d.get(k) || '').trim();
   const payload = {
     dataset_name: v('dataset_name'), description: v('description'), tagstring: v('tagstring'),
-    category: v('category'), data_type: v('data_type'), objective: v('objective'), right_of_usage: v('right_of_usage'), access_level: v('access_level'),
+    category: v('category'), data_type: v('data_type'), objective: d.getAll('objective'), right_of_usage: v('right_of_usage'), access_level: v('access_level'),
     data_owner: v('data_owner') === 'OTHER' ? v('other_owner') : v('data_owner'),
     data_custodian: v('data_custodian'), data_source: v('data_source') === 'OTHER' ? v('other_source') : v('data_source'),
     maintainer_email: v('maintainer_email') ? v('maintainer_email') + '@nbtc.go.th' : '', data_classification: v('data_classification'),
