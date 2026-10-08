@@ -307,7 +307,7 @@ h2{letter-spacing:-.005em}
 </div>
 
 <script>
-const WEBHOOK_URL = 'https://YOUR-N8N-INSTANCE/webhook/metadata-entry'; // เปลี่ยนเป็น URL จริงขององค์กร
+const WEBHOOK_URL = 'https://<โดเมนที่เข้าถึงได้>/webhook/metadata-form'; // แทนที่ <โดเมนที่เข้าถึงได้> ด้วยโดเมน n8n จริง (https://)
 
 // ---------- ข้อมูลตัวเลือก ----------
 const OPTIONS = {
@@ -525,7 +525,7 @@ form.addEventListener('submit', async e => {
   if (!validate(3)) return;
   if (!validate(2)) { goTo(2); return; }
   if (!validate(1)) { goTo(1); return; }
-  if (WEBHOOK_URL.includes('YOUR-N8N-INSTANCE')) { showModal('setup'); return; }
+  if (WEBHOOK_URL.includes('YOUR-N8N-INSTANCE') || /[<>]/.test(WEBHOOK_URL)) { showModal('setup'); return; }
   const d = new FormData(form), v = k => String(d.get(k) || '').trim();
   const payload = {
     dataset_name: v('dataset_name'), description: v('description'), tagstring: v('tagstring'),
