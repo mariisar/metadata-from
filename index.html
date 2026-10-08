@@ -114,7 +114,7 @@ textarea.field-control{min-height:112px;resize:vertical}
        <p id="data-type-help" class="field-help">เลือกประเภทข้อมูลตามลักษณะและวิธีการจัดเก็บของชุดข้อมูล</p>
       </div>
 
-      <!-- ⚙️ เปลี่ยนส่วนนี้: จาก Select เป็น Checkbox (เลือกได้มากกว่า 1 ตัวเลือก) -->
+      <!-- ส่วน Checkbox วัตถุประสงค์ (Objective) -->
       <fieldset id="objective-container" class="field sm:col-span-2">
        <legend class="field-label mb-[7px]">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span> <span class="text-xs font-normal text-slate-500">(เลือกได้มากกว่า 1 ข้อ)</span></legend>
        <div id="objective-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -279,6 +279,9 @@ textarea.field-control{min-height:112px;resize:vertical}
 </div>
 
 <script>
+// ประกาศฟังก์ชัน Helper สำหรับดึง Element
+const $ = id => document.getElementById(id);
+
 const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook-test/metadata-submission';
 
 const OPTIONS = {
@@ -321,7 +324,6 @@ const OPTIONS = {
     ['G4.1= Creative Commons Attribution-NoDerivs','G4.1= Creative Commons Attribution-NoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น และต้องให้เครดิตที่มาของเจ้าของผลงาน'],
     ['G4.2= Creative Commons Attribution-Non CommercialNoDerivs','G4.2= Creative Commons Attribution-Non CommercialNoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และต้องไม่ใช่เพื่อการค้า'],
     ['G5= Others License','G5= Others License คือ สัญญาอนุญาตให้ใช้ข้อมูลอื่นๆ โดยเงื่อนไขเป็นไปตามที่เจ้าของข้อมูลกำหนด และผู้ใช้ข้อมูลสามารถขอใช้ข้อมูลได้เป็นรายกรณี']],
-  // ⚙️ รายการวัตถุประสงค์
   objective: [
     '01= ยุทธศาสตร์ชาติ',
     '02= แผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ',
@@ -353,8 +355,10 @@ const OPTIONS = {
 
 const FIELD_ID = {category:'category',data_type:'data-type',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
 
+// Render ตัวเลือก Dropdown ต่างๆ
 for (const [key, list] of Object.entries(OPTIONS)) {
-  const sel = document.getElementById(FIELD_ID[key]);
+  if (key === 'objective') continue; // ข้าม objective ไปสร้างแบบ Checkbox
+  const sel = $(FIELD_ID[key]);
   if (!sel) continue;
   list.forEach((item, i) => {
     const [value, label] = Array.isArray(item) ? item : [i === 0 ? '' : item, item];
@@ -362,16 +366,17 @@ for (const [key, list] of Object.entries(OPTIONS)) {
   });
 }
 
-// ⚙️ สร้างรายการ Checkbox สำหรับ "วัตถุประสงค์" (Objective)
-const objectiveListEl = document.getElementById('objective-list');
-OPTIONS.objective.forEach(item => {
-  const label = document.createElement('label');
-  label.className = 'checkbox-choice';
-  label.innerHTML = `<input type="checkbox" name="objective" value="${item}"><span>${item}</span>`;
-  objectiveListEl.appendChild(label);
-});
+// Render ตัวเลือก Checkbox สำหรับ วัตถุประสงค์ (Objective)
+const objectiveListEl = $('objective-list');
+if (objectiveListEl) {
+  OPTIONS.objective.forEach(item => {
+    const label = document.createElement('label');
+    label.className = 'checkbox-choice';
+    label.innerHTML = `<input type="checkbox" name="objective" value="${item}"><span>${item}</span>`;
+    objectiveListEl.appendChild(label);
+  });
+}
 
-const $ = id => document.getElementById(id);
 const form = $('metadata-form'), modal = $('result-modal'), submitButton =$('submit-button');
 let currentPage = 1;
 
@@ -466,7 +471,7 @@ function validatePage(page) {
   });
 
   if (page === 1) {
-    // ⚙️ ตรวจสอบว่าเลือกวัตถุประสงค์ (Objective) อย่างน้อย 1 ข้อหรือไม่
+    // ตรวจสอบ Checkbox วัตถุประสงค์
     const selectedObjectives = document.querySelectorAll('input[name="objective"]:checked');
     if (selectedObjectives.length === 0) {
       setError('objective', 'กรุณาเลือกวัตถุประสงค์อย่างน้อย 1 ข้อ');
@@ -555,7 +560,7 @@ form.addEventListener('submit', async (e) => {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
 
-  // ⚙️ รวบรวมข้อมูล Checkbox ของ "วัตถุประสงค์" เข้าสู่อาร์เรย์ (Array)
+  // รวบรวมคำตอบ Checkbox ของ "วัตถุประสงค์" ทั้งหมดส่งเป็น Array
   data.objective = formData.getAll('objective');
 
   // รวมโดเมนอีเมล
