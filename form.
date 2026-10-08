@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Metadata Submission Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input { width: 100%; max-width: 400px; padding: 8px; }
+    button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+    button:disabled { background-color: #ccc; }
+  </style>
+</head>
+<body>
+
+  <h2>แบบฟอร์มส่งข้อมูล (Metadata Form)</h2>
+
+  <form id="metadataForm">
+    <div class="form-group">
+      <label for="name">ชื่อ-นามสกุล:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">อีเมล:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="title">หัวข้อ / ชื่อเรื่อง:</label>
+      <input type="text" id="title" name="title" required>
+    </div>
+
+    <button type="submit" id="submitBtn">ส่งข้อมูล</button>
+  </form>
+
+  <p id="statusMessage"></p>
+
+  <script>
+    const form = document.getElementById('metadataForm');
+    const statusMsg = document.getElementById('statusMessage');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault(); // ป้องกันไม่ให้หน้าเว็บ Refresh
+
+      submitBtn.disabled = true;
+      statusMsg.innerText = 'กำลังส่งข้อมูล...';
+
+      // 1. ดึงค่าจาก Form
+      const payload = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        title: document.getElementById('title').value,
+        submittedAt: new Date().toISOString()
+      };
+
+      // 2. นำ Test URL จาก n8n มาวางตรงนี้
+      const webhookUrl = 'https://your-n8n-domain.com/webhook-test/metadata-submission';
+
+      try {
+        // 3. ยิงข้อมูลไปยัง n8n ด้วย fetch()
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          statusMsg.innerText = 'ส่งข้อมูลสำเร็จเรียบร้อย!';
+          form.reset();
+        } else {
+          statusMsg.innerText = 'เกิดข้อผิดพลาดในการส่งข้อมูล (Status: ' + response.status + ')';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        statusMsg.innerText = 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
