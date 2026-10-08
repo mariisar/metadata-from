@@ -17,7 +17,7 @@ h1,h2{color:var(--navy);font-weight:700}
 .field-label{font-weight:600;color:#243b63;line-height:1.45}
 .req{color:#b42336}
 .field-control{width:100%;min-height:46px;border:1px solid #cbd7e6;border-radius:11px;background:#fff;padding:10px 13px;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}
-.field-control:focus,.radio-choice:focus-within,.checkbox-choice:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
+.field-control:focus,.radio-choice:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
 .field-control[aria-invalid="true"]{border-color:#bd3046}
 .field-control::placeholder{color:#94a3b8}
 .field-control:focus::placeholder{color:transparent}
@@ -28,15 +28,9 @@ textarea.field-control{min-height:112px;resize:vertical}
 .field-help{font-size:13px;color:var(--muted)}
 .field-error{font-size:13px;font-weight:600;color:#b42336}
 .field-error:empty{display:none}
-.radio-choice, .checkbox-choice{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:8px;cursor:pointer;background:#fff;font-size:14px;transition:background-color .15s}
-.checkbox-choice:hover{background-color:#f1f5f9}
-.radio-choice input, .checkbox-choice input{accent-color:var(--blue);width:17px;height:17px;flex-shrink:0}
-
-/* Multi-select Dropdown Custom Style */
-.dropdown-checkbox-container{position:relative;width:100%}
-.dropdown-checkbox-btn{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;text-align:left}
-.dropdown-checkbox-menu{position:absolute;top:100%;left:0;right:0;z-index:30;margin-top:4px;max-height:260px;overflow-y:auto;background:#fff;border:1px solid #cbd7e6;border-radius:11px;box-shadow:0 10px 25px -5px rgba(0,0,0,0.1);padding:6px}
-
+.radio-choice{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid #cbd7e6;border-radius:10px;cursor:pointer;background:#fff}
+.radio-choice input{accent-color:var(--blue);width:17px;height:17px}
+.radio-choice:has(input:checked){border-color:var(--blue);background:#eff6ff}
 .email-group{display:flex;align-items:stretch;border:1px solid #cbd7e6;border-radius:11px;background:#fff;overflow:hidden;transition:border-color .18s,box-shadow .18s}
 .email-group:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
 .email-group[data-invalid="true"]{border-color:#bd3046}
@@ -106,42 +100,24 @@ textarea.field-control{min-height:112px;resize:vertical}
       </div>
       <div class="field sm:col-span-2">
        <label for="tagstring" class="field-label">คำสำคัญ (Tag String) <span class="req" aria-label="จำเป็น">*</span></label>
-       <input id="tagstring" name="tagstring" class="field-control" type="text" required maxlength="1000" placeholder="ทีวีดิจิทัล, สถิติการรับชม, กสทช." aria-describedby="tagstring-help tagstring-error">
+       <input id="tagstring" name="tagstring" class="field-control" type="text" maxlength="1000" placeholder="ทีวีดิจิทัล, สถิติการรับชม, กสทช." aria-describedby="tagstring-help">
        <p id="tagstring-help" class="field-help">ระบุคำสำคัญของชุดข้อมูล คั่นแต่ละคำด้วยเครื่องหมายจุลภาค ( , )</p>
-       <p id="tagstring-error" class="field-error" aria-live="polite"></p>
       </div>
       <div class="field sm:col-span-2">
        <label for="category" class="field-label">หมวดหมู่ข้อมูล (Category) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="category" name="category" class="field-control" required aria-describedby="category-help category-error"></select>
+       <select id="category" name="category" class="field-control" aria-describedby="category-help"></select>
        <p id="category-help" class="field-help">เลือกหมวดหมู่ที่ตรงกับเนื้อหาของชุดข้อมูลมากที่สุด</p>
-       <p id="category-error" class="field-error" aria-live="polite"></p>
       </div>
       <div class="field sm:col-span-2">
        <label for="data-type" class="field-label">ประเภทข้อมูล (Data Type) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="data-type" name="data_type" class="field-control" required aria-describedby="data-type-help data-type-error"></select>
+       <select id="data-type" name="data_type" class="field-control" aria-describedby="data-type-help"></select>
        <p id="data-type-help" class="field-help">เลือกประเภทข้อมูลตามลักษณะและวิธีการจัดเก็บของชุดข้อมูล</p>
-       <p id="data-type-error" class="field-error" aria-live="polite"></p>
       </div>
-
-      <!-- ส่วน Dropdown Checkbox วัตถุประสงค์ (Objective) -->
-      <fieldset id="objective-container" class="field sm:col-span-2">
-       <legend class="field-label mb-[7px]">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span> <span class="text-xs font-normal text-slate-500">(เลือกได้มากกว่า 1 ข้อ)</span></legend>
-       
-       <div class="dropdown-checkbox-container">
-        <button type="button" id="objective-dropdown-btn" class="field-control dropdown-checkbox-btn" aria-expanded="false">
-         <span id="objective-btn-text" class="text-slate-400">เลือกวัตถุประสงค์...</span>
-         <svg id="objective-arrow" class="w-4 h-4 ml-2 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-        </button>
-        
-        <div id="objective-list" class="dropdown-checkbox-menu" hidden>
-         <!-- Rendered dynamically by JavaScript -->
-        </div>
-       </div>
-
-       <p id="objective-help" class="field-help mt-1">อธิบายที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
-       <p id="objective-error" class="field-error" aria-live="polite"></p>
-      </fieldset>
-
+      <div class="field sm:col-span-2">
+       <label for="objective" class="field-label">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="objective" name="objective" class="field-control" aria-describedby="objective-help"></select>
+       <p id="objective-help" class="field-help">อธิบายที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
+      </div>
      </div>
     </section>
 
@@ -161,9 +137,8 @@ textarea.field-control{min-height:112px;resize:vertical}
       </div>
       <div class="field sm:col-span-2">
        <label for="data-custodian" class="field-label">หน่วยงานผู้ดูแล (Maintainer) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="data-custodian" name="data_custodian" class="field-control" required aria-describedby="data-custodian-help data-custodian-error"></select>
+       <select id="data-custodian" name="data_custodian" class="field-control" aria-describedby="data-custodian-help"></select>
        <p id="data-custodian-help" class="field-help">ชื่อกอง สำนัก หรือฝ่าย ที่ได้รับการมอบหมายให้รับผิดชอบข้อมูล</p>
-       <p id="data-custodian-error" class="field-error" aria-live="polite"></p>
       </div>
       <div class="field sm:col-span-2">
        <label for="maintainer-email" class="field-label">อีเมลผู้ติดต่อ (Maintainer Email) <span class="req" aria-label="จำเป็น">*</span></label>
@@ -176,13 +151,12 @@ textarea.field-control{min-height:112px;resize:vertical}
       </div>
       <div class="field sm:col-span-2">
        <label for="data-source" class="field-label">แหล่งที่มา (Data Source) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="data-source" name="data_source" class="field-control" required aria-describedby="data-source-help data-source-error"></select>
+       <select id="data-source" name="data_source" class="field-control" aria-describedby="data-source-help data-source-error"></select>
        <div id="other-source-field" hidden>
         <label for="other-source" class="field-label mt-2">ระบุแหล่งที่มา <span class="req" aria-label="จำเป็น">*</span></label>
         <input id="other-source" name="other_source" class="field-control mt-1" type="text" maxlength="500">
        </div>
        <p id="data-source-help" class="field-help">ชุดข้อมูลสถิติการรับชม TV Digital ภาคพื้นดินในประเทศไทยของสำนักงาน กสทช. ต้องระบุแหล่งข้อมูลที่ใช้อ้างอิงที่แท้จริง</p>
-       <p id="data-source-error" class="field-error" aria-live="polite"></p>
       </div>
      </div>
     </section>
@@ -196,13 +170,12 @@ textarea.field-control{min-height:112px;resize:vertical}
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="field sm:col-span-2">
        <label for="data-format" class="field-label">รูปแบบไฟล์ / การจัดเก็บ (Data Format) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="data-format" name="data_format" class="field-control" required aria-describedby="data-format-help data-format-error"></select>
+       <select id="data-format" name="data_format" class="field-control" aria-describedby="data-format-help"></select>
        <p id="data-format-help" class="field-help">เลือกรูปแบบหลักที่ใช้จัดเก็บหรือให้บริการข้อมูล</p>
-       <p id="data-format-error" class="field-error" aria-live="polite"></p>
       </div>
       <div class="field sm:col-span-2">
        <label for="update-frequency" class="field-label">ความถี่ในการอัปเดต (Update Frequency) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="update-frequency" name="update_frequency" class="field-control" required aria-describedby="update-frequency-help update-frequency-error"></select>
+       <select id="update-frequency" name="update_frequency" class="field-control" aria-describedby="update-frequency-help update-frequency-error"></select>
        <div id="other-frequency-field" hidden>
         <label for="other-frequency" class="field-label mt-2">ระบุความถี่ในการอัปเดต <span class="req" aria-label="จำเป็น">*</span></label>
         <input id="other-frequency" name="other_frequency" class="field-control mt-1" type="text" maxlength="200">
@@ -212,8 +185,7 @@ textarea.field-control{min-height:112px;resize:vertical}
       </div>
       <div class="field sm:col-span-2">
        <label for="geo-coverage" class="field-label">ขอบเขตเชิงภูมิศาสตร์ หรือเชิงพื้นที่ (Geo Coverage) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="geo-coverage" name="geo_coverage" class="field-control" required aria-describedby="geo-coverage-error"></select>
-       <p id="geo-coverage-error" class="field-error" aria-live="polite"></p>
+       <select id="geo-coverage" name="geo_coverage" class="field-control"></select>
       </div>
       <div class="field sm:col-span-2">
        <label for="access-url" class="field-label">URL / API Endpoint สำหรับเข้าถึงข้อมูล</label>
@@ -230,9 +202,8 @@ textarea.field-control{min-height:112px;resize:vertical}
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="field">
        <label for="classification" class="field-label">หมวดหมู่ข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ (Data Category) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="classification" name="data_classification" class="field-control" required aria-describedby="classification-help classification-error"></select>
+       <select id="classification" name="data_classification" class="field-control" aria-describedby="classification-help"></select>
        <p id="classification-help" class="field-help">เลือกหมวดหมู่ที่ตรงกับชุดข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ</p>
-       <p id="classification-error" class="field-error" aria-live="polite"></p>
       </div>
       <fieldset id="pdpa" class="field">
        <legend class="field-label mb-[7px]">ข้อมูลส่วนบุคคล PDPA <span class="req" aria-label="จำเป็น">*</span></legend>
@@ -245,13 +216,11 @@ textarea.field-control{min-height:112px;resize:vertical}
       </fieldset>
       <div class="field sm:col-span-2">
        <label for="access-level" class="field-label">การจัดระดับชั้นความลับของข้อมูล/เงื่อนไขในการเข้าถึงข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="access-level" name="access_level" class="field-control" required aria-describedby="access-level-error"></select>
-       <p id="access-level-error" class="field-error" aria-live="polite"></p>
+       <select id="access-level" name="access_level" class="field-control"></select>
       </div>
       <div class="field sm:col-span-2">
        <label for="right-of-usage" class="field-label">สัญญาอนุญาตให้ใช้ข้อมูล (Right of usage) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="right-of-usage" name="right_of_usage" class="field-control" required aria-describedby="right-of-usage-error"></select>
-       <p id="right-of-usage-error" class="field-error" aria-live="polite"></p>
+       <select id="right-of-usage" name="right_of_usage" class="field-control"></select>
       </div>
      </div>
     </section>
@@ -264,13 +233,11 @@ textarea.field-control{min-height:112px;resize:vertical}
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="field sm:col-span-2">
        <label for="submitter-name" class="field-label">ชื่อ - นามสกุล / เบอร์ติดต่อ ผู้กรอกข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
-       <input id="submitter-name" name="submitter_name" class="field-control" type="text" required maxlength="200" autocomplete="name" aria-describedby="submitter-name-error">
-       <p id="submitter-name-error" class="field-error" aria-live="polite"></p>
+       <input id="submitter-name" name="submitter_name" class="field-control" type="text" maxlength="200" autocomplete="name">
       </div>
       <div class="field sm:col-span-2">
        <label for="submitter-email" class="field-label">อีเมล <span class="req" aria-label="จำเป็น">*</span></label>
-       <input id="submitter-email" name="submitter_email" class="field-control" type="email" required inputmode="email" maxlength="200" autocomplete="email" autocapitalize="none" spellcheck="false" aria-describedby="submitter-email-error">
-       <p id="submitter-email-error" class="field-error" aria-live="polite"></p>
+       <input id="submitter-email" name="submitter_email" class="field-control" type="email" inputmode="email" maxlength="200" autocomplete="email" autocapitalize="none" spellcheck="false">
       </div>
      </div>
     </section>
@@ -306,335 +273,252 @@ textarea.field-control{min-height:112px;resize:vertical}
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
-
 const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook-test/metadata-submission';
 
 const OPTIONS = {
- category: [
-  ['', 'เลือกหมวดหมู่ข้อมูล'],
-  ['ด้านกฎหมาย', 'ด้านกฎหมาย'],
-  ['ด้านการคุ้มครองผู้ใช้บริการ', 'ด้านการคุ้มครองผู้ใช้บริการ'],
-  ['ด้านการบริหารงานทั่วไปและอำนวยการ', 'ด้านการบริหารงานทั่วไปและอำนวยการ'],
-  ['ด้านการอนุญาต', 'ด้านการอนุญาต'],
-  ['ด้านทรัพยากรบุคคล', 'ด้านทรัพยากรบุคคล'],
-  ['ด้านการบริหารทรัพยากร', 'ด้านการบริหารทรัพยากร'],
-  ['ด้านบริหารพัสดุและบริหารทรัพย์สิน', 'ด้านบริหารพัสดุและบริหารทรัพย์สิน'],
-  ['ด้านยุทธศาสตร์', 'ด้านยุทธศาสตร์'],
-  ['ด้านการกำกับดูแล ตรวจสอบ และรับรองมาตรฐาน', 'ด้านการกำกับดูแล ตรวจสอบ และรับรองมาตรฐาน'],
-  ['ด้านการจัดให้มีบริการภายใต้งบประมาณกองทุน กทปส.', 'ด้านการจัดให้มีบริการภายใต้งบประมาณกองทุน กทปส.'],
-  ['ด้านงบประมาณ บัญชี การเงิน', 'ด้านงบประมาณ บัญชี การเงิน'],
-  ['ด้านเทคโนโลยีสารสนเทศ', 'ด้านเทคโนโลยีสารสนเทศ'],
-  ['ด้านพัฒนาองค์ความรู้แก่ผู้ประกอบการและผู้ใช้บริการ', 'ด้านพัฒนาองค์ความรู้แก่ผู้ประกอบการและผู้ใช้บริการ'],
-  ['ด้านวิชาการ', 'ด้านวิชาการ']
- ],
- data_type: [['','เลือกประเภทข้อมูล'],
-  ['1= ข้อมูลระเบียน','1= ข้อมูลระเบียน — ข้อมูลที่จัดเก็บในฐานข้อมูลที่เกิดจากการบริหารงานหรือปฏิบัติงานรายวัน'],
-  ['2= ข้อมูลสถิติ','2= ข้อมูลสถิติ — ข้อความหรือตัวเลขที่แสดงผลที่ประมวลจากข้อมูลที่เก็บรวบรวมได้'],
-  ['3= ข้อมูลภูมิสารสนเทศ','3= ข้อมูลภูมิสารสนเทศ — ข้อมูลหรือสารสนเทศที่มีความสัมพันธ์กับตำแหน่งในเชิงพื้นที่ เช่น แผนที่ ภาพถ่ายทางอากาศ และภาพถ่ายดาวเทียม'],
-  ['4= ข้อมูลหลากหลายประเภท','4= ข้อมูลหลากหลายประเภท — ชุดข้อมูลที่รวบรวมมาจากข้อมูลหลากหลายประเภทมาจัดเป็นชุดข้อมูลตามความต้องการใช้งาน เช่น ชุดข้อมูลที่ประกอบด้วยข้อมูลระเบียน ข้อมูลสถิติ ข้อมูลภาพ เป็นต้น'],
-  ['5= ข้อมูลประเภทอื่นๆ','5= ข้อมูลประเภทอื่นๆ']],
- geo_coverage: ['เลือกขอบเขตเชิงภูมิศาสตร์หรือเชิงพื้นที่','00= ไม่มี','01= โลก','02= ทวีป/กลุ่มประเทศในทวีป','03= กลุ่มประเทศทางเศรษฐกิจ','04= ประเทศ','05= ภาค','06= จังหวัด','08= ตำบล','09= หมู่บ้าน','10= เทศบาล/องค์กรปกครองส่วนท้องถิ่น','11= พิกัด','98= ไม่ทราบ'],
- access_level: [['','เลือกการจัดระดับชั้นความลับของข้อมูล'],
-  ['01= ชั้นเปิดเผย (Open)','01= ชั้นเปิดเผย (Open) คือ ไม่มีการจำกัดการเข้าถึงข้อมูล ข้อมูลทั่วไปที่ไม่ลับหรือไม่อ่อนไหว สามารถเปิดเผยให้แก่สาธารณชนได้'],
-  ['02= ชั้นเผยแพร่ภายในองค์กร (Private)','02= ชั้นเผยแพร่ภายในองค์กร (Private) คือ เฉพาะบุคคลภายในหน่วยงาน ข้อมูลที่มีเนื้อหาไม่ลับหรือไม่อ่อนไหว สามารถใช้งานร่วมกันได้ภายในสำนักงาน'],
-  ['03= ชั้นลับ (Confidential)','03= ชั้นลับ (Confidential) คือ ผ่านการอนุมัติจากผู้บริหารระดับผู้ช่วย ผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญ หากถูกเปิดเผยหรือรั่วไหลไปยังบุคคลที่ไม่เกี่ยวข้อง จะก่อให้เกิดความเสียหายในวงจำกัด หรือก่อให้เกิดความเสียหายในระดับตัวบุคคล'],
-  ['04= ชั้นลับมาก (Secret)','04= ชั้นลับมาก (Secret) คือ ผ่านการอนุมัติจากผู้บริหารระดับรองผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญมาก หากถูกเปิดเผยหรือรั่วไหลไปยังบุคคลที่ไม่เกี่ยวข้อง จะก่อให้เกิดความเสียหายในวงกว้าง หรือก่อให้เกิดความเสียหายในระดับองค์กร'],
-  ['05= ชั้นลับที่สุด (Top Secret)','05= ชั้นลับที่สุด (Top Secret) คือ ผ่านการอนุมัติจากผู้บริหารระดับผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญสูงสุด หากถูกเปิดเผยจะก่อให้เกิดความเสียหายในระดับชาติ สถาบันพระมหากษัตริย์ระบบเศรษฐกิจ']],
- right_of_usage: [['','เลือกสัญญาอนุญาตให้ใช้ข้อมูล'],
-  ['G0= Open Data Common','G0= Open Data Common คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ทำซ้ำแจกจ่าย หรือดัดแปลงงานนั้นได้ โดยไม่มีข้อจำกัด'],
-  ['G1= Creative Commons Attribution','G1= Creative Commons Attribution คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำแจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน'],
-  ['G2= Creative Commons Attribution-Non Commercial','G2= Creative Commons Attribution-Non Commercial คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และต้องไม่ใช่เพื่อการค้า'],
-  ['G3.1= Creative Commons Attribution-ShareAlike','G3.1= Creative Commons Attribution-ShareAlike คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และจะต้องกำกับด้วยสัญญาอนุญาตเงื่อนไขเดียวกันกับต้นฉบับ'],
-  ['G3.2= Creative Commons Attribution-NonCommercialShareAlike','G3.2= Creative Commons Attribution-NonCommercialShareAlike คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้แต่ต้องไม่ใช่เพื่อการค้าและจะต้องกำกับด้วยสัญญาอนุญาตเงื่อนไขเดียวกันกับต้นฉบับ'],
-  ['G4.1= Creative Commons Attribution-NoDerivs','G4.1= Creative Commons Attribution-NoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น และต้องให้เครดิตที่มาของเจ้าของผลงาน'],
-  ['G4.2= Creative Commons Attribution-Non CommercialNoDerivs','G4.2= Creative Commons Attribution-Non CommercialNoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และต้องไม่ใช่เพื่อการค้า'],
-  ['G5= Others License','G5= Others License คือ สัญญาอนุญาตให้ใช้ข้อมูลอื่นๆ โดยเงื่อนไขเป็นไปตามที่เจ้าของข้อมูลกำหนด และผู้ใช้ข้อมูลสามารถขอใช้ข้อมูลได้เป็นรายกรณี']],
- objective: [
-  '01= ยุทธศาสตร์ชาติ',
-  '02= แผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ',
-  '03= แผนความมั่นคงแห่งชาติ',
-  '04= แผนแม่บทภายใต้ยุทธศาสตร์ชาติ',
-  '05= แผนปฏิรูปประเทศ',
-  '06= แผนระดับที่ 3 (มติครม. 4 ธ.ค. 2560)',
-  '07= นโยบายรัฐบาล/ข้อสั่งการนายกรัฐมนตรี',
-  '08= มติคณะรัฐมนตรี',
-  '09= เพื่อการให้บริการประชาชน',
-  '10= กฎหมายที่เกี่ยวข้อง',
-  '11= พันธกิจหน่วยงาน',
-  '12= ดัชนี/ตัวชี้วัดระดับนานาชาติ',
-  '98= ไม่ทราบ',
-  '99= อื่นๆ'
- ],
- data_source: [['','เลือกแหล่งที่มา'],['สำนักงาน กสทช.','สำนักงาน กสทช.'],['OTHER','อื่นๆ: ระบุ...']],
- data_owner: [['','เลือกองค์กร'],['สำนักงาน กสทช.','สำนักงาน กสทช.'],['OTHER','อื่นๆ: ระบุ...']],
- data_custodian: ['เลือกหน่วยงาน','สำนักประธานกรรมการและการประชุม (ปบ.)','สำนักกรรมการและเลขาธิการ (กบ.)','สำนักอำนวยการกลาง (อบ.)','สำนักสื่อสารองค์กร (สบ.)','สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)','สำนักกองทุนวิจัยและพัฒนา (ทบ.)','สำนักบริหารคลื่นความถี่ (คบ.)','สำนักกิจการดาวเทียมสื่อสาร (ดบ.)','สำนักบริหารข้อมูลกลาง (บบ.)','สำนักเทคโนโลยีสารสนเทศ (นบ.)','สำนักยุทธศาสตร์และการงบประมาณ (ยย.)','สำนักทรัพยากรบุคคล (บย.)','สำนักบริหารคดีและนิติการ (นย.)','สำนักการพัสดุและบริหารทรัพย์สิน (พย.)','สำนักการคลัง (ลย.)','สำนักการต่างประเทศ (ตย.)','สำนักพัฒนาองค์กรดิจิทัล (ดย.)','สถาบันวิทยาการ (วย.)','สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)','สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)','สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)','สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)','สำนักการอนุญาตประกอบกิจการโครงข่าย สิ่งอำนวยความสะดวก และเครื่องวิทยุคมนาคม (ขส.)','สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)','สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)','สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)','สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)','สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)','สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)','สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการกระจายเสียงและโทรทัศน์ (บส.)','สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)','สำนักกฎหมายโทรคมนาคม (มท.)','สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)','สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)','สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)','สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)','สำนักเทคโนโลยีและมาตรฐานโทรคมนาคม (ทท.)','สำนักบริหารและจัดการเลขหมายโทรคมนาคม (จท.)','สำนักการอนุญาตวิทยุคมนาคม 1 (คท. 1)','สำนักการอนุญาตวิทยุคมนาคม 2 (คท. 2)','สำนักโครงข่ายพื้นฐาน การใช้และเชื่อมต่อโครงข่าย (ชท.)','สำนักบริการโทรคมนาคมโดยทั่วถึงและเพื่อสังคม (ถท.)','สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการโทรคมนาคม (รท.)','สำนักกิจการภูมิภาค (กภ.)','สำนักงาน กสทช. ภาค 1 (ภภ.1)','สำนักงาน กสทช. ภาค 2 (ภภ.2)','สำนักงาน กสทช. ภาค 3 (ภภ.3)','สำนักงาน กสทช. ภาค 4 (ภภ.4)','สำนักวิเคราะห์นโยบายเชิงปริมาณ (ปว.)','สำนักวิเคราะห์ข้อมูลเศรษฐกิจดิจิทัล (ศว.)','สำนักวิชาการต่างประเทศ (ตว.)','สำนักวิเคราะห์นโยบาย (วว.)','ศูนย์วิจัยและพัฒนาทางวิชาการ กสทช. (พว.)'],
- classification: [['','เลือกหมวดหมู่ข้อมูล'],
-  ['1= ข้อมูลสาธารณะ','1= ข้อมูลสาธารณะ คือ ข้อมูลที่สามารถเปิดเผยได้ สามารถนำไปใช้ได้อย่างอิสระ ไม่ว่าจะเป็นข้อมูลข่าวสาร ข้อมูลส่วนบุคคล ข้อมูลอิเล็กทรอนิกส์ เป็นต้น'],
-  ['2= ข้อมูลใช้ภายในสำนักงาน กสทช.','2= ข้อมูลใช้ภายในสำนักงาน กสทช.'],
-  ['3= ข้อมูลส่วนบุคคล','3= ข้อมูลส่วนบุคคล คือ ข้อมูลเกี่ยวกับบุคคลซึ่งทำให้สามารถระบุตัวบุคคลนั้นได้ไม่ว่าทางตรงหรือทางอ้อม แต่ไม่รวมถึงข้อมูลของผู้ถึงแก่กรรมโดยเฉพาะ (พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)'],
-  ['4= ข้อมูลความลับทางราชการ','4= ข้อมูลความลับทางราชการ คือ ข้อมูลที่อยู่ในความครอบครองหรือควบคุมดูแลของหน่วยงานของรัฐที่มีคำสั่งไม่ให้มีการเปิดเผย และมีการกำหนดชั้นความลับของข้อมูล'],
-  ['5= ข้อมูลความมั่นคง','5= ข้อมูลความมั่นคง คือ ข้อมูลเกี่ยวกับความมั่นคงของรัฐ ที่ทำให้เกิดความสงบเรียบร้อย การมีเสถียรภาพ ความเป็นปึกแผ่น ปลอดภัยจากภัยคุกคาม เป็นต้น']],
- data_format: ['เลือกรูปแบบข้อมูล','01= Database (ฐานข้อมูล)','02= CSV','03= XML','04= Image','05= Video','06= Audio (ไฟล์เสียง)','07= Text (ตัวหนังสือ ข้อความ)','08= JSON','09= HTML','10= XLS, XLSX (Ms.Excel File)','11= PDF','12= RDF','13= NoSQL','14= Vector เช่น Shapefile SVG GML','15= Raster เช่น GeoTiff JPEG2000','99= อื่นๆ'],
- update_frequency: [['','เลือกความถี่'],['A','A= รายปี'],['S','S= ทุกครึ่งปี'],['Q','Q= รายไตรมาส'],['M','M= รายเดือน'],['W','W= รายสัปดาห์'],['D','D= รายวัน'],['B','B= วันทำการ'],['H','H= รายชั่วโมง'],['N','N= ทุกนาที'],['R','R= ตามเวลาจริง'],['O','O= ไม่มีการปรับปรุงหลังจากการจัดเก็บข้อมูล'],['U','U= ไม่ทราบ'],['OTHER','อื่นๆ: ระบุ...']]
+  category: ['เลือกหมวดหมู่ข้อมูล','ด้านกฎหมาย','ด้านการคุ้มครองผู้ใช้บริการ','ด้านการบริหารงานทั่วไปและอำนวยการ','ด้านการอนุญาต','ด้านทรัพยากรบุคคล','ด้านการบริหารทรัพยากร','ด้านบริหารพัสดุและบริหารทรัพย์สิน','ด้านยุทธศาสตร์','ด้านการกำกับดูแล ตรวจสอบ และรับรองมาตรฐาน','ด้านการจัดให้มีบริการภายใต้งบประมาณกองทุน กทปส.','ด้านงบประมาณ บัญชี การเงิน','ด้านเทคโนโลยีสารสนเทศ','ด้านพัฒนาองค์ความรู้แก่ผู้ประกอบการและผู้ใช้บริการ','ด้านวิชาการ'],
+  data_type: [['','เลือกประเภทข้อมูล'],
+    ['1= ข้อมูลระเบียน','1= ข้อมูลระเบียน — ข้อมูลที่จัดเก็บในฐานข้อมูลที่เกิดจากการบริหารงานหรือปฏิบัติงานรายวัน'],
+    ['2= ข้อมูลสถิติ','2= ข้อมูลสถิติ — ข้อความหรือตัวเลขที่แสดงผลที่ประมวลจากข้อมูลที่เก็บรวบรวมได้'],
+    ['3= ข้อมูลภูมิสารสนเทศ','3= ข้อมูลภูมิสารสนเทศ — ข้อมูลหรือสารสนเทศที่มีความสัมพันธ์กับตำแหน่งในเชิงพื้นที่ เช่น แผนที่ ภาพถ่ายทางอากาศ และภาพถ่ายดาวเทียม'],
+    ['4= ข้อมูลหลากหลายประเภท','4= ข้อมูลหลากหลายประเภท — ชุดข้อมูลที่รวบรวมมาจากข้อมูลหลากหลายประเภทมาจัดเป็นชุดข้อมูลตามความต้องการใช้งาน เช่น ชุดข้อมูลที่ประกอบด้วยข้อมูลระเบียน ข้อมูลสถิติ ข้อมูลภาพ เป็นต้น'],
+    ['5= ข้อมูลประเภทอื่นๆ','5= ข้อมูลประเภทอื่นๆ']],
+  geo_coverage: ['เลือกขอบเขตเชิงภูมิศาสตร์หรือเชิงพื้นที่','00= ไม่มี','01= โลก','02= ทวีป/กลุ่มประเทศในทวีป','03= กลุ่มประเทศทางเศรษฐกิจ','04= ประเทศ','05= ภาค','06= จังหวัด','08= ตำบล','09= หมู่บ้าน','10= เทศบาล/องค์กรปกครองส่วนท้องถิ่น','11= พิกัด','98= ไม่ทราบ'],
+  access_level: [['','เลือกการจัดระดับชั้นความลับของข้อมูล'],
+    ['01= ชั้นเปิดเผย (Open)','01= ชั้นเปิดเผย (Open) คือ ไม่มีการจำกัดการเข้าถึงข้อมูล ข้อมูลทั่วไปที่ไม่ลับหรือไม่อ่อนไหว สามารถเปิดเผยให้แก่สาธารณชนได้'],
+    ['02= ชั้นเผยแพร่ภายในองค์กร (Private)','02= ชั้นเผยแพร่ภายในองค์กร (Private) คือ เฉพาะบุคคลภายในหน่วยงาน ข้อมูลที่มีเนื้อหาไม่ลับหรือไม่อ่อนไหว สามารถใช้งานร่วมกันได้ภายในสำนักงาน'],
+    ['03= ชั้นลับ (Confidential)','03= ชั้นลับ (Confidential) คือ ผ่านการอนุมัติจากผู้บริหารระดับผู้ช่วย ผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญ หากถูกเปิดเผยหรือรั่วไหลไปยังบุคคลที่ไม่เกี่ยวข้อง จะก่อให้เกิดความเสียหายในวงจำกัด หรือก่อให้เกิดความเสียหายในระดับตัวบุคคล'],
+    ['04= ชั้นลับมาก (Secret)','04= ชั้นลับมาก (Secret) คือ ผ่านการอนุมัติจากผู้บริหารระดับรองผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญมาก หากถูกเปิดเผยหรือรั่วไหลไปยังบุคคลที่ไม่เกี่ยวข้อง จะก่อให้เกิดความเสียหายในวงกว้าง หรือก่อให้เกิดความเสียหายในระดับองค์กร'],
+    ['05= ชั้นลับที่สุด (Top Secret)','05= ชั้นลับที่สุด (Top Secret) คือ ผ่านการอนุมัติจากผู้บริหารระดับผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญสูงสุด หากถูกเปิดเผยจะก่อให้เกิดความเสียหายในระดับชาติ สถาบันพระมหากษัตริย์ระบบเศรษฐกิจ']],
+  right_of_usage: [['','เลือกสัญญาอนุญาตให้ใช้ข้อมูล'],
+    ['G0= Open Data Common','G0= Open Data Common คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ทำซ้ำแจกจ่าย หรือดัดแปลงงานนั้นได้ โดยไม่มีข้อจำกัด'],
+    ['G1= Creative Commons Attribution','G1= Creative Commons Attribution คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำแจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน'],
+    ['G2= Creative Commons Attribution-Non Commercial','G2= Creative Commons Attribution-Non Commercial คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และต้องไม่ใช่เพื่อการค้า'],
+    ['G3.1= Creative Commons Attribution-ShareAlike','G3.1= Creative Commons Attribution-ShareAlike คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และจะต้องกำกับด้วยสัญญาอนุญาตเงื่อนไขเดียวกันกับต้นฉบับ'],
+    ['G3.2= Creative Commons Attribution-NonCommercialShareAlike','G3.2= Creative Commons Attribution-NonCommercialShareAlike คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้แต่ต้องไม่ใช่เพื่อการค้าและจะต้องกำกับด้วยสัญญาอนุญาตเงื่อนไขเดียวกันกับต้นฉบับ'],
+    ['G4.1= Creative Commons Attribution-NoDerivs','G4.1= Creative Commons Attribution-NoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น และต้องให้เครดิตที่มาของเจ้าของผลงาน'],
+    ['G4.2= Creative Commons Attribution-Non CommercialNoDerivs','G4.2= Creative Commons Attribution-Non CommercialNoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และต้องไม่ใช่เพื่อการค้า'],
+    ['G5= Others License','G5= Others License คือ สัญญาอนุญาตให้ใช้ข้อมูลอื่นๆ โดยเงื่อนไขเป็นไปตามที่เจ้าของข้อมูลกำหนด และผู้ใช้ข้อมูลสามารถขอใช้ข้อมูลได้เป็นรายกรณี']],
+  objective: ['เลือกวัตถุประสงค์','01= ยุทธศาสตร์ชาติ','02= แผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ','03= แผนความมั่นคงแห่งชาติ','04= แผนแม่บทภายใต้ยุทธศาสตร์ชาติ','05= แผนปฏิรูปประเทศ','06= แผนระดับที่ 3 (มติครม. 4 ธ.ค. 2560)','07= นโยบายรัฐบาล/ข้อสั่งการนายกรัฐมนตรี','08= มติคณะรัฐมนตรี','09= เพื่อการให้บริการประชาชน','10= กฎหมายที่เกี่ยวข้อง','11= พันธกิจหน่วยงาน','12= ดัชนี/ตัวชี้วัดระดับนานาชาติ','98= ไม่ทราบ','99= อื่นๆ'],
+  data_source: [['','เลือกแหล่งที่มา'],['สำนักงาน กสทช.','สำนักงาน กสทช.'],['OTHER','อื่นๆ: ระบุ...']],
+  data_owner: [['','เลือกองค์กร'],['สำนักงาน กสทช.','สำนักงาน กสทช.'],['OTHER','อื่นๆ: ระบุ...']],
+  data_custodian: ['เลือกหน่วยงาน','สำนักประธานกรรมการและการประชุม (ปบ.)','สำนักกรรมการและเลขาธิการ (กบ.)','สำนักอำนวยการกลาง (อบ.)','สำนักสื่อสารองค์กร (สบ.)','สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)','สำนักกองทุนวิจัยและพัฒนา (ทบ.)','สำนักบริหารคลื่นความถี่ (คบ.)','สำนักกิจการดาวเทียมสื่อสาร (ดบ.)','สำนักบริหารข้อมูลกลาง (บบ.)','สำนักเทคโนโลยีสารสนเทศ (นบ.)','สำนักยุทธศาสตร์และการงบประมาณ (ยย.)','สำนักทรัพยากรบุคคล (บย.)','สำนักบริหารคดีและนิติการ (นย.)','สำนักการพัสดุและบริหารทรัพย์สิน (พย.)','สำนักการคลัง (ลย.)','สำนักการต่างประเทศ (ตย.)','สำนักพัฒนาองค์กรดิจิทัล (ดย.)','สถาบันวิทยาการ (วย.)','สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)','สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)','สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)','สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)','สำนักการอนุญาตประกอบกิจการโครงข่าย สิ่งอำนวยความสะดวก และเครื่องวิทยุคมนาคม (ขส.)','สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)','สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)','สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)','สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)','สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)','สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)','สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการกระจายเสียงและโทรทัศน์ (บส.)','สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)','สำนักกฎหมายโทรคมนาคม (มท.)','สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)','สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)','สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)','สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)','สำนักเทคโนโลยีและมาตรฐานโทรคมนาคม (ทท.)','สำนักบริหารและจัดการเลขหมายโทรคมนาคม (จท.)','สำนักการอนุญาตวิทยุคมนาคม 1 (คท. 1)','สำนักการอนุญาตวิทยุคมนาคม 2 (คท. 2)','สำนักโครงข่ายพื้นฐาน การใช้และเชื่อมต่อโครงข่าย (ชท.)','สำนักบริการโทรคมนาคมโดยทั่วถึงและเพื่อสังคม (ถท.)','สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการโทรคมนาคม (รท.)','สำนักกิจการภูมิภาค (กภ.)','สำนักงาน กสทช. ภาค 1 (ภภ.1)','สำนักงาน กสทช. ภาค 2 (ภภ.2)','สำนักงาน กสทช. ภาค 3 (ภภ.3)','สำนักงาน กสทช. ภาค 4 (ภภ.4)','สำนักวิเคราะห์นโยบายเชิงปริมาณ (ปว.)','สำนักวิเคราะห์ข้อมูลเศรษฐกิจดิจิทัล (ศว.)','สำนักวิชาการต่างประเทศ (ตว.)','สำนักวิเคราะห์นโยบาย (วว.)','ศูนย์วิจัยและพัฒนาทางวิชาการ กสทช. (พว.)'],
+  classification: [['','เลือกหมวดหมู่ข้อมูล'],
+    ['1= ข้อมูลสาธารณะ','1= ข้อมูลสาธารณะ คือ ข้อมูลที่สามารถเปิดเผยได้ สามารถนำไปใช้ได้อย่างอิสระ ไม่ว่าจะเป็นข้อมูลข่าวสาร ข้อมูลส่วนบุคคล ข้อมูลอิเล็กทรอนิกส์ เป็นต้น'],
+    ['2= ข้อมูลใช้ภายในสำนักงาน กสทช.','2= ข้อมูลใช้ภายในสำนักงาน กสทช.'],
+    ['3= ข้อมูลส่วนบุคคล','3= ข้อมูลส่วนบุคคล คือ ข้อมูลเกี่ยวกับบุคคลซึ่งทำให้สามารถระบุตัวบุคคลนั้นได้ไม่ว่าทางตรงหรือทางอ้อม แต่ไม่รวมถึงข้อมูลของผู้ถึงแก่กรรมโดยเฉพาะ (พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)'],
+    ['4= ข้อมูลความลับทางราชการ','4= ข้อมูลความลับทางราชการ คือ ข้อมูลที่อยู่ในความครอบครองหรือควบคุมดูแลของหน่วยงานของรัฐที่มีคำสั่งไม่ให้มีการเปิดเผย และมีการกำหนดชั้นความลับของข้อมูล'],
+    ['5= ข้อมูลความมั่นคง','5= ข้อมูลความมั่นคง คือ ข้อมูลเกี่ยวกับความมั่นคงของรัฐ ที่ทำให้เกิดความสงบเรียบร้อย การมีเสถียรภาพ ความเป็นปึกแผ่น ปลอดภัยจากภัยคุกคาม เป็นต้น']],
+  data_format: ['เลือกรูปแบบข้อมูล','01= Database (ฐานข้อมูล)','02= CSV','03= XML','04= Image','05= Video','06= Audio (ไฟล์เสียง)','07= Text (ตัวหนังสือ ข้อความ)','08= JSON','09= HTML','10= XLS, XLSX (Ms.Excel File)','11= PDF','12= RDF','13= NoSQL','14= Vector เช่น Shapefile SVG GML','15= Raster เช่น GeoTiff JPEG2000','99= อื่นๆ'],
+  update_frequency: [['','เลือกความถี่'],['A','A= รายปี'],['S','S= ทุกครึ่งปี'],['Q','Q= รายไตรมาส'],['M','M= รายเดือน'],['W','W= รายสัปดาห์'],['D','D= รายวัน'],['B','B= วันทำการ'],['H','H= รายชั่วโมง'],['N','N= ทุกนาที'],['R','R= ตามเวลาจริง'],['O','O= ไม่มีการปรับปรุงหลังจากการจัดเก็บข้อมูล'],['U','U= ไม่ทราบ'],['OTHER','อื่นๆ: ระบุ...']]
 };
 
-const FIELD_ID = {category:'category',data_type:'data-type',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
+const FIELD_ID = {category:'category',data_type:'data-type',objective:'objective',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
 
-// Render ตัวเลือก Dropdown ทั่วไป
 for (const [key, list] of Object.entries(OPTIONS)) {
- if (key === 'objective') continue;
- const sel = $(FIELD_ID[key]);
- if (!sel) continue;
- list.forEach((item, i) => {
-  const [value, label] = Array.isArray(item) ? item : [i === 0 ? '' : item, item];
-  sel.add(new Option(label, value));
- });
+  const sel = document.getElementById(FIELD_ID[key]);
+  if (!sel) continue;
+  list.forEach((item, i) => {
+    const [value, label] = Array.isArray(item) ? item : [i === 0 ? '' : item, item];
+    sel.add(new Option(label, value));
+  });
 }
 
-// Render ตัวเลือก Checkbox ใน Dropdown วัตถุประสงค์
-const objectiveListEl = $('objective-list');
-if (objectiveListEl) {
- OPTIONS.objective.forEach(item => {
-  const label = document.createElement('label');
-  label.className = 'checkbox-choice';
-  label.innerHTML = `<input type="checkbox" name="objective" value="${item}"><span>${item}</span>`;
-  objectiveListEl.appendChild(label);
- });
+const $ = id => document.getElementById(id);
+const form = $('metadata-form'), modal = $('result-modal'), submitButton = $('submit-button');
+let currentPage = 1;
+
+// ---------- Dropdown placeholder tone ----------
+function updateTone(sel) { sel.classList.toggle('select-placeholder', sel.value === ''); }
+document.querySelectorAll('select.field-control').forEach(s => { updateTone(s); s.addEventListener('change', () => updateTone(s)); });
+
+// ---------- "อื่นๆ" fields ----------
+function bindOther(selectId, fieldId, inputId, helpId) {
+  $(selectId).addEventListener('change', e => {
+    const isOther = e.target.value === 'OTHER';
+    $(fieldId).hidden = !isOther;
+    if (helpId) $(helpId).hidden = isOther && helpId === 'data-owner-help';
+    if (!isOther) $(inputId).value = '';
+    setError(selectId, '');
+  });
 }
+bindOther('data-owner', 'other-owner-field', 'other-owner', 'data-owner-help');
+bindOther('data-source', 'other-source-field', 'other-source');
+bindOther('update-frequency', 'other-frequency-field', 'other-frequency');
 
-// ระบบจัดการ Dropdown Checkbox (เปิด/ปิด & แสดงข้อความที่เลือก)
-const objBtn = $('objective-dropdown-btn');
-const objList = $('objective-list');
-const objText = $('objective-btn-text');
-const objArrow = $('objective-arrow');
-
-function toggleObjectiveDropdown(e) {
- if(e) e.stopPropagation();
- const isHidden = objList.hasAttribute('hidden');
- if (isHidden) {
-  objList.removeAttribute('hidden');
-  objBtn.setAttribute('aria-expanded', 'true');
-  objArrow.style.transform = 'rotate(180deg)';
- } else {
-  objList.setAttribute('hidden', '');
-  objBtn.setAttribute('aria-expanded', 'false');
-  objArrow.style.transform = 'rotate(0deg)';
- }
-}
-
-function updateObjectiveText() {
- const checked = Array.from(document.querySelectorAll('input[name="objective"]:checked'));
- if (checked.length === 0) {
-  objText.textContent = 'เลือกวัตถุประสงค์...';
-  objText.className = 'text-slate-400';
- } else if (checked.length === 1) {
-  objText.textContent = checked[0].value;
-  objText.className = 'text-slate-800 font-medium';
- } else {
-  objText.textContent = `เลือกแล้ว (${checked.length} รายการ)`;
-  objText.className = 'text-slate-800 font-medium';
- }
- // ล้าง Error แจ้งเตือนเมื่อมีการเลือก
- $('objective-error').textContent = '';
-}
-
-objBtn.addEventListener('click', toggleObjectiveDropdown);
-
-objList.addEventListener('change', updateObjectiveText);
-
-// ปิด Dropdown เมื่อคลิกภายนอก
-document.addEventListener('click', (e) => {
- const container = $('objective-container');
- if (container && !container.contains(e.target)) {
-  objList.setAttribute('hidden', '');
-  objBtn.setAttribute('aria-expanded', 'false');
-  if(objArrow) objArrow.style.transform = 'rotate(0deg)';
- }
+// ---------- Auto-select defaults ----------
+const CATEGORY_DEFAULTS = {
+  '1= ข้อมูลสาธารณะ': { access: '01= ชั้นเปิดเผย (Open)', right: 'G0= Open Data Common' },
+  '2= ข้อมูลใช้ภายในสำนักงาน กสทช.': { access: '02= ชั้นเผยแพร่ภายในองค์กร (Private)', right: 'G5= Others License' }
+};
+$('classification').addEventListener('change', e => {
+  const d = CATEGORY_DEFAULTS[e.target.value];
+  if (!d) return;
+  $('access-level').value = d.access;
+  $('right-of-usage').value = d.right;
+  updateTone($('access-level')); updateTone($('right-of-usage'));
 });
 
-// จัดการกรณีเลือก "อื่นๆ" ให้เปิดช่องกรอกข้อความ
-function setupOtherToggle(selectId, fieldId, reqInputId) {
- const sel = $(selectId);
- const field = $(fieldId);
- const input = $(reqInputId);
- if (!sel || !field) return;
- sel.addEventListener('change', () => {
-  if (sel.value === 'OTHER' || sel.value === '99= อื่นๆ') {
-   field.removeAttribute('hidden');
-   if (input) input.setAttribute('required', '');
-  } else {
-   field.setAttribute('hidden', '');
-   if (input) {
-    input.removeAttribute('required');
-    input.value = '';
-   }
+// ---------- Validation ----------
+function setError(id, msg) {
+  const el = $(id);
+  if (!el) return;
+  let err = $(id + '-error');
+  if (!err) {
+    err = document.createElement('p');
+    err.id = id + '-error'; err.className = 'field-error'; err.setAttribute('aria-live', 'polite');
+    (el.closest('.field') || el.parentNode).appendChild(err);
+    const d = el.getAttribute('aria-describedby');
+    el.setAttribute('aria-describedby', (d ? d + ' ' : '') + err.id);
   }
- });
+  err.textContent = msg;
+  el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  if (id === 'maintainer-email') $('maintainer-email-group').dataset.invalid = msg ? 'true' : 'false';
 }
 
-setupOtherToggle('data-owner', 'other-owner-field', 'other-owner');
-setupOtherToggle('data-source', 'other-source-field', 'other-source');
-setupOtherToggle('update-frequency', 'other-frequency-field', 'other-frequency');
+const REQUIRED_FIELDS = {
+  1: [
+    ['dataset-name', 'กรุณาระบุชื่อชุดข้อมูล'],
+    ['description', 'กรุณาระบุคำอธิบายรายละเอียด'],
+    ['tagstring', 'กรุณาระบุคำสำคัญ (Tag)'],
+    ['category', 'กรุณาเลือกหมวดหมู่ข้อมูล'],
+    ['data-type', 'กรุณาเลือกประเภทข้อมูล'],
+    ['objective', 'กรุณาเลือกวัตถุประสงค์'],
+    ['data-owner', 'กรุณาเลือกองค์กรเจ้าของข้อมูล'],
+    ['data-custodian', 'กรุณาเลือกหน่วยงานผู้ดูแล'],
+    ['maintainer-email', 'กรุณาระบุอีเมลผู้ติดต่อ'],
+    ['data-source', 'กรุณาเลือกแหล่งที่มา']
+  ],
+  2: [
+    ['data-format', 'กรุณาเลือกรูปแบบไฟล์/การจัดเก็บ'],
+    ['update-frequency', 'กรุณาเลือกความถี่ในการอัปเดต'],
+    ['geo-coverage', 'กรุณาเลือกขอบเขตเชิงภูมิศาสตร์'],
+    ['classification', 'กรุณาเลือกหมวดหมู่ตามธรรมาภิบาล'],
+    ['access-level', 'กรุณาเลือกการจัดระดับชั้นความลับ'],
+    ['right-of-usage', 'กรุณาเลือกสัญญาอนุญาตให้ใช้ข้อมูล']
+  ],
+  3: [
+    ['submitter-name', 'กรุณาระบุชื่อผู้กรอกข้อมูล'],
+    ['submitter-email', 'กรุณาระบุอีเมลผู้กรอกข้อมูล']
+  ]
+};
 
-// การสลับหน้า (Multi-page Flow)
-let currentPage = 1;
-const totalPages = 3;
+function validatePage(page) {
+  let isValid = true;
+  const fields = REQUIRED_FIELDS[page] || [];
 
-function updatePageUI() {
- for (let i = 1; i <= totalPages; i++) {
-  const page = $(`page-${i}`);
-  if (page) {
-   if (i === currentPage) {
-    page.removeAttribute('hidden');
-   } else {
-    page.setAttribute('hidden', '');
-   }
+  for (const [id, msg] of fields) {
+    const el = $(id);
+    if (!el) continue;
+    const val = el.value.trim();
+    if (!val) {
+      setError(id, msg);
+      isValid = false;
+    } else {
+      setError(id, '');
+    }
   }
- }
- $('page-indicator').textContent = `หน้า ${currentPage} จาก ${totalPages}`;
- $('back-button').hidden = currentPage === 1;
- if (currentPage === totalPages) {
-  $('next-button').hidden = true;
-  $('submit-button').hidden = false;
- } else {
-  $('next-button').hidden = false;
-  $('submit-button').hidden = true;
- }
- window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Check Option "อื่นๆ"
+  if (page === 1) {
+    if ($('data-owner').value === 'OTHER' && !$('other-owner').value.trim()) {
+      setError('other-owner', 'กรุณาระบุชื่อองค์กรที่รับผิดชอบ');
+      isValid = false;
+    }
+    if ($('data-source').value === 'OTHER' && !$('other-source').value.trim()) {
+      setError('other-source', 'กรุณาระบุแหล่งที่มา');
+      isValid = false;
+    }
+  }
+  if (page === 2) {
+    if ($('update-frequency').value === 'OTHER' && !$('other-frequency').value.trim()) {
+      setError('other-frequency', 'กรุณาระบุความถี่ในการอัปเดต');
+      isValid = false;
+    }
+    const pdpaChecked = document.querySelector('input[name="pdpa"]:checked');
+    if (!pdpaChecked) {
+      setError('pdpa', 'กรุณาเลือกข้อมูลส่วนบุคคล PDPA');
+      isValid = false;
+    } else {
+      setError('pdpa', '');
+    }
+  }
+
+  return isValid;
 }
 
-function validatePage(pageNum) {
- let isValid = true;
- const pageEl = $(`page-${pageNum}`);
- if (!pageEl) return true;
+// ---------- Page Navigation ----------
+function showPage(page) {
+  currentPage = page;
+  $('page-1').hidden = page !== 1;
+  $('page-2').hidden = page !== 2;
+  $('page-3').hidden = page !== 3;
 
- // ตรวจสอบ Inputs/Selects ในหน้านั้นๆ
- const inputs = pageEl.querySelectorAll('input[required], select[required], textarea[required]');
- inputs.forEach(input => {
-  const errEl = $(`${input.id}-error`);
-  if (!input.value.trim()) {
-   isValid = false;
-   input.setAttribute('aria-invalid', 'true');
-   if (errEl) errEl.textContent = 'กรุณากรอกข้อมูลในช่องนี้';
-  } else {
-   input.removeAttribute('aria-invalid');
-   if (errEl) errEl.textContent = '';
-  }
- });
+  $('back-button').hidden = page === 1;
+  $('next-button').hidden = page === 3;
+  $('submit-button').hidden = page !== 3;
 
- // ตรวจสอบ Validation พิเศษในหน้า 1 (Dropdown Checkbox วัตถุประสงค์)
- if (pageNum === 1) {
-  const checkedObjs = document.querySelectorAll('input[name="objective"]:checked');
-  const objErr = $('objective-error');
-  if (checkedObjs.length === 0) {
-   isValid = false;
-   if (objErr) objErr.textContent = 'กรุณาเลือกวัตถุประสงค์อย่างน้อย 1 ข้อ';
-  } else {
-   if (objErr) objErr.textContent = '';
-  }
- }
-
- // ตรวจสอบ Validation พิเศษในหน้า 2 (Radio PDPA)
- if (pageNum === 2) {
-  const pdpaChecked = document.querySelector('input[name="pdpa"]:checked');
-  const pdpaErr = $('pdpa-error');
-  if (!pdpaChecked) {
-   isValid = false;
-   if (pdpaErr) pdpaErr.textContent = 'กรุณาเลือกระดับข้อมูลส่วนบุคคล PDPA';
-  } else {
-   if (pdpaErr) pdpaErr.textContent = '';
-  }
- }
-
- return isValid;
+  $('page-indicator').textContent = `หน้า ${page} จาก 3`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 $('next-button').addEventListener('click', () => {
- if (validatePage(currentPage)) {
-  if (currentPage < totalPages) {
-   currentPage++;
-   updatePageUI();
+  if (validatePage(currentPage)) {
+    showPage(currentPage + 1);
   }
- }
 });
 
 $('back-button').addEventListener('click', () => {
- if (currentPage > 1) {
-  currentPage--;
-  updatePageUI();
- }
+  showPage(currentPage - 1);
 });
 
-// Modal Helpers
-function showModal(title, msg, isSuccess = true) {
- $('modal-title').textContent = title;
- $('modal-message').textContent = msg;
- $('success-icon').hidden = !isSuccess;
- $('error-icon').hidden = isSuccess;
- $('result-modal').removeAttribute('hidden');
+// ---------- Modal Helpers ----------
+function showModal(isSuccess, title, message) {
+  $('success-icon').hidden = !isSuccess;
+  $('error-icon').hidden = isSuccess;
+  $('modal-title').textContent = title;
+  $('modal-message').textContent = message;
+  modal.hidden = false;
 }
 
-function hideModal() {
- $('result-modal').setAttribute('hidden', '');
-}
+$('modal-close').addEventListener('click', () => modal.hidden = true);$('modal-action').addEventListener('click', () => modal.hidden = true);
 
-$('modal-close').addEventListener('click', hideModal);$('modal-action').addEventListener('click', hideModal);
+// ---------- Submit Form ----------
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!validatePage(3)) return;
 
-// Submit Form Handlers
-$('metadata-form').addEventListener('submit', async (e) => {
- e.preventDefault();
- if (!validatePage(currentPage)) return;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  
+  // รวมโดเมนอีเมลผู้ดูแล
+  data.maintainer_email = data.maintainer_email ? `${data.maintainer_email}@nbtc.go.th` : '';
 
- const submitBtn = $('submit-button');
- const submitLabel = $('submit-label');
- const loadingLabel = $('loading-label');
+  $('submit-label').hidden = true;
+  $('loading-label').hidden = false;
+  submitButton.disabled = true;
 
- submitBtn.disabled = true;
- submitLabel.hidden = true;
- loadingLabel.hidden = false;
+  try {
+    const res = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
 
- const formData = new FormData(e.target);
- const data = {};
-
- // แปลงข้อมูลจาก FormData เป็น JSON Object
- formData.forEach((value, key) => {
-  if (key === 'objective') {
-   if (!data[key]) data[key] = [];
-   data[key].push(value);
-  } else {
-   data[key] = value;
+    if (res.ok) {
+      showModal(true, 'ลงทะเบียนสำเร็จ', 'ข้อมูล Metadata ของท่านถูกส่งเข้าสู่ระบบเรียบร้อยแล้ว');
+      form.reset();
+      showPage(1);
+    } else {
+      throw new Error('Server returned ' + res.status);
+    }
+  } catch (err) {
+    showModal(false, 'เกิดข้อผิดพลาด', 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้งในภายหลัง');
+  } finally {
+    $('submit-label').hidden = false;
+    $('loading-label').hidden = true;
+    submitButton.disabled = false;
   }
- });
-
- // รวมส่วนการต่อท้าย อีเมลผู้ดูแล
- if (data.maintainer_email) {
-  data.maintainer_email = data.maintainer_email + '@nbtc.go.th';
- }
-
- try {
-  const res = await fetch(WEBHOOK_URL, {
-   method: 'POST',
-   headers: { 'Content-Type': 'application/json' },
-   body: JSON.stringify(data)
-  });
-
-  if (res.ok) {
-   showModal('ลงทะเบียนสำเร็จ!', 'ข้อมูล Metadata ของคุณถูกส่งเข้าสู่ระบบเรียบร้อยแล้ว', true);
-   e.target.reset();
-   currentPage = 1;
-   updatePageUI();
-   updateObjectiveText();
-  } else {
-   throw new Error('Server responded with error');
-  }
- } catch (err) {
-  showModal('เกิดข้อผิดพลาด!', 'ไม่สามารถส่งข้อมูลได้ กรุณาตรวจสอบการเชื่อมต่อแล้วลองใหม่อีกครั้ง', false);
- } finally {
-  submitBtn.disabled = false;
-  submitLabel.hidden = false;
-  loadingLabel.hidden = true;
- }
 });
 </script>
 </body>
