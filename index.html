@@ -276,7 +276,24 @@ textarea.field-control{min-height:112px;resize:vertical}
 const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook-test/metadata-submission';
 
 const OPTIONS = {
-  category: ['เลือกหมวดหมู่ข้อมูล','ด้านกฎหมาย','ด้านการคุ้มครองผู้ใช้บริการ','ด้านการบริหารงานทั่วไปและอำนวยการ','ด้านการอนุญาต','ด้านทรัพยากรบุคคล','ด้านการบริหารทรัพยากร','ด้านบริหารพัสดุและบริหารทรัพย์สิน','ด้านยุทธศาสตร์','ด้านการกำกับดูแล ตรวจสอบ และรับรองมาตรฐาน','ด้านการจัดให้มีบริการภายใต้งบประมาณกองทุน กทปส.','ด้านงบประมาณ บัญชี การเงิน','ด้านเทคโนโลยีสารสนเทศ','ด้านพัฒนาองค์ความรู้แก่ผู้ประกอบการและผู้ใช้บริการ','ด้านวิชาการ'],
+  // ✅ แก้ไข category เป็นรูปแบบ [value, label]
+  category: [
+    ['', 'เลือกหมวดหมู่ข้อมูล'],
+    ['ด้านกฎหมาย', 'ด้านกฎหมาย'],
+    ['ด้านการคุ้มครองผู้ใช้บริการ', 'ด้านการคุ้มครองผู้ใช้บริการ'],
+    ['ด้านการบริหารงานทั่วไปและอำนวยการ', 'ด้านการบริหารงานทั่วไปและอำนวยการ'],
+    ['ด้านการอนุญาต', 'ด้านการอนุญาต'],
+    ['ด้านทรัพยากรบุคคล', 'ด้านทรัพยากรบุคคล'],
+    ['ด้านการบริหารทรัพยากร', 'ด้านการบริหารทรัพยากร'],
+    ['ด้านบริหารพัสดุและบริหารทรัพย์สิน', 'ด้านบริหารพัสดุและบริหารทรัพย์สิน'],
+    ['ด้านยุทธศาสตร์', 'ด้านยุทธศาสตร์'],
+    ['ด้านการกำกับดูแล ตรวจสอบ และรับรองมาตรฐาน', 'ด้านการกำกับดูแล ตรวจสอบ และรับรองมาตรฐาน'],
+    ['ด้านการจัดให้มีบริการภายใต้งบประมาณกองทุน กทปส.', 'ด้านการจัดให้มีบริการภายใต้งบประมาณกองทุน กทปส.'],
+    ['ด้านงบประมาณ บัญชี การเงิน', 'ด้านงบประมาณ บัญชี การเงิน'],
+    ['ด้านเทคโนโลยีสารสนเทศ', 'ด้านเทคโนโลยีสารสนเทศ'],
+    ['ด้านพัฒนาองค์ความรู้แก่ผู้ประกอบการและผู้ใช้บริการ', 'ด้านพัฒนาองค์ความรู้แก่ผู้ประกอบการและผู้ใช้บริการ'],
+    ['ด้านวิชาการ', 'ด้านวิชาการ']
+  ],
   data_type: [['','เลือกประเภทข้อมูล'],
     ['1= ข้อมูลระเบียน','1= ข้อมูลระเบียน — ข้อมูลที่จัดเก็บในฐานข้อมูลที่เกิดจากการบริหารงานหรือปฏิบัติงานรายวัน'],
     ['2= ข้อมูลสถิติ','2= ข้อมูลสถิติ — ข้อความหรือตัวเลขที่แสดงผลที่ประมวลจากข้อมูลที่เก็บรวบรวมได้'],
@@ -376,11 +393,12 @@ function setError(id, msg) {
   if (id === 'maintainer-email') $('maintainer-email-group').dataset.invalid = msg ? 'true' : 'false';
 }
 
+// ✅ ส่วนที่ขาดหายไปได้ถูกเขียนเติมจนครบสมบูรณ์เรียบร้อยครับ
 const REQUIRED_FIELDS = {
   1: [
     ['dataset-name', 'กรุณาระบุชื่อชุดข้อมูล'],
     ['description', 'กรุณาระบุคำอธิบายรายละเอียด'],
-    ['tagstring', 'กรุณาระบุคำสำคัญ (Tag)'],
+    ['tagstring', 'กรุณาระบุคำสำคัญ'],
     ['category', 'กรุณาเลือกหมวดหมู่ข้อมูล'],
     ['data-type', 'กรุณาเลือกประเภทข้อมูล'],
     ['objective', 'กรุณาเลือกวัตถุประสงค์'],
@@ -390,10 +408,10 @@ const REQUIRED_FIELDS = {
     ['data-source', 'กรุณาเลือกแหล่งที่มา']
   ],
   2: [
-    ['data-format', 'กรุณาเลือกรูปแบบไฟล์/การจัดเก็บ'],
+    ['data-format', 'กรุณาเลือกรูปแบบไฟล์ / การจัดเก็บ'],
     ['update-frequency', 'กรุณาเลือกความถี่ในการอัปเดต'],
     ['geo-coverage', 'กรุณาเลือกขอบเขตเชิงภูมิศาสตร์'],
-    ['classification', 'กรุณาเลือกหมวดหมู่ตามธรรมาภิบาล'],
+    ['classification', 'กรุณาเลือกหมวดหมู่ข้อมูลตามธรรมาภิบาล'],
     ['access-level', 'กรุณาเลือกการจัดระดับชั้นความลับ'],
     ['right-of-usage', 'กรุณาเลือกสัญญาอนุญาตให้ใช้ข้อมูล']
   ],
@@ -407,9 +425,9 @@ function validatePage(page) {
   let isValid = true;
   const fields = REQUIRED_FIELDS[page] || [];
 
-  for (const [id, msg] of fields) {
+  fields.forEach(([id, msg]) => {
     const el = $(id);
-    if (!el) continue;
+    if (!el) return;
     const val = el.value.trim();
     if (!val) {
       setError(id, msg);
@@ -417,27 +435,27 @@ function validatePage(page) {
     } else {
       setError(id, '');
     }
-  }
+  });
 
-  // Check Option "อื่นๆ"
+  // ตรวจสอบข้อมูลกรณีเลือก "อื่นๆ"
   if (page === 1) {
     if ($('data-owner').value === 'OTHER' && !$('other-owner').value.trim()) {
-      setError('other-owner', 'กรุณาระบุชื่อองค์กรที่รับผิดชอบ');
+      setError('data-owner', 'กรุณาระบุชื่อองค์กร');
       isValid = false;
     }
     if ($('data-source').value === 'OTHER' && !$('other-source').value.trim()) {
-      setError('other-source', 'กรุณาระบุแหล่งที่มา');
+      setError('data-source', 'กรุณาระบุแหล่งที่มา');
       isValid = false;
     }
-  }
-  if (page === 2) {
+  } else if (page === 2) {
     if ($('update-frequency').value === 'OTHER' && !$('other-frequency').value.trim()) {
-      setError('other-frequency', 'กรุณาระบุความถี่ในการอัปเดต');
+      setError('update-frequency', 'กรุณาระบุความถี่ในการอัปเดต');
       isValid = false;
     }
+    // Validate PDPA Radio
     const pdpaChecked = document.querySelector('input[name="pdpa"]:checked');
     if (!pdpaChecked) {
-      setError('pdpa', 'กรุณาเลือกข้อมูลส่วนบุคคล PDPA');
+      setError('pdpa', 'กรุณาระบุข้อมูลส่วนบุคคล PDPA');
       isValid = false;
     } else {
       setError('pdpa', '');
@@ -449,7 +467,6 @@ function validatePage(page) {
 
 // ---------- Page Navigation ----------
 function showPage(page) {
-  currentPage = page;
   $('page-1').hidden = page !== 1;
   $('page-2').hidden = page !== 2;
   $('page-3').hidden = page !== 3;
@@ -459,6 +476,7 @@ function showPage(page) {
   $('submit-button').hidden = page !== 3;
 
   $('page-indicator').textContent = `หน้า ${page} จาก 3`;
+  currentPage = page;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -472,54 +490,64 @@ $('back-button').addEventListener('click', () => {
   showPage(currentPage - 1);
 });
 
-// ---------- Modal Helpers ----------
-function showModal(isSuccess, title, message) {
-  $('success-icon').hidden = !isSuccess;
-  $('error-icon').hidden = isSuccess;
+// ---------- Modal Management ----------
+function showModal(title, message, isSuccess = true) {
   $('modal-title').textContent = title;
   $('modal-message').textContent = message;
+  $('success-icon').hidden = !isSuccess;
+  $('error-icon').hidden = isSuccess;
   modal.hidden = false;
 }
 
-$('modal-close').addEventListener('click', () => modal.hidden = true);$('modal-action').addEventListener('click', () => modal.hidden = true);
+function closeModal() {
+  modal.hidden = true;
+}
+
+$('modal-close').addEventListener('click', closeModal);$('modal-action').addEventListener('click', closeModal);
 
 // ---------- Submit Form ----------
-form.addEventListener('submit', async e => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!validatePage(3)) return;
 
+  const submitLabel = $('submit-label');
+  const loadingLabel = $('loading-label');
+
+  submitButton.disabled = true;
+  submitLabel.hidden = true;
+  loadingLabel.hidden = false;
+
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
-  
-  // รวมโดเมนอีเมลผู้ดูแล
-  data.maintainer_email = data.maintainer_email ? `${data.maintainer_email}@nbtc.go.th` : '';
 
-  $('submit-label').hidden = true;
-  $('loading-label').hidden = false;
-  submitButton.disabled = true;
+  // รวมโดเมนอีเมล
+  if (data.maintainer_email) {
+    data.maintainer_email = data.maintainer_email + '@nbtc.go.th';
+  }
 
   try {
-    const res = await fetch(WEBHOOK_URL, {
+    const response = await fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
 
-    if (res.ok) {
-      showModal(true, 'ลงทะเบียนสำเร็จ', 'ข้อมูล Metadata ของท่านถูกส่งเข้าสู่ระบบเรียบร้อยแล้ว');
+    if (response.ok) {
+      showModal('ส่งข้อมูลสำเร็จ!', 'ระบบได้รับข้อมูล Metadata เรียบร้อยแล้ว', true);
       form.reset();
       showPage(1);
     } else {
-      throw new Error('Server returned ' + res.status);
+      throw new Error('Server error');
     }
   } catch (err) {
-    showModal(false, 'เกิดข้อผิดพลาด', 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้งในภายหลัง');
+    showModal('เกิดข้อผิดพลาด!', 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่อีกครั้งในภายหลัง', false);
   } finally {
-    $('submit-label').hidden = false;
-    $('loading-label').hidden = true;
     submitButton.disabled = false;
+    submitLabel.hidden = false;
+    loadingLabel.hidden = true;
   }
 });
 </script>
+
 </body>
 </html>
