@@ -228,13 +228,13 @@ textarea.field-control{min-height:112px;resize:vertical}
      <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">04</span>
       <div><h2 id="h4s" class="text-2xl">ระดับความลับของข้อมูล (Data Classification)</h2><p class="sub">ระบุระดับความลับและการมีข้อมูลส่วนบุคคลของชุดข้อมูล</p></div></div>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="field">
+      <div class="field sm:col-span-2">
        <label for="classification" class="field-label">หมวดหมู่ข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ (Data Category) <span class="req" aria-label="จำเป็น">*</span></label>
        <select id="classification" name="data_classification" class="field-control select-placeholder" required aria-describedby="classification-help classification-error"></select>
        <p id="classification-help" class="field-help">เลือกหมวดหมู่ที่ตรงกับชุดข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ</p>
        <p id="classification-error" class="field-error" aria-live="polite"></p>
       </div>
-      <fieldset id="pdpa" class="field">
+      <fieldset id="pdpa" class="field sm:col-span-2">
        <legend class="field-label mb-[7px]">ข้อมูลส่วนบุคคล PDPA <span class="req" aria-label="จำเป็น">*</span></legend>
        <div class="flex flex-wrap gap-2">
         <label class="radio-choice"><input type="radio" name="pdpa" value="มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help"><span>มีข้อมูลส่วนบุคคล</span></label>
@@ -308,7 +308,7 @@ textarea.field-control{min-height:112px;resize:vertical}
 <script>
 const $ = id => document.getElementById(id);
 
-const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook-test/metadata-submission';
+const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook/metadata-submission';
 
 const OPTIONS = {
  category: [
@@ -381,6 +381,15 @@ const OPTIONS = {
 
 const FIELD_ID = {category:'category',data_type:'data-type',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
 
+// Helper ช่วยอัปเดตสี Placeholder สำหรับ Select Box
+function updateSelectColor(sel) {
+ if (!sel.value) {
+  sel.classList.add('select-placeholder');
+ } else {
+  sel.classList.remove('select-placeholder');
+ }
+}
+
 // Render ตัวเลือก Dropdown ทั่วไป พร้อมปรับการแสดงผลสีเทาสำหรับ Placeholder
 for (const [key, list] of Object.entries(OPTIONS)) {
  if (key === 'objective') continue;
@@ -391,12 +400,29 @@ for (const [key, list] of Object.entries(OPTIONS)) {
   sel.add(new Option(label, value));
  });
 
- sel.addEventListener('change', () => {
-  if (!sel.value) {
-   sel.classList.add('select-placeholder');
-  } else {
-   sel.classList.remove('select-placeholder');
+ sel.addEventListener('change', () => updateSelectColor(sel));
+}
+
+// ระบบ Auto-mapping สำหรับหัวข้อ "ระดับความลับของข้อมูล (Data Classification)"
+const classificationSelect = $('classification');
+const accessLevelSelect = $('access-level');
+const rightOfUsageSelect = $('right-of-usage');
+
+if (classificationSelect) {
+ classificationSelect.addEventListener('change', (e) => {
+  const selectedVal = e.target.value;
+  
+  if (selectedVal === '1= ข้อมูลสาธารณะ') {
+   accessLevelSelect.value = '01= ชั้นเปิดเผย (Open)';
+   rightOfUsageSelect.value = 'G0= Open Data Common';
+  } else if (selectedVal === '2= ข้อมูลใช้ภายในสำนักงาน กสทช.') {
+   accessLevelSelect.value = '02= ชั้นเผยแพร่ภายในองค์กร (Private)';
+   rightOfUsageSelect.value = 'G5= Others License';
   }
+  
+  // ปรับอัปเดตสีตัวอักษรของ Select ทั้งหมดทันทีที่มีการเปลี่ยนค่าอัตโนมัติ
+  updateSelectColor(accessLevelSelect);
+  updateSelectColor(rightOfUsageSelect);
  });
 }
 
