@@ -390,7 +390,7 @@ function updateSelectColor(sel) {
  }
 }
 
-// Render ตัวเลือก Dropdown ทั่วไป พร้อมปรับการแสดงผลสีเทาสำหรับ Placeholder
+// Render ตัวเลือก Dropdown ทั่วไป
 for (const [key, list] of Object.entries(OPTIONS)) {
  if (key === 'objective') continue;
  const sel = $(FIELD_ID[key]);
@@ -408,19 +408,28 @@ const classificationSelect = $('classification');
 const accessLevelSelect = $('access-level');
 const rightOfUsageSelect = $('right-of-usage');
 
+function selectOptionByPrefix(selectElement, prefix) {
+ for (let i = 0; i < selectElement.options.length; i++) {
+  if (selectElement.options[i].value.startsWith(prefix)) {
+   selectElement.selectedIndex = i;
+   break;
+  }
+ }
+}
+
 if (classificationSelect) {
  classificationSelect.addEventListener('change', (e) => {
   const selectedVal = e.target.value;
   
-  if (selectedVal === '1= ข้อมูลสาธารณะ') {
-   accessLevelSelect.value = '01= ชั้นเปิดเผย (Open)';
-   rightOfUsageSelect.value = 'G0= Open Data Common';
-  } else if (selectedVal === '2= ข้อมูลใช้ภายในสำนักงาน กสทช.') {
-   accessLevelSelect.value = '02= ชั้นเผยแพร่ภายในองค์กร (Private)';
-   rightOfUsageSelect.value = 'G5= Others License';
+  if (selectedVal.startsWith('1=')) {
+   selectOptionByPrefix(accessLevelSelect, '01=');
+   selectOptionByPrefix(rightOfUsageSelect, 'G0=');
+  } else if (selectedVal.startsWith('2=')) {
+   selectOptionByPrefix(accessLevelSelect, '02=');
+   selectOptionByPrefix(rightOfUsageSelect, 'G5=');
   }
   
-  // ปรับอัปเดตสีตัวอักษรของ Select ทั้งหมดทันทีที่มีการเปลี่ยนค่าอัตโนมัติ
+  // อัปเดตสีตัวอักษรของ Select ทั้งหมดทันทีที่มีการเปลี่ยนค่าอัตโนมัติ
   updateSelectColor(accessLevelSelect);
   updateSelectColor(rightOfUsageSelect);
  });
@@ -463,12 +472,10 @@ function updateObjectiveText() {
   objText.textContent = 'เลือกวัตถุประสงค์...';
   objText.className = 'text-slate-400 break-words leading-relaxed mr-2';
  } else {
-  // แสดงคำตอบทั้งหมดที่เลือก คั่นด้วยเครื่องหมายจุลภาค
   const selectedValues = checked.map(c => c.value).join(', ');
   objText.textContent = selectedValues;
   objText.className = 'text-slate-800 font-medium break-words leading-relaxed mr-2';
  }
- // ล้าง Error แจ้งเตือนเมื่อมีการเลือก
  const objErr = $('objective-error');
  if (objErr && checked.length > 0) objErr.textContent = '';
 }
@@ -542,7 +549,6 @@ function validatePage(pageNum) {
  const pageEl = $(`page-${pageNum}`);
  if (!pageEl) return true;
 
- // ตรวจสอบ Inputs/Selects ในหน้านั้นๆ
  const inputs = pageEl.querySelectorAll('input[required], select[required], textarea[required]');
  inputs.forEach(input => {
   const errEl = $(`${input.id}-error`);
@@ -556,7 +562,6 @@ function validatePage(pageNum) {
   }
  });
 
- // ตรวจสอบ Validation พิเศษในหน้า 1 (Dropdown Checkbox วัตถุประสงค์)
  if (pageNum === 1) {
   const checkedObjs = document.querySelectorAll('input[name="objective"]:checked');
   const objErr = $('objective-error');
@@ -568,7 +573,6 @@ function validatePage(pageNum) {
   }
  }
 
- // ตรวจสอบ Validation พิเศษในหน้า 2 (Radio PDPA)
  if (pageNum === 2) {
   const pdpaChecked = document.querySelector('input[name="pdpa"]:checked');
   const pdpaErr = $('pdpa-error');
@@ -630,7 +634,6 @@ $('metadata-form').addEventListener('submit', async (e) => {
  const formData = new FormData(e.target);
  const data = {};
 
- // แปลงข้อมูลจาก FormData เป็น JSON Object
  formData.forEach((value, key) => {
   if (key === 'objective') {
    if (!data[key]) data[key] = [];
@@ -640,7 +643,6 @@ $('metadata-form').addEventListener('submit', async (e) => {
   }
  });
 
- // รวมส่วนการต่อท้าย อีเมลผู้ดูแล
  if (data.maintainer_email) {
   data.maintainer_email = data.maintainer_email + '@nbtc.go.th';
  }
@@ -656,7 +658,6 @@ $('metadata-form').addEventListener('submit', async (e) => {
    showModal('ลงทะเบียนสำเร็จ!', 'ข้อมูล Metadata ของคุณถูกส่งเข้าสู่ระบบเรียบร้อยแล้ว', true);
    e.target.reset();
    
-   // รีเซ็ตการแสดงผล Select Placeholders
    document.querySelectorAll('select.field-control').forEach(sel => sel.classList.add('select-placeholder'));
    
    currentPage = 1;
