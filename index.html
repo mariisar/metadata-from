@@ -28,9 +28,15 @@ textarea.field-control{min-height:112px;resize:vertical}
 .field-help{font-size:13px;color:var(--muted)}
 .field-error{font-size:13px;font-weight:600;color:#b42336}
 .field-error:empty{display:none}
-.radio-choice, .checkbox-choice{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid #cbd7e6;border-radius:10px;cursor:pointer;background:#fff;font-size:14px}
+.radio-choice, .checkbox-choice{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:8px;cursor:pointer;background:#fff;font-size:14px;transition:background-color .15s}
+.checkbox-choice:hover{background-color:#f1f5f9}
 .radio-choice input, .checkbox-choice input{accent-color:var(--blue);width:17px;height:17px;flex-shrink:0}
-.radio-choice:has(input:checked), .checkbox-choice:has(input:checked){border-color:var(--blue);background:#eff6ff}
+
+/* Multi-select Dropdown Custom Style */
+.dropdown-checkbox-container{position:relative;width:100%}
+.dropdown-checkbox-btn{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.dropdown-checkbox-menu{position:absolute;top:100%;left:0;right:0;z-index:30;margin-top:4px;max-height:260px;overflow-y:auto;background:#fff;border:1px solid #cbd7e6;border-radius:11px;box-shadow:0 10px 25px -5px rgba(0,0,0,0.1);padding:6px}
+
 .email-group{display:flex;align-items:stretch;border:1px solid #cbd7e6;border-radius:11px;background:#fff;overflow:hidden;transition:border-color .18s,box-shadow .18s}
 .email-group:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
 .email-group[data-invalid="true"]{border-color:#bd3046}
@@ -114,12 +120,21 @@ textarea.field-control{min-height:112px;resize:vertical}
        <p id="data-type-help" class="field-help">เลือกประเภทข้อมูลตามลักษณะและวิธีการจัดเก็บของชุดข้อมูล</p>
       </div>
 
-      <!-- ส่วน Checkbox วัตถุประสงค์ (Objective) -->
+      <!-- ส่วน Dropdown Checkbox วัตถุประสงค์ (Objective) -->
       <fieldset id="objective-container" class="field sm:col-span-2">
        <legend class="field-label mb-[7px]">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span> <span class="text-xs font-normal text-slate-500">(เลือกได้มากกว่า 1 ข้อ)</span></legend>
-       <div id="objective-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-        <!-- Rendered dynamically by JavaScript -->
+       
+       <div class="dropdown-checkbox-container">
+        <button type="button" id="objective-dropdown-btn" class="field-control dropdown-checkbox-btn" aria-expanded="false">
+         <span id="objective-btn-text" class="text-slate-400">เลือกวัตถุประสงค์...</span>
+         <svg class="w-4 h-4 ml-2 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        
+        <div id="objective-list" class="dropdown-checkbox-menu" hidden>
+         <!-- Rendered dynamically by JavaScript -->
+        </div>
        </div>
+
        <p id="objective-help" class="field-help mt-1">อธิบายที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
        <p id="objective-error" class="field-error" aria-live="polite"></p>
       </fieldset>
@@ -279,7 +294,6 @@ textarea.field-control{min-height:112px;resize:vertical}
 </div>
 
 <script>
-// ประกาศฟังก์ชัน Helper สำหรับดึง Element
 const $ = id => document.getElementById(id);
 
 const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook-test/metadata-submission';
@@ -355,9 +369,9 @@ const OPTIONS = {
 
 const FIELD_ID = {category:'category',data_type:'data-type',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
 
-// Render ตัวเลือก Dropdown ต่างๆ
+// Render ตัวเลือก Dropdown ทั่วไป
 for (const [key, list] of Object.entries(OPTIONS)) {
-  if (key === 'objective') continue; // ข้าม objective ไปสร้างแบบ Checkbox
+  if (key === 'objective') continue;
   const sel = $(FIELD_ID[key]);
   if (!sel) continue;
   list.forEach((item, i) => {
@@ -366,7 +380,7 @@ for (const [key, list] of Object.entries(OPTIONS)) {
   });
 }
 
-// Render ตัวเลือก Checkbox สำหรับ วัตถุประสงค์ (Objective)
+// Render ตัวเลือก Checkbox ใน Dropdown วัตถุประสงค์
 const objectiveListEl = $('objective-list');
 if (objectiveListEl) {
   OPTIONS.objective.forEach(item => {
@@ -377,14 +391,47 @@ if (objectiveListEl) {
   });
 }
 
+// ควบคุมการ เปิด/ปิด Dropdown
+const dropdownBtn = $('objective-dropdown-btn');
+const dropdownMenu = $('objective-list');
+const btnText = $('objective-btn-text');
+
+dropdownBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isHidden = dropdownMenu.hidden;
+  dropdownMenu.hidden = !isHidden;
+  dropdownBtn.setAttribute('aria-expanded', !isHidden);
+});
+
+// ปิด Dropdown เมื่อคลิกข้างนอก
+document.addEventListener('click', (e) => {
+  if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+    dropdownMenu.hidden = true;
+    dropdownBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// อัปเดตข้อความบนปุ่มกดเมื่อติ๊กเลือก Checkbox
+dropdownMenu.addEventListener('change', () => {
+  const selected = Array.from(document.querySelectorAll('input[name="objective"]:checked')).map(cb => cb.value);
+  if (selected.length === 0) {
+    btnText.textContent = 'เลือกวัตถุประสงค์...';
+    btnText.className = 'text-slate-400';
+  } else if (selected.length === 1) {
+    btnText.textContent = selected[0];
+    btnText.className = 'text-slate-900 font-medium truncate';
+  } else {
+    btnText.textContent = `เลือกแล้ว ${selected.length} รายการ`;
+    btnText.className = 'text-slate-900 font-medium';
+  }
+});
+
 const form = $('metadata-form'), modal = $('result-modal'), submitButton =$('submit-button');
 let currentPage = 1;
 
-// ---------- Dropdown placeholder tone ----------
 function updateTone(sel) { sel.classList.toggle('select-placeholder', sel.value === ''); }
 document.querySelectorAll('select.field-control').forEach(s => { updateTone(s); s.addEventListener('change', () => updateTone(s)); });
 
-// ---------- "อื่นๆ" fields ----------
 function bindOther(selectId, fieldId, inputId, helpId) {
   $(selectId).addEventListener('change', e => {
     const isOther = e.target.value === 'OTHER';
@@ -398,7 +445,6 @@ bindOther('data-owner', 'other-owner-field', 'other-owner', 'data-owner-help');
 bindOther('data-source', 'other-source-field', 'other-source');
 bindOther('update-frequency', 'other-frequency-field', 'other-frequency');
 
-// ---------- Auto-select defaults ----------
 const CATEGORY_DEFAULTS = {
   '1= ข้อมูลสาธารณะ': { access: '01= ชั้นเปิดเผย (Open)', right: 'G0= Open Data Common' },
   '2= ข้อมูลใช้ภายในสำนักงาน กสทช.': { access: '02= ชั้นเผยแพร่ภายในองค์กร (Private)', right: 'G5= Others License' }
@@ -411,7 +457,6 @@ $('classification').addEventListener('change', e => {
   updateTone($('access-level')); updateTone($('right-of-usage'));
 });
 
-// ---------- Validation ----------
 function setError(id, msg) {
   const el = $(id);
   if (!el) return;
@@ -471,7 +516,6 @@ function validatePage(page) {
   });
 
   if (page === 1) {
-    // ตรวจสอบ Checkbox วัตถุประสงค์
     const selectedObjectives = document.querySelectorAll('input[name="objective"]:checked');
     if (selectedObjectives.length === 0) {
       setError('objective', 'กรุณาเลือกวัตถุประสงค์อย่างน้อย 1 ข้อ');
@@ -505,7 +549,6 @@ function validatePage(page) {
   return isValid;
 }
 
-// ---------- Page Navigation ----------
 function showPage(page) {
   $('page-1').hidden = page !== 1;
   $('page-2').hidden = page !== 2;
@@ -530,7 +573,6 @@ $('back-button').addEventListener('click', () => {
   showPage(currentPage - 1);
 });
 
-// ---------- Modal Management ----------
 function showModal(title, message, isSuccess = true) {
   $('modal-title').textContent = title;
   $('modal-message').textContent = message;
@@ -545,7 +587,6 @@ function closeModal() {
 
 $('modal-close').addEventListener('click', closeModal);$('modal-action').addEventListener('click', closeModal);
 
-// ---------- Submit Form ----------
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!validatePage(3)) return;
@@ -560,10 +601,9 @@ form.addEventListener('submit', async (e) => {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
 
-  // รวบรวมคำตอบ Checkbox ของ "วัตถุประสงค์" ทั้งหมดส่งเป็น Array
+  // รวบรวมวัตถุประสงค์ทั้งหมดที่ถูกเลือกเป็น Array
   data.objective = formData.getAll('objective');
 
-  // รวมโดเมนอีเมล
   if (data.maintainer_email) {
     data.maintainer_email = data.maintainer_email + '@nbtc.go.th';
   }
@@ -578,6 +618,8 @@ form.addEventListener('submit', async (e) => {
     if (response.ok) {
       showModal('ส่งข้อมูลสำเร็จ!', 'ระบบได้รับข้อมูล Metadata เรียบร้อยแล้ว', true);
       form.reset();
+      btnText.textContent = 'เลือกวัตถุประสงค์...';
+      btnText.className = 'text-slate-400';
       showPage(1);
     } else {
       throw new Error('Server error');
