@@ -146,7 +146,7 @@ textarea.field-control{min-height:112px;resize:vertical}
     </section>
 
     <section class="sec" aria-labelledby="h2s">
-     <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">01</span>
+     <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">02</span>
       <div><h2 id="h2s" class="text-2xl">การกำกับดูแลและความปลอดภัย (Governance &amp; Security)</h2><p class="sub">ระบุความรับผิดชอบและข้อพิจารณาด้านความปลอดภัย</p></div></div>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="field sm:col-span-2">
@@ -228,13 +228,17 @@ textarea.field-control{min-height:112px;resize:vertical}
      <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">04</span>
       <div><h2 id="h4s" class="text-2xl">ระดับความลับของข้อมูล (Data Classification)</h2><p class="sub">ระบุระดับความลับและการมีข้อมูลส่วนบุคคลของชุดข้อมูล</p></div></div>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="field sm:col-span-2">
+      
+      <!-- หมวดหมู่ข้อมูลตามธรรมาภิบาล (ฝั่งซ้าย) -->
+      <div class="field sm:col-span-1">
        <label for="classification" class="field-label">หมวดหมู่ข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ (Data Category) <span class="req" aria-label="จำเป็น">*</span></label>
        <select id="classification" name="data_classification" class="field-control select-placeholder" required aria-describedby="classification-help classification-error"></select>
        <p id="classification-help" class="field-help">เลือกหมวดหมู่ที่ตรงกับชุดข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ</p>
        <p id="classification-error" class="field-error" aria-live="polite"></p>
       </div>
-      <fieldset id="pdpa" class="field sm:col-span-2">
+
+      <!-- ข้อมูลส่วนบุคคล PDPA (ฝั่งขวา - ย้ายมาไว้ข้างกัน) -->
+      <fieldset id="pdpa" class="field sm:col-span-1">
        <legend class="field-label mb-[7px]">ข้อมูลส่วนบุคคล PDPA <span class="req" aria-label="จำเป็น">*</span></legend>
        <div class="flex flex-wrap gap-2">
         <label class="radio-choice"><input type="radio" name="pdpa" value="มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help"><span>มีข้อมูลส่วนบุคคล</span></label>
@@ -243,6 +247,8 @@ textarea.field-control{min-height:112px;resize:vertical}
        <p id="pdpa-help" class="field-help">ระบุว่าชุดข้อมูลมีข้อมูลที่ระบุตัวบุคคลได้หรือไม่</p>
        <p id="pdpa-error" class="field-error" aria-live="polite"></p>
       </fieldset>
+
+      <!-- สองหัวข้อล่างวางเต็มความกว้างแถว -->
       <div class="field sm:col-span-2">
        <label for="access-level" class="field-label">การจัดระดับชั้นความลับของข้อมูล/เงื่อนไขในการเข้าถึงข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
        <select id="access-level" name="access_level" class="field-control select-placeholder" required aria-describedby="access-level-error"></select>
@@ -253,6 +259,7 @@ textarea.field-control{min-height:112px;resize:vertical}
        <select id="right-of-usage" name="right_of_usage" class="field-control select-placeholder" required aria-describedby="right-of-usage-error"></select>
        <p id="right-of-usage-error" class="field-error" aria-live="polite"></p>
       </div>
+
      </div>
     </section>
    </div>
