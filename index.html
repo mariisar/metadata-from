@@ -17,7 +17,7 @@ h1,h2{color:var(--navy);font-weight:700}
 .field-label{font-weight:600;color:#243b63;line-height:1.45}
 .req{color:#b42336}
 .field-control{width:100%;min-height:46px;border:1px solid #cbd7e6;border-radius:11px;background:#fff;padding:10px 13px;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}
-.field-control:focus,.radio-choice:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
+.field-control:focus,.radio-choice:focus-within,.checkbox-choice:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
 .field-control[aria-invalid="true"]{border-color:#bd3046}
 .field-control::placeholder{color:#94a3b8}
 .field-control:focus::placeholder{color:transparent}
@@ -28,9 +28,9 @@ textarea.field-control{min-height:112px;resize:vertical}
 .field-help{font-size:13px;color:var(--muted)}
 .field-error{font-size:13px;font-weight:600;color:#b42336}
 .field-error:empty{display:none}
-.radio-choice{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid #cbd7e6;border-radius:10px;cursor:pointer;background:#fff}
-.radio-choice input{accent-color:var(--blue);width:17px;height:17px}
-.radio-choice:has(input:checked){border-color:var(--blue);background:#eff6ff}
+.radio-choice, .checkbox-choice{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid #cbd7e6;border-radius:10px;cursor:pointer;background:#fff;font-size:14px}
+.radio-choice input, .checkbox-choice input{accent-color:var(--blue);width:17px;height:17px;flex-shrink:0}
+.radio-choice:has(input:checked), .checkbox-choice:has(input:checked){border-color:var(--blue);background:#eff6ff}
 .email-group{display:flex;align-items:stretch;border:1px solid #cbd7e6;border-radius:11px;background:#fff;overflow:hidden;transition:border-color .18s,box-shadow .18s}
 .email-group:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
 .email-group[data-invalid="true"]{border-color:#bd3046}
@@ -113,11 +113,17 @@ textarea.field-control{min-height:112px;resize:vertical}
        <select id="data-type" name="data_type" class="field-control" aria-describedby="data-type-help"></select>
        <p id="data-type-help" class="field-help">เลือกประเภทข้อมูลตามลักษณะและวิธีการจัดเก็บของชุดข้อมูล</p>
       </div>
-      <div class="field sm:col-span-2">
-       <label for="objective" class="field-label">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span></label>
-       <select id="objective" name="objective" class="field-control" aria-describedby="objective-help"></select>
-       <p id="objective-help" class="field-help">อธิบายที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
-      </div>
+
+      <!-- ⚙️ เปลี่ยนส่วนนี้: จาก Select เป็น Checkbox (เลือกได้มากกว่า 1 ตัวเลือก) -->
+      <fieldset id="objective-container" class="field sm:col-span-2">
+       <legend class="field-label mb-[7px]">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span> <span class="text-xs font-normal text-slate-500">(เลือกได้มากกว่า 1 ข้อ)</span></legend>
+       <div id="objective-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <!-- Rendered dynamically by JavaScript -->
+       </div>
+       <p id="objective-help" class="field-help mt-1">อธิบายที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
+       <p id="objective-error" class="field-error" aria-live="polite"></p>
+      </fieldset>
+
      </div>
     </section>
 
@@ -276,7 +282,6 @@ textarea.field-control{min-height:112px;resize:vertical}
 const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook-test/metadata-submission';
 
 const OPTIONS = {
-  // ✅ แก้ไข category เป็นรูปแบบ [value, label]
   category: [
     ['', 'เลือกหมวดหมู่ข้อมูล'],
     ['ด้านกฎหมาย', 'ด้านกฎหมาย'],
@@ -316,7 +321,23 @@ const OPTIONS = {
     ['G4.1= Creative Commons Attribution-NoDerivs','G4.1= Creative Commons Attribution-NoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น และต้องให้เครดิตที่มาของเจ้าของผลงาน'],
     ['G4.2= Creative Commons Attribution-Non CommercialNoDerivs','G4.2= Creative Commons Attribution-Non CommercialNoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และต้องไม่ใช่เพื่อการค้า'],
     ['G5= Others License','G5= Others License คือ สัญญาอนุญาตให้ใช้ข้อมูลอื่นๆ โดยเงื่อนไขเป็นไปตามที่เจ้าของข้อมูลกำหนด และผู้ใช้ข้อมูลสามารถขอใช้ข้อมูลได้เป็นรายกรณี']],
-  objective: ['เลือกวัตถุประสงค์','01= ยุทธศาสตร์ชาติ','02= แผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ','03= แผนความมั่นคงแห่งชาติ','04= แผนแม่บทภายใต้ยุทธศาสตร์ชาติ','05= แผนปฏิรูปประเทศ','06= แผนระดับที่ 3 (มติครม. 4 ธ.ค. 2560)','07= นโยบายรัฐบาล/ข้อสั่งการนายกรัฐมนตรี','08= มติคณะรัฐมนตรี','09= เพื่อการให้บริการประชาชน','10= กฎหมายที่เกี่ยวข้อง','11= พันธกิจหน่วยงาน','12= ดัชนี/ตัวชี้วัดระดับนานาชาติ','98= ไม่ทราบ','99= อื่นๆ'],
+  // ⚙️ รายการวัตถุประสงค์
+  objective: [
+    '01= ยุทธศาสตร์ชาติ',
+    '02= แผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ',
+    '03= แผนความมั่นคงแห่งชาติ',
+    '04= แผนแม่บทภายใต้ยุทธศาสตร์ชาติ',
+    '05= แผนปฏิรูปประเทศ',
+    '06= แผนระดับที่ 3 (มติครม. 4 ธ.ค. 2560)',
+    '07= นโยบายรัฐบาล/ข้อสั่งการนายกรัฐมนตรี',
+    '08= มติคณะรัฐมนตรี',
+    '09= เพื่อการให้บริการประชาชน',
+    '10= กฎหมายที่เกี่ยวข้อง',
+    '11= พันธกิจหน่วยงาน',
+    '12= ดัชนี/ตัวชี้วัดระดับนานาชาติ',
+    '98= ไม่ทราบ',
+    '99= อื่นๆ'
+  ],
   data_source: [['','เลือกแหล่งที่มา'],['สำนักงาน กสทช.','สำนักงาน กสทช.'],['OTHER','อื่นๆ: ระบุ...']],
   data_owner: [['','เลือกองค์กร'],['สำนักงาน กสทช.','สำนักงาน กสทช.'],['OTHER','อื่นๆ: ระบุ...']],
   data_custodian: ['เลือกหน่วยงาน','สำนักประธานกรรมการและการประชุม (ปบ.)','สำนักกรรมการและเลขาธิการ (กบ.)','สำนักอำนวยการกลาง (อบ.)','สำนักสื่อสารองค์กร (สบ.)','สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)','สำนักกองทุนวิจัยและพัฒนา (ทบ.)','สำนักบริหารคลื่นความถี่ (คบ.)','สำนักกิจการดาวเทียมสื่อสาร (ดบ.)','สำนักบริหารข้อมูลกลาง (บบ.)','สำนักเทคโนโลยีสารสนเทศ (นบ.)','สำนักยุทธศาสตร์และการงบประมาณ (ยย.)','สำนักทรัพยากรบุคคล (บย.)','สำนักบริหารคดีและนิติการ (นย.)','สำนักการพัสดุและบริหารทรัพย์สิน (พย.)','สำนักการคลัง (ลย.)','สำนักการต่างประเทศ (ตย.)','สำนักพัฒนาองค์กรดิจิทัล (ดย.)','สถาบันวิทยาการ (วย.)','สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)','สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)','สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)','สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)','สำนักการอนุญาตประกอบกิจการโครงข่าย สิ่งอำนวยความสะดวก และเครื่องวิทยุคมนาคม (ขส.)','สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)','สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)','สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)','สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)','สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)','สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)','สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการกระจายเสียงและโทรทัศน์ (บส.)','สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)','สำนักกฎหมายโทรคมนาคม (มท.)','สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)','สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)','สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)','สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)','สำนักเทคโนโลยีและมาตรฐานโทรคมนาคม (ทท.)','สำนักบริหารและจัดการเลขหมายโทรคมนาคม (จท.)','สำนักการอนุญาตวิทยุคมนาคม 1 (คท. 1)','สำนักการอนุญาตวิทยุคมนาคม 2 (คท. 2)','สำนักโครงข่ายพื้นฐาน การใช้และเชื่อมต่อโครงข่าย (ชท.)','สำนักบริการโทรคมนาคมโดยทั่วถึงและเพื่อสังคม (ถท.)','สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการโทรคมนาคม (รท.)','สำนักกิจการภูมิภาค (กภ.)','สำนักงาน กสทช. ภาค 1 (ภภ.1)','สำนักงาน กสทช. ภาค 2 (ภภ.2)','สำนักงาน กสทช. ภาค 3 (ภภ.3)','สำนักงาน กสทช. ภาค 4 (ภภ.4)','สำนักวิเคราะห์นโยบายเชิงปริมาณ (ปว.)','สำนักวิเคราะห์ข้อมูลเศรษฐกิจดิจิทัล (ศว.)','สำนักวิชาการต่างประเทศ (ตว.)','สำนักวิเคราะห์นโยบาย (วว.)','ศูนย์วิจัยและพัฒนาทางวิชาการ กสทช. (พว.)'],
@@ -330,7 +351,7 @@ const OPTIONS = {
   update_frequency: [['','เลือกความถี่'],['A','A= รายปี'],['S','S= ทุกครึ่งปี'],['Q','Q= รายไตรมาส'],['M','M= รายเดือน'],['W','W= รายสัปดาห์'],['D','D= รายวัน'],['B','B= วันทำการ'],['H','H= รายชั่วโมง'],['N','N= ทุกนาที'],['R','R= ตามเวลาจริง'],['O','O= ไม่มีการปรับปรุงหลังจากการจัดเก็บข้อมูล'],['U','U= ไม่ทราบ'],['OTHER','อื่นๆ: ระบุ...']]
 };
 
-const FIELD_ID = {category:'category',data_type:'data-type',objective:'objective',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
+const FIELD_ID = {category:'category',data_type:'data-type',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
 
 for (const [key, list] of Object.entries(OPTIONS)) {
   const sel = document.getElementById(FIELD_ID[key]);
@@ -341,8 +362,17 @@ for (const [key, list] of Object.entries(OPTIONS)) {
   });
 }
 
+// ⚙️ สร้างรายการ Checkbox สำหรับ "วัตถุประสงค์" (Objective)
+const objectiveListEl = document.getElementById('objective-list');
+OPTIONS.objective.forEach(item => {
+  const label = document.createElement('label');
+  label.className = 'checkbox-choice';
+  label.innerHTML = `<input type="checkbox" name="objective" value="${item}"><span>${item}</span>`;
+  objectiveListEl.appendChild(label);
+});
+
 const $ = id => document.getElementById(id);
-const form = $('metadata-form'), modal = $('result-modal'), submitButton = $('submit-button');
+const form = $('metadata-form'), modal = $('result-modal'), submitButton =$('submit-button');
 let currentPage = 1;
 
 // ---------- Dropdown placeholder tone ----------
@@ -389,11 +419,10 @@ function setError(id, msg) {
     el.setAttribute('aria-describedby', (d ? d + ' ' : '') + err.id);
   }
   err.textContent = msg;
-  el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  if (el.setAttribute) el.setAttribute('aria-invalid', msg ? 'true' : 'false');
   if (id === 'maintainer-email') $('maintainer-email-group').dataset.invalid = msg ? 'true' : 'false';
 }
 
-// ✅ ส่วนที่ขาดหายไปได้ถูกเขียนเติมจนครบสมบูรณ์เรียบร้อยครับ
 const REQUIRED_FIELDS = {
   1: [
     ['dataset-name', 'กรุณาระบุชื่อชุดข้อมูล'],
@@ -401,7 +430,6 @@ const REQUIRED_FIELDS = {
     ['tagstring', 'กรุณาระบุคำสำคัญ'],
     ['category', 'กรุณาเลือกหมวดหมู่ข้อมูล'],
     ['data-type', 'กรุณาเลือกประเภทข้อมูล'],
-    ['objective', 'กรุณาเลือกวัตถุประสงค์'],
     ['data-owner', 'กรุณาเลือกองค์กรเจ้าของข้อมูล'],
     ['data-custodian', 'กรุณาเลือกหน่วยงานผู้ดูแล'],
     ['maintainer-email', 'กรุณาระบุอีเมลผู้ติดต่อ'],
@@ -437,8 +465,16 @@ function validatePage(page) {
     }
   });
 
-  // ตรวจสอบข้อมูลกรณีเลือก "อื่นๆ"
   if (page === 1) {
+    // ⚙️ ตรวจสอบว่าเลือกวัตถุประสงค์ (Objective) อย่างน้อย 1 ข้อหรือไม่
+    const selectedObjectives = document.querySelectorAll('input[name="objective"]:checked');
+    if (selectedObjectives.length === 0) {
+      setError('objective', 'กรุณาเลือกวัตถุประสงค์อย่างน้อย 1 ข้อ');
+      isValid = false;
+    } else {
+      setError('objective', '');
+    }
+
     if ($('data-owner').value === 'OTHER' && !$('other-owner').value.trim()) {
       setError('data-owner', 'กรุณาระบุชื่อองค์กร');
       isValid = false;
@@ -452,7 +488,6 @@ function validatePage(page) {
       setError('update-frequency', 'กรุณาระบุความถี่ในการอัปเดต');
       isValid = false;
     }
-    // Validate PDPA Radio
     const pdpaChecked = document.querySelector('input[name="pdpa"]:checked');
     if (!pdpaChecked) {
       setError('pdpa', 'กรุณาระบุข้อมูลส่วนบุคคล PDPA');
@@ -519,6 +554,9 @@ form.addEventListener('submit', async (e) => {
 
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
+
+  // ⚙️ รวบรวมข้อมูล Checkbox ของ "วัตถุประสงค์" เข้าสู่อาร์เรย์ (Array)
+  data.objective = formData.getAll('objective');
 
   // รวมโดเมนอีเมล
   if (data.maintainer_email) {
