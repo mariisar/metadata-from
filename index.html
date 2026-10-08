@@ -168,8 +168,8 @@ h2{letter-spacing:-.005em}
       <label for="data-owner" class="field-label">องค์กร (Owner ORG) <span class="req" aria-label="จำเป็น">*</span></label>
       <select id="data-owner" name="data_owner" class="field-control" required aria-describedby="data-owner-help data-owner-error"></select>
       <div id="other-owner-field" hidden>
-       <label for="other-owner" class="field-label">ระบุชื่อองค์กรที่รับผิดชอบชุดข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
-       <input id="other-owner" name="other_owner" class="field-control mt-2" type="text" maxlength="200">
+       <label for="other-owner" class="field-label mt-2">ระบุชื่อองค์กรที่รับผิดชอบชุดข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
+       <input id="other-owner" name="other_owner" class="field-control mt-1" type="text" maxlength="200">
       </div>
       <p id="data-owner-help" class="field-help">ชื่อองค์กรที่รับผิดชอบข้อมูล</p>
       <p id="data-owner-error" class="field-error" aria-live="polite"></p>
@@ -192,8 +192,8 @@ h2{letter-spacing:-.005em}
       <label for="data-source" class="field-label">แหล่งที่มา (Data Source) <span class="req" aria-label="จำเป็น">*</span></label>
       <select id="data-source" name="data_source" class="field-control" aria-describedby="data-source-help data-source-error"></select>
       <div id="other-source-field" hidden>
-       <label for="other-source" class="field-label">ระบุแหล่งที่มา <span class="req" aria-label="จำเป็น">*</span></label>
-       <input id="other-source" name="other_source" class="field-control mt-2" type="text" maxlength="500">
+       <label for="other-source" class="field-label mt-2">ระบุแหล่งที่มา <span class="req" aria-label="จำเป็น">*</span></label>
+       <input id="other-source" name="other_source" class="field-control mt-1" type="text" maxlength="500">
       </div>
       <p id="data-source-help" class="field-help">ชุดข้อมูลสถิติการรับชม TV Digital ภาคพื้นดินในประเทศไทยของสำนักงาน กสทช. ต้องระบุแหล่งข้อมูลที่ใช้อ้างอิงที่แท้จริง (ถ้ามี) เช่น ข้อมูลสถิติด้านการรับชมทีวีดิจิทัลภาคพื้นดิน (AGB Nielsen Media Research) แต่ถ้าเป็นข้อมูลที่ได้จากการดำเนินการภายในให้กำหนดเป็น = สำนักงาน กสทช.</p>
      </div>
@@ -215,8 +215,8 @@ h2{letter-spacing:-.005em}
       <label for="update-frequency" class="field-label">ความถี่ในการอัปเดต (Update Frequency) <span class="req" aria-label="จำเป็น">*</span></label>
       <select id="update-frequency" name="update_frequency" class="field-control" aria-describedby="update-frequency-help update-frequency-error"></select>
       <div id="other-frequency-field" hidden>
-       <label for="other-frequency" class="field-label">ระบุความถี่ในการอัปเดต <span class="req" aria-label="จำเป็น">*</span></label>
-       <input id="other-frequency" name="other_frequency" class="field-control mt-2" type="text" maxlength="200">
+       <label for="other-frequency" class="field-label mt-2">ระบุความถี่ในการอัปเดต <span class="req" aria-label="จำเป็น">*</span></label>
+       <input id="other-frequency" name="other_frequency" class="field-control mt-1" type="text" maxlength="200">
       </div>
       <p id="update-frequency-help" class="field-help">ระบุรอบการปรับปรุงข้อมูลตามการใช้งานจริง</p>
       <p id="update-frequency-error" class="field-error" aria-live="polite"></p>
@@ -246,7 +246,7 @@ h2{letter-spacing:-.005em}
       <legend class="field-label mb-[7px]">ข้อมูลส่วนบุคคล PDPA <span class="req" aria-label="จำเป็น">*</span></legend>
       <div class="flex flex-wrap gap-2">
        <label class="radio-choice"><input type="radio" name="pdpa" value="มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help"><span>มีข้อมูลส่วนบุคคล</span></label>
-       <label class="radio-choice"><input type="radio" name="pdpa" value="ไม่มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help"><span>ไม่มีข้อมูลส่วนบุคคล</span></label>
+       <label class="radio-choice"><input type="radio" name="pdpa" value="ไม่มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help" checked><span>ไม่มีข้อมูลส่วนบุคคล</span></label>
       </div>
       <p id="pdpa-help" class="field-help">ระบุว่าชุดข้อมูลมีข้อมูลที่ระบุตัวบุคคลได้หรือไม่</p>
      </fieldset>
@@ -267,11 +267,11 @@ h2{letter-spacing:-.005em}
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
      <div class="field sm:col-span-2">
       <label for="submitter-name" class="field-label">ชื่อ - นามสกุล / เบอร์ติดต่อ ผู้กรอกข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
-      <input id="submitter-name" name="submitter_name" class="field-control" type="text" maxlength="200" autocomplete="name">
+      <input id="submitter-name" name="submitter_name" class="field-control" type="text" maxlength="200" autocomplete="name" required>
      </div>
      <div class="field sm:col-span-2">
       <label for="submitter-email" class="field-label">อีเมล <span class="req" aria-label="จำเป็น">*</span></label>
-      <input id="submitter-email" name="submitter_email" class="field-control" type="email" inputmode="email" maxlength="200" autocomplete="email" autocapitalize="none" spellcheck="false">
+      <input id="submitter-email" name="submitter_email" class="field-control" type="email" inputmode="email" maxlength="200" autocomplete="email" autocapitalize="none" spellcheck="false" required>
      </div>
     </div>
    </section>
@@ -285,7 +285,7 @@ h2{letter-spacing:-.005em}
    </div>
    <div class="flex flex-col-reverse sm:flex-row gap-3">
     <button id="back-button" type="button" class="btn" style="background:#fff;color:var(--navy);border:1px solid #CBD5E1;box-shadow:none" hidden>‹ ย้อนกลับ</button>
-    <button id="next-button" type="submit" class="btn inline-flex justify-center items-center gap-2"><span>หน้าถัดไป</span><span aria-hidden="true">›</span></button>
+    <button id="next-button" type="button" class="btn inline-flex justify-center items-center gap-2"><span>หน้าถัดไป</span><span aria-hidden="true">›</span></button>
     <button id="submit-button" type="submit" class="btn inline-flex justify-center items-center gap-2" hidden>
      <span id="submit-label">บันทึกข้อมูล (Submit Metadata)</span><span id="loading-label" hidden>กำลังส่งข้อมูล...</span>
     </button>
@@ -300,14 +300,15 @@ h2{letter-spacing:-.005em}
   <button id="modal-close" type="button" aria-label="ปิดหน้าต่าง" class="absolute right-5 top-4 text-slate-500 hover:text-slate-900 rounded-lg p-1 text-2xl leading-none">×</button>
   <div id="success-icon" aria-hidden="true" class="w-12 h-12 rounded-full bg-green-50 text-green-700 flex items-center justify-center text-2xl mb-5" hidden>✓</div>
   <div id="error-icon" aria-hidden="true" class="w-12 h-12 rounded-full bg-red-50 text-red-700 flex items-center justify-center text-2xl mb-5" hidden>!</div>
-  <h2 id="modal-title" class="text-xl"></h2>
+  <h2 id="modal-title" class="text-xl font-bold"></h2>
   <p id="modal-message" class="mt-3 text-slate-600"></p>
   <button id="modal-action" type="button" class="btn mt-7 w-full" style="background:var(--navy)">ปิดหน้าต่าง</button>
  </div>
 </div>
 
 <script>
-const WEBHOOK_URL = 'https://<โดเมนที่เข้าถึงได้>/webhook/metadata-form'; // แทนที่ <โดเมนที่เข้าถึงได้> ด้วยโดเมน n8n จริง (https://)
+// Webhook URL ของ n8n (ผ่าน ngrok)
+const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook-test/metadata-submission'; 
 
 // ---------- ข้อมูลตัวเลือก ----------
 const OPTIONS = {
@@ -347,211 +348,176 @@ const OPTIONS = {
   data_format: ['เลือกรูปแบบที่เหมาะสมที่สุดสำหรับการจัดเก็บในรูปแบบดิจิทัล','01= Database (ฐานข้อมูล)','02= CSV','03= XML','04= Image','05= Video','06= Audio (ไฟล์เสียง)','07= Text (ตัวหนังสือ ข้อความ)','08= JSON','09= HTML','10= XLS, XLSX (Ms.Excel File)','11= PDF','12= RDF','13= NoSQL','14= Vector เช่น Shapefile SVG GML','15= Raster เช่น GeoTiff JPEG2000','99= อื่นๆ'],
   update_frequency: [['','เลือกความถี่'],['A','A= รายปี'],['S','S= ทุกครึ่งปี'],['Q','Q= รายไตรมาส'],['M','M= รายเดือน'],['W','W= รายสัปดาห์'],['D','D= รายวัน'],['B','B= วันทำการ'],['H','H= รายชั่วโมง'],['N','N= ทุกนาที'],['R','R= ตามเวลาจริง'],['O','O= ไม่มีการปรับปรุงหลังจากการจัดเก็บข้อมูล'],['U','U= ไม่ทราบ'],['OTHER','อื่นๆ: ระบุ...']]
 };
-const FIELD_ID = {category:'category',data_type:'data-type',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
 
-for (const [key, list] of Object.entries(OPTIONS)) {
-  if (!FIELD_ID[key]) continue;
-  const sel = document.getElementById(FIELD_ID[key]);
-  list.forEach((item, i) => {
-    const [value, label] = Array.isArray(item) ? item : [i === 0 ? '' : item, item];
-    sel.add(new Option(label, value));
+const FIELD_ID = {
+  category: 'category',
+  data_type: 'data-type',
+  geo_coverage: 'geo-coverage',
+  access_level: 'access-level',
+  right_of_usage: 'right-of-usage',
+  data_source: 'data-source',
+  data_owner: 'data-owner',
+  data_custodian: 'data-custodian',
+  classification: 'classification',
+  data_format: 'data-format',
+  update_frequency: 'update-frequency'
+};
+
+// เติม Dropdown Options
+Object.keys(FIELD_ID).forEach(key => {
+  const select = document.getElementById(FIELD_ID[key]);
+  if (!select || !OPTIONS[key]) return;
+  
+  OPTIONS[key].forEach((item, index) => {
+    const opt = document.createElement('option');
+    if (Array.isArray(item)) {
+      opt.value = item[0];
+      opt.textContent = item[1];
+      if (index === 0) opt.disabled = true;
+    } else {
+      opt.value = index === 0 ? '' : item;
+      opt.textContent = item;
+      if (index === 0) opt.disabled = true;
+    }
+    select.appendChild(opt);
   });
-}
-
-const $ = id => document.getElementById(id);
-const form = $('metadata-form'), modal = $('result-modal'), submitButton = $('submit-button');
-let submitting = false, previousFocus = null;
-
-// ---------- Objective: เลือกได้หลายข้อ ----------
-const OBJ_PLACEHOLDER = 'เลือกวัตถุประสงค์ (เลือกได้มากกว่า 1 ข้อ)';
-OPTIONS.objective.slice(1).forEach(text => {
-  const label = document.createElement('label');
-  const cb = document.createElement('input'); cb.type = 'checkbox'; cb.name = 'objective'; cb.value = text;
-  const span = document.createElement('span'); span.textContent = text;
-  label.append(cb, span); $('objective-panel').appendChild(label);
 });
-function refreshObjective() {
-  const picked = [...form.querySelectorAll('input[name="objective"]:checked')].map(c => c.value);
-  const sum = $('objective-summary');
-  sum.firstElementChild.textContent = picked.length ? picked.join(', ') : OBJ_PLACEHOLDER;
-  sum.classList.toggle('is-placeholder', !picked.length);
-}
-$('objective-panel').addEventListener('change', refreshObjective);
-form.addEventListener('reset', () => setTimeout(refreshObjective));
-document.addEventListener('click', e => { if (!$('objective').contains(e.target)) $('objective').open = false; });
-$('objective').addEventListener('keydown', e => { if (e.key === 'Escape') { $('objective').open = false; $('objective-summary').focus(); } });
 
-// ---------- Dropdown placeholder tone ----------
-function updateTone(sel) { sel.classList.toggle('select-placeholder', sel.value === ''); }
-document.querySelectorAll('select.field-control').forEach(s => { updateTone(s); s.addEventListener('change', () => updateTone(s)); });
+// เติม Objective Checkboxes (Multi-select)
+const objectivePanel = document.getElementById('objective-panel');
+OPTIONS.objective.slice(1).forEach(item => {
+  const lbl = document.createElement('label');
+  lbl.innerHTML = `<input type="checkbox" name="objective" value="${item}"><span>${item}</span>`;
+  objectivePanel.appendChild(lbl);
+});
 
-// ---------- "อื่นๆ" fields ----------
-function bindOther(selectId, fieldId, inputId, helpId) {
-  $(selectId).addEventListener('change', e => {
-    const isOther = e.target.value === 'OTHER';
-    $(fieldId).hidden = !isOther;
-    if (helpId) $(helpId).hidden = isOther && helpId === 'data-owner-help';
-    if (!isOther) $(inputId).value = '';
-    setError(selectId, '');
+// Update Objective Label Summary
+objectivePanel.addEventListener('change', () => {
+  const checked = Array.from(objectivePanel.querySelectorAll('input:checked')).map(c => c.value);
+  const summarySpan = document.querySelector('#objective-summary span');
+  if (checked.length === 0) {
+    summarySpan.textContent = 'เลือกวัตถุประสงค์ (เลือกได้มากกว่า 1 ข้อ)';
+    document.getElementById('objective-summary').classList.add('is-placeholder');
+  } else {
+    summarySpan.textContent = `เลือกแล้ว (${checked.length} รายการ): ` + checked.join(', ');
+    document.getElementById('objective-summary').classList.remove('is-placeholder');
+  }
+});
+
+// จัดการกรณีเลือก "อื่นๆ" (Show/Hide Other Fields)
+const toggleOther = (selectId, containerId) => {
+  const sel = document.getElementById(selectId);
+  const cont = document.getElementById(containerId);
+  if (sel && cont) {
+    sel.addEventListener('change', () => {
+      cont.hidden = (sel.value !== 'OTHER');
+    });
+  }
+};
+toggleOther('data-owner', 'other-owner-field');
+toggleOther('data-source', 'other-source-field');
+toggleOther('update-frequency', 'other-frequency-field');
+
+// ---------- Multi-step Page Logic ----------
+let currentPage = 1;
+const totalPages = 3;
+
+const updatePageUI = () => {
+  for (let i = 1; i <= totalPages; i++) {
+    document.getElementById(`page-${i}`).hidden = (i !== currentPage);
+  }
+  document.getElementById('page-indicator').textContent = `หน้า ${currentPage} จาก ${totalPages}`;
+  
+  // Progress bar
+  const spans = document.querySelectorAll('#progress span');
+  spans.forEach((s, idx) => {
+    s.classList.toggle('on', idx < currentPage);
   });
-}
-bindOther('data-owner', 'other-owner-field', 'other-owner', 'data-owner-help');
-bindOther('data-source', 'other-source-field', 'other-source');
-bindOther('update-frequency', 'other-frequency-field', 'other-frequency');
 
-// ---------- เลือกค่าให้อัตโนมัติจากหมวดหมู่ข้อมูล (ผู้ใช้เปลี่ยนเองได้) ----------
-const CATEGORY_DEFAULTS = {
-  '1= ข้อมูลสาธารณะ': { access: '01= ชั้นเปิดเผย (Open)', right: 'G0= Open Data Common' },
-  '2= ข้อมูลใช้ภายในสำนักงาน กสทช.': { access: '02= ชั้นเผยแพร่ภายในองค์กร (Private)', right: 'G5= Others License' }
+  // Buttons
+  document.getElementById('back-button').hidden = (currentPage === 1);
+  document.getElementById('next-button').hidden = (currentPage === totalPages);
+  document.getElementById('submit-button').hidden = (currentPage !== totalPages);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };
-$('classification').addEventListener('change', e => {
-  const d = CATEGORY_DEFAULTS[e.target.value];
-  if (!d) return; // หมวดอื่น ไม่เปลี่ยนค่าที่ผู้ใช้เลือกไว้
-  $('access-level').value = d.access;
-  $('right-of-usage').value = d.right;
-  updateTone($('access-level')); updateTone($('right-of-usage'));
+
+document.getElementById('next-button').addEventListener('click', () => {
+  if (currentPage < totalPages) {
+    currentPage++;
+    updatePageUI();
+  }
 });
 
-// ---------- Validation ----------
-function setError(id, msg) {
-  const el = $(id);
-  let err = $(id + '-error');
-  if (!err) {
-    err = document.createElement('p');
-    err.id = id + '-error'; err.className = 'field-error'; err.setAttribute('aria-live', 'polite');
-    (el.closest('.field') || el.parentNode).appendChild(err);
-    const d = el.getAttribute('aria-describedby');
-    el.setAttribute('aria-describedby', (d ? d + ' ' : '') + err.id);
+document.getElementById('back-button').addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    updatePageUI();
   }
-  err.textContent = msg;
-  el.setAttribute('aria-invalid', msg ? 'true' : 'false');
-  if (id === 'maintainer-email') $('maintainer-email-group').dataset.invalid = msg ? 'true' : 'false';
-}
-const REQUIRED = {
-  1: [['dataset-name','กรุณาระบุชื่อชุดข้อมูล'],['description','กรุณาระบุคำอธิบายรายละเอียด'],['tagstring','กรุณาระบุคำสำคัญ'],['category','กรุณาเลือกหมวดหมู่ข้อมูล'],['data-type','กรุณาเลือกประเภทข้อมูล'],['objective','กรุณาเลือกวัตถุประสงค์อย่างน้อย 1 ข้อ'],['data-owner','กรุณาเลือกองค์กรเจ้าของข้อมูล'],['data-custodian','กรุณาเลือกหน่วยงานผู้ดูแล'],['maintainer-email','กรุณาระบุอีเมลผู้ติดต่อ'],['data-source','กรุณาระบุแหล่งที่มา']],
-  3: [['submitter-name','กรุณาระบุชื่อ - นามสกุล / เบอร์ติดต่อ ผู้กรอกข้อมูล'],['submitter-email','กรุณาระบุอีเมลผู้กรอกข้อมูล']],
-  2: [['data-format','กรุณาเลือกรูปแบบไฟล์ / การจัดเก็บ'],['update-frequency','กรุณาเลือกความถี่ในการอัปเดต'],['geo-coverage','กรุณาเลือกขอบเขตเชิงภูมิศาสตร์หรือเชิงพื้นที่'],['access-url','กรุณาระบุ URL / API Endpoint'],['classification','กรุณาเลือกหมวดหมู่ข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ'],['pdpa','กรุณาเลือกว่ามีข้อมูลส่วนบุคคลหรือไม่'],['access-level','กรุณาเลือกการจัดระดับชั้นความลับของข้อมูล'],['right-of-usage','กรุณาเลือกสัญญาอนุญาตให้ใช้ข้อมูล']]
-};
-function fieldError(id, emptyMsg) {
-  const v = id === 'pdpa' ? (form.querySelector('input[name="pdpa"]:checked')?.value || '')
-    : id === 'objective' ? (form.querySelector('input[name="objective"]:checked') ? 'x' : '')
-    : $(id).value.trim();
-  if (!v) return id === 'access-url' ? ['', null] : [emptyMsg, $(id === 'objective' ? 'objective-summary' : id === 'pdpa' ? 'pdpa' : id)]; // URL ไม่บังคับกรอก
-  if (id === 'data-owner' && v === 'OTHER' && !$('other-owner').value.trim()) return ['กรุณาระบุชื่อองค์กรเพิ่มเติม', $('other-owner')];
-  if (id === 'data-source' && v === 'OTHER' && !$('other-source').value.trim()) return ['กรุณาระบุแหล่งที่มาเพิ่มเติม', $('other-source')];
-  if (id === 'update-frequency' && v === 'OTHER' && !$('other-frequency').value.trim()) return ['กรุณาระบุความถี่ในการอัปเดตเพิ่มเติม', $('other-frequency')];
-  if (id === 'maintainer-email') {
-    if (/@\s*nbtc\.go\.th/i.test(v)) return ['ไม่ต้องพิมพ์ @nbtc.go.th ซ้ำ ระบบเติมโดเมนให้อัตโนมัติ กรอกเฉพาะชื่ออีเมลข้างหน้า', $(id)];
-    if (!/^[A-Za-z0-9._%+-]+$/.test(v)) return ['กรอกเฉพาะชื่ออีเมลก่อนเครื่องหมาย @ ใช้ได้เฉพาะตัวอักษรอังกฤษ ตัวเลข และ . _ - + เท่านั้น', $(id)];
-  }
-  if (id === 'submitter-email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return ['กรุณาระบุอีเมลให้ถูกต้อง เช่น name@example.com', $(id)];
-  if (id === 'access-url') {
-    try { if (!['http:', 'https:'].includes(new URL(v).protocol)) return ['กรุณาระบุ URL ที่ขึ้นต้นด้วย http:// หรือ https://', $(id)]; }
-    catch { return ['กรุณาระบุ URL ที่ถูกต้อง เช่น https://example.com/data', $(id)]; }
-  }
-  return ['', null];
-}
-function validate(page) {
-  let first = null;
-  for (const [id, emptyMsg] of REQUIRED[page]) {
-    const [msg, focusEl] = fieldError(id, emptyMsg);
-    setError(id, msg);
-    if (msg && !first) first = focusEl;
-  }
-  if (first) (first.matches('fieldset') ? first.querySelector('input') : first).focus();
-  return !first;
-}
-['dataset-name', 'description', 'access-url', 'maintainer-email'].forEach(id => $(id).addEventListener('input', () => setError(id, '')));
-$('maintainer-email').addEventListener('input', e => {
-  if (/@/.test(e.target.value) && /@\s*nbtc\.go\.th/i.test(e.target.value)) setError('maintainer-email', 'ไม่ต้องพิมพ์ @nbtc.go.th ซ้ำ ระบบเติมโดเมนให้อัตโนมัติ กรอกเฉพาะชื่ออีเมลข้างหน้า');
-});
-$('other-owner').addEventListener('input', () => setError('data-owner', ''));
-$('other-source').addEventListener('input', () => setError('data-source', ''));
-$('other-frequency').addEventListener('input', () => setError('update-frequency', ''));
-
-REQUIRED[1].concat(REQUIRED[2], REQUIRED[3]).forEach(([id]) => { if (id !== 'pdpa' && id !== 'access-url') $(id).required = true; });
-document.querySelectorAll('input[name="pdpa"]').forEach(r => { r.required = true; r.addEventListener('change', () => setError('pdpa', '')); });
-['submitter-name','submitter-email','category','data-type','objective','data-custodian','tagstring','data-source','data-format','update-frequency','geo-coverage','classification','access-level','right-of-usage'].forEach(id => {
-  $(id).addEventListener('input', () => setError(id, ''));
-  $(id).addEventListener('change', () => setError(id, ''));
 });
 
-// ---------- Modal ----------
-const MESSAGES = {
-  success: ['บันทึกข้อมูลสำเร็จ!', 'ระบบกำลังนำข้อมูลเข้ากระบวนการตรวจสอบ'],
-  setup: ['ยังไม่สามารถส่งข้อมูลได้', 'กรุณาตั้งค่า WEBHOOK_URL เป็นที่อยู่ webhook ขององค์กรก่อนใช้งาน ข้อมูลที่กรอกยังอยู่ครบ'],
-  error: ['บันทึกข้อมูลไม่สำเร็จ', 'ไม่สามารถส่งข้อมูลไปยังระบบได้ กรุณาตรวจสอบการเชื่อมต่อหรือการตั้งค่า webhook แล้วลองอีกครั้ง ข้อมูลที่กรอกยังอยู่ครบ']
-};
-function showModal(kind) {
-  previousFocus = document.activeElement;
-  $('modal-title').textContent = MESSAGES[kind][0];
-  $('modal-message').textContent = MESSAGES[kind][1];
-  $('success-icon').hidden = kind !== 'success';
-  $('error-icon').hidden = kind === 'success';
+// ---------- Modal Logic ----------
+const showModal = (isSuccess, title, message) => {
+  const modal = document.getElementById('result-modal');
+  document.getElementById('success-icon').hidden = !isSuccess;
+  document.getElementById('error-icon').hidden = isSuccess;
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-message').textContent = message;
   modal.hidden = false;
-  $('modal-close').focus();
-}
-function closeModal() { modal.hidden = true; if (previousFocus?.isConnected) previousFocus.focus(); }
-$('modal-close').addEventListener('click', closeModal);
-$('modal-action').addEventListener('click', closeModal);
-modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-modal.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-  if (e.key === 'Tab') {
-    const [a, b] = [$('modal-close'), $('modal-action')];
-    if (e.shiftKey && document.activeElement === a) { e.preventDefault(); b.focus(); }
-    else if (!e.shiftKey && document.activeElement === b) { e.preventDefault(); a.focus(); }
-  }
-});
+};
 
-// ---------- Pages ----------
-let page = 1;
-function goTo(n) {
-  page = n;
-  [1, 2, 3].forEach(i => { $('page-' + i).hidden = n !== i; });
-  $('next-button').hidden = n === 3; $('submit-button').hidden = n !== 3; $('back-button').hidden = n === 1;
-  document.querySelectorAll('#progress span').forEach((el, i) => el.classList.toggle('on', i < n));
-  $('page-indicator').textContent = 'หน้า ' + n + ' จาก 3';
-  const top = document.querySelector('main h1'); top.scrollIntoView({ behavior: 'smooth' });
-  const h = $('page-' + n).querySelector('h2'); h.tabIndex = -1; h.focus({ preventScroll: true });
-}
-$('back-button').addEventListener('click', () => goTo(page - 1));
+const closeModal = () => {
+  document.getElementById('result-modal').hidden = true;
+};
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-action').addEventListener('click', closeModal);
 
-// ---------- Submit ----------
-form.addEventListener('submit', async e => {
+// ---------- Submit Form to n8n ----------
+document.getElementById('metadata-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  if (submitting) return;
-  if (page < 3) { if (validate(page)) goTo(page + 1); return; }
-  if (!validate(3)) return;
-  if (!validate(2)) { goTo(2); return; }
-  if (!validate(1)) { goTo(1); return; }
-  if (WEBHOOK_URL.includes('YOUR-N8N-INSTANCE') || /[<>]/.test(WEBHOOK_URL)) { showModal('setup'); return; }
-  const d = new FormData(form), v = k => String(d.get(k) || '').trim();
-  const payload = {
-    dataset_name: v('dataset_name'), description: v('description'), tagstring: v('tagstring'),
-    category: v('category'), data_type: v('data_type'), objective: d.getAll('objective'), right_of_usage: v('right_of_usage'), access_level: v('access_level'),
-    data_owner: v('data_owner') === 'OTHER' ? v('other_owner') : v('data_owner'),
-    data_custodian: v('data_custodian'), data_source: v('data_source') === 'OTHER' ? v('other_source') : v('data_source'),
-    maintainer_email: v('maintainer_email') ? v('maintainer_email') + '@nbtc.go.th' : '', data_classification: v('data_classification'),
-    pdpa: v('pdpa'), data_format: v('data_format'),
-    geo_coverage: v('geo_coverage'),
-    update_frequency: v('update_frequency') === 'OTHER' ? v('other_frequency') : v('update_frequency'),
-    access_url: v('access_url'), submitter_name: v('submitter_name'), submitter_email: v('submitter_email'), timestamp: new Date().toISOString()
-  };
-  submitting = true; submitButton.disabled = true; submitButton.setAttribute('aria-busy', 'true');
-  $('submit-label').hidden = true; $('loading-label').hidden = false;
+
+  const submitBtn = document.getElementById('submit-button');
+  const submitLabel = document.getElementById('submit-label');
+  const loadingLabel = document.getElementById('loading-label');
+
+  submitBtn.disabled = true;
+  submitLabel.hidden = true;
+  loadingLabel.hidden = false;
+
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
+
+  // เก็บค่า Checkbox แบบ Multi-select ของ Objective
+  data.objective = Array.from(document.querySelectorAll('#objective-panel input:checked')).map(c => c.value);
+
+  // รวม Maintainer Email กับ Domain @nbtc.go.th
+  if (data.maintainer_email) {
+    data.maintainer_email = data.maintainer_email + '@nbtc.go.th';
+  }
+
   try {
-    const r = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    if (!r.ok) throw new Error('Webhook error');
-    form.reset();
-    document.querySelectorAll('select.field-control').forEach(updateTone);
-    $('other-owner-field').hidden = true; $('other-source-field').hidden = true; $('other-frequency-field').hidden = true; $('data-owner-help').hidden = false;
-    goTo(1);
-    showModal('success');
-  } catch { showModal('error'); }
-  finally {
-    submitting = false; submitButton.disabled = false; submitButton.removeAttribute('aria-busy');
-    $('submit-label').hidden = false; $('loading-label').hidden = true;
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true' // เพิ่ม header ข้ามหน้าแจ้งเตือนของ ngrok free
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      showModal(true, 'ส่งข้อมูลสำเร็จ', 'ระบบได้บันทึกข้อมูล Metadata เรียบร้อยแล้ว');
+      e.target.reset();
+      currentPage = 1;
+      updatePageUI();
+    } else {
+      showModal(false, 'เกิดข้อผิดพลาด', `เซิร์ฟเวอร์ตอบกลับสถานะ: ${response.status}`);
+    }
+  } catch (err) {
+    showModal(false, 'ไม่สามารถเชื่อมต่อได้', 'กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต หรือสถานะการรัน ngrok / n8n');
+  } finally {
+    submitBtn.disabled = false;
+    submitLabel.hidden = false;
+    loadingLabel.hidden = true;
   }
 });
 </script>
