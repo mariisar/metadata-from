@@ -28,7 +28,7 @@
 html{font-size:clamp(15px,calc(10px + .4167vw),22px)}
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 4.5rem);scroll-behavior:smooth}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:1rem;font-synthesis:none;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.7;font-size:1rem;font-synthesis:none;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 header :focus-visible,.hero :focus-visible,footer :focus-visible{outline-color:var(--cream)}
@@ -79,7 +79,7 @@ nav>a:hover,.dd:hover .dd-btn,.dd:focus-within .dd-btn,.dd.open .dd-btn{opacity:
 @keyframes drift{to{background-position:3.75rem -25rem,11.25rem -9.375rem,0 -21.25rem,3.125rem -14.375rem}}
 .hero .wrap{position:relative;width:100%;padding-top:8.75rem}
 .badge{display:inline-block;font-size:0.8125rem;padding:3px 0.875rem;border:1px solid rgba(255,255,255,.5);border-radius:6.1875rem;margin-bottom:1.5rem}
-.hero h1{font-family:var(--sans);font-weight:600;font-size:clamp(2.75rem,8.5vw,6.5rem);line-height:1.08;letter-spacing:-.025em;margin:0 0 2.75rem}
+.hero h1{font-family:var(--sans);font-weight:600;font-size:clamp(2.75rem,8.5vw,7rem);line-height:1.05;letter-spacing:-.015em;margin:0 0 2.75rem}
 .row{border-top:1px solid rgba(255,255,255,.35);padding:1.75rem 0 2.75rem;display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap}
 .row p{margin:0;max-width:30em;font-size:1rem;line-height:1.65}
 .row p b{display:block;font-weight:500;margin-bottom:0.25rem}
@@ -89,14 +89,14 @@ nav>a:hover,.dd:hover .dd-btn,.dd:focus-within .dd-btn,.dd.open .dd-btn{opacity:
 
 section{padding:4.5rem 0;border-top:1px solid var(--line)}
 section.first{border-top:0}
-h2{font-family:var(--sans);font-weight:600;font-size:clamp(1.875rem,4vw,2.625rem);margin:0 0 0.5rem;line-height:1.2;letter-spacing:-.015em}
+h2{font-family:var(--sans);font-weight:600;font-size:clamp(1.875rem,4vw,2.625rem);margin:0 0 0.5rem;line-height:1.2}
 h2 .en{font-family:var(--sans);font-size:.5em;margin-left:0.625rem}
 .sub{color:var(--muted);margin:0 0 2.25rem}
 #services h2{margin-bottom:2.25rem}
 [hidden]{display:none!important}
 .hero.short{min-height:0}
 .hero.short .wrap{padding-top:4.5rem}
-.hero.short h1{font-size:clamp(2.5rem,6vw,4.5rem);margin-bottom:2rem;font-weight:600}
+.hero.short h1{font-size:clamp(2.5rem,6vw,5rem);margin-bottom:2rem}
 .back{display:inline-block;margin-bottom:1.75rem;font-size:0.875rem;text-decoration:none;opacity:.9;border-bottom:1px solid rgba(255,255,255,.5)}
 .back:hover{opacity:1;border-bottom-color:var(--cream)}
 
@@ -417,7 +417,7 @@ footer .wrap{padding-right:7.5rem}
 .so-bar input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:1.0625rem;color:var(--ink);outline:none;padding:0.25rem 0}
 .so-bar button{border:0;background:none;font-size:1.5rem;line-height:1;color:var(--muted);cursor:pointer}
 .so-res{overflow:auto;padding:0.375rem}
-.so-item{display:flex;justify-between:space-between;align-items:baseline;gap:1rem;width:100%;text-align:left;border:0;background:none;padding:0.6875rem 0.75rem;border-radius:0.75rem;font:inherit;font-size:0.9375rem;color:var(--ink);cursor:pointer}
+.so-item{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;width:100%;text-align:left;border:0;background:none;padding:0.6875rem 0.75rem;border-radius:0.75rem;font:inherit;font-size:0.9375rem;color:var(--ink);cursor:pointer}
 .so-item:hover,.so-item:focus-visible{background:var(--soft);outline:none}
 .so-t{min-width:0}
 .so-t mark{background:rgba(139,26,26,.16);color:inherit;border-radius:0.1875rem;padding:0 0.0625rem}
@@ -467,3 +467,1346 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
 .acc-h,.so-bar input,.help-q{font-family:var(--sans)}
 </style>
 </head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="menu-wrap">
+      <button type="button" class="hamb" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menuPanel"><span></span><span></span><span></span></button>
+      <div class="menu-panel" id="menuPanel">
+        <a class="mi" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.8V20h13V9.8"/><path d="M10 20v-6h4v6"/></svg>Home</a>
+        <a class="mi" href="#dashboard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Dashboard</a>
+        <span class="mh">Service</span>
+        <a class="ms" href="#data-agent">Data Agent</a>
+        <a class="ms" href="#data-structure">Data Structure</a>
+        <a class="ms" href="#announcements">ประกาศ</a>
+        <a class="ms" href="#data-owner">Data Owner</a>
+        <a class="ms" href="#manual">Manual</a>
+        <a class="ms" href="#game">Game</a>
+        <a class="ms" href="#knowledge">Knowledge</a>
+      </div>
+    </div>
+    <nav aria-label="Main menu">
+      <a href="#news">News</a>
+    </nav>
+    <div class="hright">
+      <button type="button" class="sbtn" id="searchBtn" aria-label="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
+      <a class="hbtn" href="#contact">Contact Us</a>
+    </div>
+  </div>
+</header>
+<div id="searchOverlay" class="so" hidden>
+  <div class="so-box" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="so-bar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+      <input id="soInput" type="search" placeholder="ค้นหาข้อมูลทั้งหมดในเว็บ · Search everything" autocomplete="off" aria-label="Search">
+      <button type="button" id="soClose" aria-label="Close">×</button>
+    </div>
+    <div id="soResults" class="so-res"></div>
+    <div class="so-foot">Enter เปิดผลลัพธ์แรก · Esc ปิด</div>
+  </div>
+</div>
+
+<main id="top">
+<div id="homeView">
+  <div class="hero">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Data Analysis<br>and Technical Support</h1>
+      <div class="row">
+        <p><b>ส่วนวิเคราะห์ข้อมูลและสนับสนุนทางเทคนิค</b></p>
+      </div>
+    </div>
+  </div>
+
+  <section id="services" class="first"><div class="wrap">
+    <h2>Our Services.</h2>
+    <div class="car-wrap">
+      <button type="button" class="car-btn prev" id="svcPrev" aria-label="Previous"><span aria-hidden="true">&lt;</span></button>
+      <button type="button" class="car-btn next" id="svcNext" aria-label="Next"><span aria-hidden="true">&gt;</span></button>
+    <div class="track" id="svcTrack">
+      <a class="card" href="#data-agent" id="agentCard">
+        <h3>Data Agent</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="21" r="13"/><path d="M6 64a28 28 0 0 1 56 0z"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#data-structure" id="metaLink">
+        <h3>Data Structure</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="34" r="32"/><circle cx="34" cy="34" r="23"/><circle cx="34" cy="34" r="13"/><path d="M26 42l16-16"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#announcements" id="annCard">
+        <h3>ประกาศ</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 3L65 64H3z"/><path d="M34 3v44M3 64l31-17 31 17"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#data-owner" id="ownerCard">
+        <h3>Data Owner</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 2l30 32-30 32L4 34z"/><path d="M34 14l18 20-18 20-18-20z"/><path d="M4 34h60"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#manual" id="manualCard">
+        <h3>Manual</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 14C26 8 14 8 4 12v46c10-4 22-4 30 2 8-6 20-6 30-2V12C54 8 42 8 34 14z"/><path d="M34 14v46"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#game" id="gameCard">
+        <h3>Game</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="16" r="12.7"/><circle cx="16" cy="34" r="12.7"/><circle cx="52" cy="34" r="12.7"/><circle cx="34" cy="52" r="12.7"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#knowledge" id="knowCard">
+        <h3>Knowledge</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 5a21 21 0 0 0-11.5 38.5V51h23v-7.5A21 21 0 0 0 34 5z"/><path d="M27 58h14M29.5 63h9"/><path d="M28 31l6 9 6-9"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+    </div>
+    </div>
+  </div></section>
+
+  <section id="news"><div class="wrap">
+    <div>
+      <h2>News.</h2>
+      <div class="chips" role="group" aria-label="กรองประเภท">
+        <button class="chip" data-f="all" aria-pressed="true">ทั้งหมด</button>
+        <button class="chip" data-f="ประกาศใช้" aria-pressed="false">ประกาศ</button>
+        <button class="chip" data-f="กิจกรรม" aria-pressed="false">กิจกรรม</button>
+        <button class="chip" data-f="ทั่วไป" aria-pressed="false">ทั่วไป</button>
+      </div>
+      <ul class="news" id="newsList">
+        <li data-c="ประกาศใช้"><time>ตัวอย่าง</time><div><span class="tag">ประกาศใช้</span><b>ประกาศใช้แนวปฏิบัติการจัดทำ Metadata (ตัวอย่างหัวข้อ)</b><span class="en">Metadata guideline takes effect — sample</span></div></li>
+        <li data-c="กิจกรรม"><time>ตัวอย่าง</time><div><span class="tag">กิจกรรม</span><b>อบรม Data Agent รุ่นที่ 1 (ตัวอย่างหัวข้อ)</b><span class="en">Data Agent training, batch 1 — sample</span></div></li>
+        <li data-c="ทั่วไป"><time>ตัวอย่าง</time><div><span class="tag">ทั่วไป</span><b>เปิดให้กรอกแบบสำรวจ Metadata รอบประจำปี (ตัวอย่างหัวข้อ)</b><span class="en">Annual Metadata survey is open — sample</span></div></li>
+      </ul>
+    </div>
+  </div></section>
+</div>
+
+<div id="agentPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Data Agent</h1>
+      <div class="row"></div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="acc-list">
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>หน้าที่ของผู้แทนสำนัก (Data Agent)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><div class="story2">
+      <div class="s2-txt">
+        <h4>บทบาทหน้าที่</h4>
+        <p>ผู้แทนสำนัก (Data Agent) ทำหน้าที่ประสานงานด้านข้อมูลระหว่างสำนักกับส่วนวิเคราะห์ข้อมูลและสนับสนุนทางเทคนิค รวบรวมและปรับปรุง Metadata และบัญชีข้อมูลของสำนักให้เป็นปัจจุบัน ตรวจสอบความครบถ้วนและความถูกต้องก่อนลงทะเบียนชุดข้อมูล และสื่อสารประกาศและแนวปฏิบัติด้านข้อมูลให้บุคลากรในสำนักทราบ</p>
+      </div>
+      <div class="s2-img"><svg viewBox="0 0 660 440" role="img" aria-label="ภาพประกอบ ผู้แทนสำนักในแต่ละสำนัก">
+<path class="w1" d="M52 232 C52 128 170 84 300 96 C402 104 452 138 548 78 L584 62 L584 238 L52 238 Z"/>
+<path class="w2" d="M60 238 C80 160 180 118 300 124 C400 130 450 160 548 112 L548 238 Z"/>
+<path class="w3" d="M520 66 H584 V190 H540 V108 Q540 76 520 66 Z"/>
+<polygon class="fl1" points="30,340 88,236 604,236 650,340"/>
+<polygon class="fl2" points="120,382 178,306 506,306 560,382"/>
+<rect class="fl3" x="120" y="382" width="440" height="30"/>
+<ellipse class="fs" cx="340" cy="414" rx="240" ry="9"/>
+<ellipse class="fs" cx="282.0" cy="237.0" rx="6.3" ry="1.5"/><rect class="fm" x="278.5" y="229.0" width="2.8" height="7.0"/><rect class="fm" x="282.7" y="229.0" width="2.8" height="7.0"/><path class="fm" d="M277.1,217.1 Q282.0,214.3 286.9,217.1 L286.2,229.0 L277.8,229.0 Z"/><circle class="fm" cx="282.0" cy="212.2" r="3.5"/><ellipse class="fs" cx="440.0" cy="241.0" rx="6.8" ry="1.7"/><rect class="fg" x="436.2" y="232.5" width="3.0" height="7.5"/><rect class="fg" x="440.8" y="232.5" width="3.0" height="7.5"/><path class="fg" d="M434.8,219.8 Q440.0,216.8 445.2,219.8 L444.5,232.5 L435.5,232.5 Z"/><circle class="fg" cx="440.0" cy="214.5" r="3.8"/><ellipse class="fs" cx="208.0" cy="243.0" rx="6.8" ry="1.7"/><rect class="fg" x="204.2" y="234.5" width="3.0" height="7.5"/><rect class="fg" x="208.8" y="234.5" width="3.0" height="7.5"/><path class="fg" d="M202.8,221.8 Q208.0,218.8 213.2,221.8 L212.5,234.5 L203.5,234.5 Z"/><circle class="fg" cx="208.0" cy="216.5" r="3.8"/><ellipse class="fs" cx="604.0" cy="263.0" rx="7.6" ry="1.9"/><rect class="fg" x="599.8" y="253.5" width="3.4" height="8.5"/><rect class="fg" x="604.9" y="253.5" width="3.4" height="8.5"/><path class="fg" d="M598.0,239.1 Q604.0,235.7 610.0,239.1 L609.1,253.5 L598.9,253.5 Z"/><circle class="fg" cx="604.0" cy="233.1" r="4.2"/><ellipse class="fs" cx="484.0" cy="267.0" rx="7.6" ry="1.9"/><rect class="fm" x="479.8" y="257.5" width="3.4" height="8.5"/><rect class="fm" x="484.9" y="257.5" width="3.4" height="8.5"/><path class="fm" d="M478.1,243.1 Q484.0,239.7 489.9,243.1 L489.1,257.5 L478.9,257.5 Z"/><circle class="fm" cx="484.0" cy="237.1" r="4.2"/><ellipse class="fs" cx="150.0" cy="273.0" rx="8.1" ry="2.0"/><rect class="fm" x="145.5" y="263.0" width="3.6" height="9.0"/><rect class="fm" x="150.9" y="263.0" width="3.6" height="9.0"/><path class="fm" d="M143.7,247.7 Q150.0,244.1 156.3,247.7 L155.4,263.0 L144.6,263.0 Z"/><circle class="fm" cx="150.0" cy="241.4" r="4.5"/><ellipse class="fs" cx="528.0" cy="293.0" rx="8.5" ry="2.1"/><rect class="fg" x="523.2" y="282.5" width="3.8" height="9.5"/><rect class="fg" x="529.0" y="282.5" width="3.8" height="9.5"/><path class="fg" d="M521.4,266.4 Q528.0,262.6 534.6,266.4 L533.7,282.5 L522.3,282.5 Z"/><circle class="fg" cx="528.0" cy="259.7" r="4.8"/><ellipse class="fs" cx="576.0" cy="309.0" rx="9.0" ry="2.2"/><rect class="fm" x="571.0" y="298.0" width="4.0" height="10.0"/><rect class="fm" x="577.0" y="298.0" width="4.0" height="10.0"/><path class="fm" d="M569.0,281.0 Q576.0,277.0 583.0,281.0 L582.0,298.0 L570.0,298.0 Z"/><circle class="fm" cx="576.0" cy="274.0" r="5.0"/><ellipse class="fs" cx="92.0" cy="313.0" rx="9.0" ry="2.2"/><rect class="fg" x="87.0" y="302.0" width="4.0" height="10.0"/><rect class="fg" x="93.0" y="302.0" width="4.0" height="10.0"/><path class="fg" d="M85.0,285.0 Q92.0,281.0 99.0,285.0 L98.0,302.0 L86.0,302.0 Z"/><circle class="fg" cx="92.0" cy="278.0" r="5.0"/>
+<rect class="gb" x="232" y="272" width="190" height="130" rx="3"/>
+<line class="gb" x1="327" y1="252" x2="327" y2="272"/>
+<rect class="tg2" x="276" y="226" width="102" height="26" rx="4"/>
+<text class="tg3" x="327" y="244" text-anchor="middle">Data Agent</text>
+<ellipse class="fs" cx="256.0" cy="389.0" rx="15.8" ry="3.9"/><rect class="fg" x="247.2" y="370.5" width="7.0" height="17.5"/><rect class="fg" x="257.8" y="370.5" width="7.0" height="17.5"/><path class="fg" d="M243.8,340.8 Q256.0,333.8 268.2,340.8 L266.5,370.5 L245.5,370.5 Z"/><circle class="fg" cx="256.0" cy="328.5" r="8.8"/><ellipse class="fs" cx="290.0" cy="391.0" rx="15.3" ry="3.7"/><rect class="fm" x="281.5" y="373.0" width="6.8" height="17.0"/><rect class="fm" x="291.7" y="373.0" width="6.8" height="17.0"/><path class="fm" d="M278.1,344.1 Q290.0,337.3 301.9,344.1 L300.2,373.0 L279.8,373.0 Z"/><circle class="fm" cx="290.0" cy="332.2" r="8.5"/><ellipse class="fs" cx="324.0" cy="389.0" rx="16.2" ry="4.0"/><rect class="fg" x="315.0" y="370.0" width="7.2" height="18.0"/><rect class="fg" x="325.8" y="370.0" width="7.2" height="18.0"/><path class="fg" d="M311.4,339.4 Q324.0,332.2 336.6,339.4 L334.8,370.0 L313.2,370.0 Z"/><circle class="fg" cx="324.0" cy="326.8" r="9.0"/><ellipse class="fs" cx="358.0" cy="392.0" rx="15.3" ry="3.7"/><rect class="fm" x="349.5" y="374.0" width="6.8" height="17.0"/><rect class="fm" x="359.7" y="374.0" width="6.8" height="17.0"/><path class="fm" d="M346.1,345.1 Q358.0,338.3 369.9,345.1 L368.2,374.0 L347.8,374.0 Z"/><circle class="fm" cx="358.0" cy="333.2" r="8.5"/><ellipse class="fs" cx="392.0" cy="389.0" rx="16.7" ry="4.1"/><rect class="fg" x="382.8" y="369.5" width="7.4" height="18.5"/><rect class="fg" x="393.9" y="369.5" width="7.4" height="18.5"/><path class="fg" d="M379.1,338.1 Q392.0,330.6 404.9,338.1 L403.1,369.5 L380.9,369.5 Z"/><circle class="fg" cx="392.0" cy="325.1" r="9.2"/></svg></div>
+    </div>
+    <p class="note">ข้อความอธิบายเป็นร่าง กรุณาแก้ไขให้ตรงกับหน้าที่จริงตามคำสั่งหรือประกาศของสำนักงาน · Draft text, please edit to match the official duties.</p></div></div>
+    </div>
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>ตรวจสอบรายชื่อผู้แทนสำนัก (Data Agent) ประจำปี 2570</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><div class="agent-tools">
+      <input type="search" id="unitSearch" list="unitList" placeholder="ค้นหาสำนัก" aria-label="ค้นหาสำนัก" autocomplete="off">
+      <datalist id="unitList"></datalist>
+      <span id="agentCount" class="count" aria-live="polite"></span>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr>
+        <th aria-sort="none"><button type="button" class="sort" data-k="0">ชื่อ-นามสกุล</button></th>
+        <th aria-sort="none"><button type="button" class="sort" data-k="1">ตำแหน่ง</button></th>
+        <th aria-sort="none"><button type="button" class="sort" data-k="2">สำนัก</button></th>
+        <th>เบอร์ติดต่อ</th><th>อีเมล</th>
+      </tr></thead>
+      <tbody id="agentRows"></tbody>
+    </table></div>
+    <div class="pager" id="pager" role="navigation" aria-label="เปลี่ยนหน้า"></div>
+    </div></div>
+    </div>
+    </div>
+  </div></section>
+</div>
+
+<div id="ownerPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Data Owner</h1>
+      <div class="row">
+        <p>รายการถือครองรายการบัญชีข้อมูลของสำนักงาน กสทช.</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="acc-list" id="ownerList"></div>
+    <p class="note">รายการเป็นตัวอย่างเพื่อแสดงรูปแบบ · Sample entries to show the layout.</p>
+  </div></section>
+</div>
+
+<div id="annPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>ประกาศ</h1>
+      <div class="row">
+        <p>ประกาศ แนวปฏิบัติ และมาตรฐานข้อมูลที่มีผลบังคับใช้</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="chips" role="group" aria-label="กรองประเภท">
+      <button class="chip" data-a="all" aria-pressed="true">ทั้งหมด</button>
+      <button class="chip" data-a="ประกาศ" aria-pressed="false">ประกาศ</button>
+      <button class="chip" data-a="แนวปฏิบัติ" aria-pressed="false">แนวปฏิบัติ</button>
+      <button class="chip" data-a="มาตรฐานข้อมูล" aria-pressed="false">มาตรฐานข้อมูล</button>
+    </div>
+    <div class="acc-list" id="annList">
+    <div class="acc" data-t="ประกาศ">
+      <button type="button" class="acc-h" aria-expanded="false"><span>ประกาศ (ตัวอย่างหัวข้อ 1)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>ประเภท</dt><dd>ประกาศ</dd><dt>วันที่ประกาศใช้</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    <div class="acc" data-t="แนวปฏิบัติ">
+      <button type="button" class="acc-h" aria-expanded="false"><span>แนวปฏิบัติการจัดทำ Metadata (ตัวอย่างหัวข้อ)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>ประเภท</dt><dd>แนวปฏิบัติ</dd><dt>วันที่ประกาศใช้</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    <div class="acc" data-t="มาตรฐานข้อมูล">
+      <button type="button" class="acc-h" aria-expanded="false"><span>มาตรฐานข้อมูล (ตัวอย่างหัวข้อ)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>ประเภท</dt><dd>มาตรฐานข้อมูล</dd><dt>วันที่ประกาศใช้</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    </div>
+    <p class="note">รายการเป็นตัวอย่าง กรุณาแทนที่ด้วยประกาศจริงของส่วนงานและลิงก์ไฟล์ · Sample entries, replace with the division's actual announcements.</p>
+  </div></section>
+</div>
+
+<div id="dashPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Dashboard</h1>
+      <div class="row">
+        <p>ภาพรวมข้อมูลและการลงทะเบียนของส่วนงาน</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="kpis" id="dashKpis"></div>
+    <div class="dash-grid">
+      <div class="dcard"><h3>Data Agent ตามสำนัก (8 อันดับแรก)</h3><div id="dashBars"></div></div>
+      <div class="dcard"><h3>การลงทะเบียน Metadata รายเดือน</h3><div id="dashLine"></div></div>
+      <div class="dcard"><h3>สถานะชุดข้อมูล</h3><div id="dashDonut"></div></div>
+    </div>
+    <p class="note">จำนวน Data Agent คำนวณจากรายชื่อในระบบ ส่วนตัวเลขอื่นเป็นข้อมูลตัวอย่าง กรุณาเชื่อมกับข้อมูลจริง · Agent counts come from the list; other figures are sample data.</p>
+  </div></section>
+</div>
+
+<div id="knowPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Knowledge</h1>
+      <div class="row">
+        <p>เนื้อหากำลังจัดทำ</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="soon">เร็ว ๆ นี้ · Coming soon</div>
+  </div></section>
+</div>
+
+<div id="gamePage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Game</h1>
+      <div class="row">
+        <p>เนื้อหากำลังจัดทำ</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="soon">เร็ว ๆ นี้ · Coming soon</div>
+  </div></section>
+</div>
+
+<div id="manualPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Manual</h1>
+      <div class="row">
+        <p>คู่มือการใช้งานระบบและแนวปฏิบัติสำหรับผู้กรอกข้อมูลและ Data Agent</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="acc-list">
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>คู่มือการกรอกแบบฟอร์ม Metadata (ตัวอย่าง)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>รายละเอียด</dt><dd>ขั้นตอนการลงทะเบียนชุดข้อมูล</dd><dt>ปรับปรุงล่าสุด</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>คู่มือสำหรับ Data Agent (ตัวอย่าง)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>รายละเอียด</dt><dd>บทบาทและแนวปฏิบัติของผู้ประสานงานข้อมูล</dd><dt>ปรับปรุงล่าสุด</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    </div>
+    <p class="note">รายการเป็นตัวอย่าง กรุณาแทนที่ด้วยคู่มือจริงและลิงก์ดาวน์โหลด · Sample entries, replace with real manuals and download links.</p>
+  </div></section>
+</div>
+
+<div id="dsPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Data Structure</h1>
+      <div class="row"></div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="acc-list">
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>ขั้นตอนการดำเนินการจัดทำโครงสร้างข้อมูลของสำนักงาน กสทช.</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><div class="story">
+      <div class="step">
+        <div class="plate"><svg viewBox="0 0 420 246" role="img" aria-label="ภาพประกอบ การสำรวจข้อมูล">
+<polygon class="pe" points="14.0,120.0 210.0,218.0 406.0,120.0 406.0,129.0 210.0,227.0 14.0,129.0"/>
+<polygon class="pt" points="210.0,22.0 406.0,120.0 210.0,218.0 14.0,120.0"/>
+<line class="pg" x1="185.5" y1="34.2" x2="381.5" y2="132.2"/>
+<line class="pg" x1="234.5" y1="34.2" x2="38.5" y2="132.2"/>
+<line class="pg" x1="161.0" y1="46.5" x2="357.0" y2="144.5"/>
+<line class="pg" x1="259.0" y1="46.5" x2="63.0" y2="144.5"/>
+<line class="pg" x1="136.5" y1="58.8" x2="332.5" y2="156.8"/>
+<line class="pg" x1="283.5" y1="58.8" x2="87.5" y2="156.8"/>
+<line class="pg" x1="112.0" y1="71.0" x2="308.0" y2="169.0"/>
+<line class="pg" x1="308.0" y1="71.0" x2="112.0" y2="169.0"/>
+<line class="pg" x1="87.5" y1="83.2" x2="283.5" y2="181.2"/>
+<line class="pg" x1="332.5" y1="83.2" x2="136.5" y2="181.2"/>
+<line class="pg" x1="63.0" y1="95.5" x2="259.0" y2="193.5"/>
+<line class="pg" x1="357.0" y1="95.5" x2="161.0" y2="193.5"/>
+<line class="pg" x1="38.5" y1="107.8" x2="234.5" y2="205.8"/>
+<line class="pg" x1="381.5" y1="107.8" x2="185.5" y2="205.8"/>
+<circle class="pd" cx="210.0" cy="30.8" r="3"/>
+<circle class="pd" cx="388.4" cy="120.0" r="3"/>
+<circle class="pd" cx="210.0" cy="209.2" r="3"/>
+<circle class="pd" cx="31.6" cy="120.0" r="3"/>
+<path class="cn" d="M150,112 Q176,84 205,86"/><path class="cn" d="M205,86 Q242,78 262,112"/><path class="cn" d="M205,86 Q190,125 205,148"/><path class="cn" d="M262,112 C300,90 320,72 336,50"/><polygon class="tl" points="130.0,112.0 150.0,123.0 150.0,129.0 130.0,118.0"/><polygon class="tr" points="170.0,112.0 150.0,123.0 150.0,129.0 170.0,118.0"/><polygon class="tt" points="150.0,101.0 170.0,112.0 150.0,123.0 130.0,112.0"/><circle class="gl" cx="150" cy="105" r="2.8"/><path class="gl" d="M145,112.5a5,4 0 0 1 10,0"/><polygon class="tl" points="185.0,86.0 205.0,97.0 205.0,103.0 185.0,92.0"/><polygon class="tr" points="225.0,86.0 205.0,97.0 205.0,103.0 225.0,92.0"/><polygon class="tt" points="205.0,75.0 225.0,86.0 205.0,97.0 185.0,86.0"/><path class="gl" d="M201,78h8M201,82h8M201,86h5"/><polygon class="tl" points="242.0,112.0 262.0,123.0 262.0,129.0 242.0,118.0"/><polygon class="tr" points="282.0,112.0 262.0,123.0 262.0,129.0 282.0,118.0"/><polygon class="tk" points="262.0,101.0 282.0,112.0 262.0,123.0 242.0,112.0"/><polygon class="tl" points="185.0,148.0 205.0,159.0 205.0,165.0 185.0,154.0"/><polygon class="tr" points="225.0,148.0 205.0,159.0 205.0,165.0 225.0,154.0"/><polygon class="tt" points="205.0,137.0 225.0,148.0 205.0,159.0 185.0,148.0"/><path class="gl" d="M200,145l3,3 6,-6"/><polygon class="tl" points="286.0,138.0 306.0,149.0 306.0,155.0 286.0,144.0"/><polygon class="tr" points="326.0,138.0 306.0,149.0 306.0,155.0 326.0,144.0"/><polygon class="tt" points="306.0,127.0 326.0,138.0 306.0,149.0 286.0,138.0"/><polygon class="tl" points="323.0,44.0 338.0,52.5 338.0,57.5 323.0,49.0"/><polygon class="tr" points="353.0,44.0 338.0,52.5 338.0,57.5 353.0,49.0"/><polygon class="tt" points="338.0,35.5 353.0,44.0 338.0,52.5 323.0,44.0"/>
+</svg></div>
+        <div class="txt"><h4>STEP 1: สำรวจข้อมูลภายในองค์กร</h4><p>ปรึกษา EA ได้ทำการสำรวจข้อมูลภายในองค์กรโดยอิงตามภารกิจของสำนักงาน กสทช. เพื่อให้ทราบถึงข้อมูลว่าแต่ละสำนักมีข้อมูลใดบ้างภายใต้ภารกิจของตน และทำการระบุเจ้าของข้อมูล แหล่งที่มา เพื่อให้เห็นภาพรวมว่ามีข้อมูลอะไรอยู่ที่ใดบ้าง</p></div>
+      </div>
+      <div class="step">
+        <div class="plate"><svg viewBox="0 0 420 246" role="img" aria-label="ภาพประกอบ การกำหนดโครงสร้างข้อมูล">
+<polygon class="pe" points="14.0,120.0 210.0,218.0 406.0,120.0 406.0,129.0 210.0,227.0 14.0,129.0"/>
+<polygon class="pt" points="210.0,22.0 406.0,120.0 210.0,218.0 14.0,120.0"/>
+<line class="pg" x1="185.5" y1="34.2" x2="381.5" y2="132.2"/>
+<line class="pg" x1="234.5" y1="34.2" x2="38.5" y2="132.2"/>
+<line class="pg" x1="161.0" y1="46.5" x2="357.0" y2="144.5"/>
+<line class="pg" x1="259.0" y1="46.5" x2="63.0" y2="144.5"/>
+<line class="pg" x1="136.5" y1="58.8" x2="332.5" y2="156.8"/>
+<line class="pg" x1="283.5" y1="58.8" x2="87.5" y2="156.8"/>
+<line class="pg" x1="112.0" y1="71.0" x2="308.0" y2="169.0"/>
+<line class="pg" x1="308.0" y1="71.0" x2="112.0" y2="169.0"/>
+<line class="pg" x1="87.5" y1="83.2" x2="283.5" y2="181.2"/>
+<line class="pg" x1="332.5" y1="83.2" x2="136.5" y2="181.2"/>
+<line class="pg" x1="63.0" y1="95.5" x2="259.0" y2="193.5"/>
+<line class="pg" x1="357.0" y1="95.5" x2="161.0" y2="193.5"/>
+<line class="pg" x1="38.5" y1="107.8" x2="234.5" y2="205.8"/>
+<line class="pg" x1="381.5" y1="107.8" x2="185.5" y2="205.8"/>
+<circle class="pd" cx="210.0" cy="30.8" r="3"/>
+<circle class="pd" cx="388.4" cy="120.0" r="3"/>
+<circle class="pd" cx="210.0" cy="209.2" r="3"/>
+<circle class="pd" cx="31.6" cy="120.0" r="3"/>
+<polygon class="tl" points="189.0,76.0 210.0,87.5 210.0,93.5 189.0,82.0"/><polygon class="tr" points="231.0,76.0 210.0,87.5 210.0,93.5 231.0,82.0"/><polygon class="tg" points="210.0,64.5 231.0,76.0 210.0,87.5 189.0,76.0"/><polygon class="tl" points="149.0,97.0 170.0,108.5 170.0,114.5 149.0,103.0"/><polygon class="tr" points="191.0,97.0 170.0,108.5 170.0,114.5 191.0,103.0"/><polygon class="tt" points="170.0,85.5 191.0,97.0 170.0,108.5 149.0,97.0"/><polygon class="tl" points="229.0,97.0 250.0,108.5 250.0,114.5 229.0,103.0"/><polygon class="tr" points="271.0,97.0 250.0,108.5 250.0,114.5 271.0,103.0"/><polygon class="tt" points="250.0,85.5 271.0,97.0 250.0,108.5 229.0,97.0"/><polygon class="tl" points="109.0,118.0 130.0,129.5 130.0,135.5 109.0,124.0"/><polygon class="tr" points="151.0,118.0 130.0,129.5 130.0,135.5 151.0,124.0"/><polygon class="tt" points="130.0,106.5 151.0,118.0 130.0,129.5 109.0,118.0"/><polygon class="tl" points="189.0,118.0 210.0,129.5 210.0,135.5 189.0,124.0"/><polygon class="tr" points="231.0,118.0 210.0,129.5 210.0,135.5 231.0,124.0"/><polygon class="tk" points="210.0,106.5 231.0,118.0 210.0,129.5 189.0,118.0"/><polygon class="tl" points="269.0,118.0 290.0,129.5 290.0,135.5 269.0,124.0"/><polygon class="tr" points="311.0,118.0 290.0,129.5 290.0,135.5 311.0,124.0"/><polygon class="tt" points="290.0,106.5 311.0,118.0 290.0,129.5 269.0,118.0"/><polygon class="tl" points="149.0,139.0 170.0,150.5 170.0,156.5 149.0,145.0"/><polygon class="tr" points="191.0,139.0 170.0,150.5 170.0,156.5 191.0,145.0"/><polygon class="tt" points="170.0,127.5 191.0,139.0 170.0,150.5 149.0,139.0"/><polygon class="tl" points="229.0,139.0 250.0,150.5 250.0,156.5 229.0,145.0"/><polygon class="tr" points="271.0,139.0 250.0,150.5 250.0,156.5 271.0,145.0"/><polygon class="tt" points="250.0,127.5 271.0,139.0 250.0,150.5 229.0,139.0"/><polygon class="tl" points="189.0,160.0 210.0,171.5 210.0,177.5 189.0,166.0"/><polygon class="tr" points="231.0,160.0 210.0,171.5 210.0,177.5 231.0,166.0"/><polygon class="tg" points="210.0,148.5 231.0,160.0 210.0,171.5 189.0,160.0"/>
+</svg></div>
+        <div class="txt"><h4>STEP 2: กำหนดโครงสร้างให้ข้อมูล</h4><p>เป็นขั้นตอนที่สำคัญ โดยมอบหมายให้เจ้าของข้อมูล (Data Owner) และผู้แทนของสำนัก (Data Agent) ดำเนินการร่วมกันเพื่อกำหนดรายละเอียดของแต่ละชุดข้อมูล เช่น ชื่อ คำอธิบาย หมวดหมู่ ความถี่ในการปรับปรุง และพจนานุกรมข้อมูล (Data Dictionary) เพื่อให้ผู้ใช้อ่านและตีความข้อมูลได้ตรงกันเกี่ยวกับตัวข้อมูล และเพื่อความสะดวกในการที่บุคลากรภายในองคืกรจะสามารถนำข้อมูลเหล่านั้นไปใช้งานต่อได้อย่างมีประสิทธิภาพ</p></div>
+      </div>
+      <div class="step">
+        <div class="plate"><svg viewBox="0 0 420 246" role="img" aria-label="ภาพประกอบ การนำเข้าระบบ Data Catalog">
+<polygon class="pe" points="14.0,120.0 210.0,218.0 406.0,120.0 406.0,129.0 210.0,227.0 14.0,129.0"/>
+<polygon class="pt" points="210.0,22.0 406.0,120.0 210.0,218.0 14.0,120.0"/>
+<line class="pg" x1="185.5" y1="34.2" x2="381.5" y2="132.2"/>
+<line class="pg" x1="234.5" y1="34.2" x2="38.5" y2="132.2"/>
+<line class="pg" x1="161.0" y1="46.5" x2="357.0" y2="144.5"/>
+<line class="pg" x1="259.0" y1="46.5" x2="63.0" y2="144.5"/>
+<line class="pg" x1="136.5" y1="58.8" x2="332.5" y2="156.8"/>
+<line class="pg" x1="283.5" y1="58.8" x2="87.5" y2="156.8"/>
+<line class="pg" x1="112.0" y1="71.0" x2="308.0" y2="169.0"/>
+<line class="pg" x1="308.0" y1="71.0" x2="112.0" y2="169.0"/>
+<line class="pg" x1="87.5" y1="83.2" x2="283.5" y2="181.2"/>
+<line class="pg" x1="332.5" y1="83.2" x2="136.5" y2="181.2"/>
+<line class="pg" x1="63.0" y1="95.5" x2="259.0" y2="193.5"/>
+<line class="pg" x1="357.0" y1="95.5" x2="161.0" y2="193.5"/>
+<line class="pg" x1="38.5" y1="107.8" x2="234.5" y2="205.8"/>
+<line class="pg" x1="381.5" y1="107.8" x2="185.5" y2="205.8"/>
+<circle class="pd" cx="210.0" cy="30.8" r="3"/>
+<circle class="pd" cx="388.4" cy="120.0" r="3"/>
+<circle class="pd" cx="210.0" cy="209.2" r="3"/>
+<circle class="pd" cx="31.6" cy="120.0" r="3"/>
+<path class="cn" d="M122,96 C170,96 190,118 224,128"/><path class="cn" d="M150,128 C180,128 195,134 224,138"/><path class="cn" d="M122,152 C170,152 190,146 224,146"/><path class="cn" d="M178,84 C200,92 210,112 232,122"/><path class="cn" d="M282,140 C330,142 372,150 400,168"/><polygon class="tl" points="106.0,96.0 122.0,105.0 122.0,110.0 106.0,101.0"/><polygon class="tr" points="138.0,96.0 122.0,105.0 122.0,110.0 138.0,101.0"/><polygon class="tt" points="122.0,87.0 138.0,96.0 122.0,105.0 106.0,96.0"/><polygon class="tl" points="134.0,128.0 150.0,137.0 150.0,142.0 134.0,133.0"/><polygon class="tr" points="166.0,128.0 150.0,137.0 150.0,142.0 166.0,133.0"/><polygon class="tt" points="150.0,119.0 166.0,128.0 150.0,137.0 134.0,128.0"/><polygon class="tl" points="106.0,152.0 122.0,161.0 122.0,166.0 106.0,157.0"/><polygon class="tr" points="138.0,152.0 122.0,161.0 122.0,166.0 138.0,157.0"/><polygon class="tt" points="122.0,143.0 138.0,152.0 122.0,161.0 106.0,152.0"/><polygon class="tl" points="162.0,84.0 178.0,93.0 178.0,98.0 162.0,89.0"/><polygon class="tr" points="194.0,84.0 178.0,93.0 178.0,98.0 194.0,89.0"/><polygon class="tt" points="178.0,75.0 194.0,84.0 178.0,93.0 162.0,84.0"/><polygon class="tl" points="212.0,140.0 258.0,165.0 258.0,175.0 212.0,150.0"/><polygon class="tr" points="304.0,140.0 258.0,165.0 258.0,175.0 304.0,150.0"/><polygon class="tk" points="258.0,115.0 304.0,140.0 258.0,165.0 212.0,140.0"/>
+</svg></div>
+        <div class="txt"><h4>STEP 3: เชื่อข้อมูลขึ้นระบบ Data Catalog </h4><p>หลังจากที่ข้อมูลมีความครบถ้วนและได้รับการตรวจสอบความถูกต้องจากทีมงานส่วนวิเคราะห์ข้อมูลเรียบร้อยแล้ว จะทำการเชื่อมข้อมูลขึ้นระบบ Datacatalog.go.th เพื่อเผยแพร่ให้ผู้ที่เกี่ยวข้องค้นหา รับรู้ และนำข้อมูลไปใช้ประโยชน์ต่อได้</p></div>
+      </div>
+    </div>
+    <p class="note">ข้อความอธิบายขั้นตอนเป็นร่าง กรุณาแก้ไขให้ตรงกับขั้นตอนจริงของสำนักงาน · Draft text, please edit to match the official process.</p></div></div>
+    </div>
+    <div class="acc">
+      <a class="acc-h" href="#metadata"><span>ฟอร์มสำหรับการลงทะเบียนชุดข้อมูลของสำนักงาน กสทช. (Metadata & Data Dictionary)</span><svg class="acc-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    </div>
+  </div></section>
+</div>
+
+<div id="metaPage" hidden>
+  <div class="fh">
+    <div class="fh-in">
+      <span class="fh-kick">Metadata registration</span>
+      <h1>Metadata &amp; Data Dictionary</h1>
+      <p>ฟอร์มสำหรับลงทะเบียนชุดข้อมูลของสำนักงาน กสทช.</p>
+    </div>
+    <div class="fh-scene"><svg viewBox="0 0 1400 440" preserveAspectRatio="xMidYMax slice" role="img" aria-label="ภาพประกอบ สถาปัตยกรรมโทนเทา">
+<defs>
+ <linearGradient id="fhBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0EEE9"/><stop offset="1" stop-color="#E4E1DA"/></linearGradient>
+ <linearGradient id="fhFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4F1EA" stop-opacity="1"/><stop offset="1" stop-color="#F4F1EA" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="1400" height="440" fill="url(#fhBg)"/>
+<path d="M0 250 C180 200 300 260 470 330 C560 366 640 380 700 380 L700 440 L0 440 Z" fill="#E1DED7"/>
+<path d="M830 350 C920 336 980 280 1040 225 L1040 440 L830 440 Z" fill="#DDD9D2"/>
+<rect x="0" y="70" width="240" height="370" fill="#EAE8E3" stroke="#D2CEC6"/>
+<rect x="28" y="108" width="92" height="176" fill="#F7F6F2" stroke="#BDB9B0"/>
+<path d="M58 108V284M88 108V284M28 150H120M28 196H120M28 240H120" stroke="#BDB9B0" stroke-width="1.5"/>
+<rect x="150" y="70" width="90" height="120" fill="#DDD9D1"/>
+<rect x="0" y="300" width="252" height="18" fill="#D8D4CC"/>
+<rect x="0" y="318" width="252" height="122" fill="#DCD8D0"/>
+<path d="M0 440V380Q60 340 118 380V440Z" fill="#CFCBC3"/>
+<rect x="250" y="316" width="222" height="18" fill="#E6E3DD"/><rect x="280" y="334" width="192" height="18" fill="#DEDAD3"/><rect x="310" y="352" width="162" height="18" fill="#E6E3DD"/><rect x="340" y="370" width="132" height="18" fill="#DEDAD3"/><rect x="370" y="388" width="102" height="18" fill="#E6E3DD"/><rect x="400" y="406" width="72" height="18" fill="#DEDAD3"/><rect x="430" y="424" width="42" height="18" fill="#E6E3DD"/>
+<rect x="500" y="212" width="350" height="24" fill="#DDD9D1" stroke="#CFCBC3"/>
+<rect x="500" y="236" width="24" height="204" fill="#E6E3DD"/><rect x="826" y="236" width="24" height="204" fill="#E6E3DD"/>
+<rect x="524" y="236" width="302" height="204" fill="#CFCBC3"/>
+<path d="M548 288H720M548 332H720" stroke="#B9B5AC" stroke-width="3"/>
+<g fill="#E5E2DB"><rect x="560" y="262" width="34" height="26"/><rect x="620" y="270" width="26" height="18"/><rect x="680" y="258" width="30" height="30"/><rect x="574" y="308" width="28" height="24"/><rect x="650" y="310" width="36" height="22"/></g>
+<rect x="524" y="384" width="302" height="56" fill="#E9E6E0"/><path d="M552 392V432M600 392V432M648 392V432M696 392V432M744 392V432M792 392V432" stroke="#D3CFC7" stroke-width="2"/>
+<rect x="1010" y="150" width="390" height="290" fill="#E9E7E2" stroke="#D2CEC6"/>
+<rect x="1050" y="196" width="320" height="244" rx="28" fill="#D4D0C8"/>
+<rect x="1078" y="250" width="270" height="170" fill="#E6E3DC"/>
+<g fill="#F4F3EF" stroke="#BDB9B0"><rect x="1100" y="276" width="46" height="62" rx="4"/><rect x="1176" y="276" width="46" height="62" rx="4"/><rect x="1252" y="276" width="46" height="62" rx="4"/></g>
+<rect x="1050" y="196" width="320" height="244" rx="28" fill="none" stroke="#F2F0EB" stroke-width="12"/>
+<rect x="1000" y="428" width="400" height="12" fill="#D6D2CA"/>
+<g>
+ <rect x="140" y="278" width="96" height="6" fill="#B9B5AC"/><rect x="146" y="284" width="4" height="22" fill="#B9B5AC"/><rect x="226" y="284" width="4" height="22" fill="#B9B5AC"/>
+ <g fill="#2b2b2b"><circle cx="118" cy="236" r="11"/><path d="M104 248 Q120 244 134 252 L142 276 L100 276 Z"/><rect x="96" y="276" width="48" height="8" rx="3"/><rect x="98" y="284" width="8" height="30"/></g>
+ <rect x="82" y="284" width="26" height="4" fill="#B9B5AC"/><rect x="84" y="288" width="3" height="28" fill="#B9B5AC"/><rect x="104" y="288" width="3" height="28" fill="#B9B5AC"/>
+</g>
+<ellipse cx="640.0" cy="439.0" rx="30.0" ry="7.2" fill="#000" opacity=".10"/><g fill="#2b2b2b"><rect x="625.0" y="408.0" width="12.0" height="30.0"/><rect x="643.0" y="408.0" width="12.0" height="30.0"/><path d="M619.0,357.0 Q640.0,345.0 661.0,357.0 L658.0,408.0 L622.0,408.0 Z"/><circle cx="640.0" cy="336.0" r="15.0"/></g><ellipse cx="702.0" cy="441.0" rx="31.0" ry="7.4" fill="#000" opacity=".10"/><g fill="#2b2b2b"><rect x="686.5" y="409.0" width="12.4" height="31.0"/><rect x="705.1" y="409.0" width="12.4" height="31.0"/><path d="M680.3,356.3 Q702.0,343.9 723.7,356.3 L720.6,409.0 L683.4,409.0 Z"/><circle cx="702.0" cy="334.6" r="15.5"/></g><ellipse cx="1160.0" cy="439.0" rx="32.0" ry="7.7" fill="#000" opacity=".10"/><g fill="#2b2b2b"><rect x="1144.0" y="425.2" width="11.5" height="12.8"/><rect x="1164.5" y="425.2" width="11.5" height="12.8"/><path d="M1136.0,351.6 Q1160.0,338.8 1184.0,351.6 L1188.8,425.2 L1131.2,425.2 Z"/><circle cx="1160.0" cy="329.2" r="16.0"/></g><ellipse cx="1236.0" cy="441.0" rx="31.0" ry="7.4" fill="#000" opacity=".10"/><g fill="#2b2b2b"><rect x="1220.5" y="409.0" width="12.4" height="31.0"/><rect x="1239.1" y="409.0" width="12.4" height="31.0"/><path d="M1214.3,356.3 Q1236.0,343.9 1257.7,356.3 L1254.6,409.0 L1217.4,409.0 Z"/><circle cx="1236.0" cy="334.6" r="15.5"/><rect x="1251.5" y="353.2" width="18.6" height="43.4" rx="6.2"/></g>
+<rect width="1400" height="170" fill="url(#fhFade)"/>
+</svg></div>
+  </div>
+  <section class="first section-first"><div class="wrap">
+<form id="metadata-form" novalidate>
+  <div class="px-5 sm:px-9 py-6 border-b flex flex-wrap items-center justify-between gap-3" style="border-color:var(--line)">
+   <div>
+    <h2 class="text-2xl">ลงทะเบียน</h2>
+    <p class="sub mt-1">กรอกข้อมูลที่เกี่ยวข้องเพื่อส่งชุดข้อมูลเข้าสู่กระบวนการตรวจสอบ</p>
+   </div>
+   <div class="flex flex-wrap items-center gap-3"><span class="status-online" role="status"><span class="dot" aria-hidden="true"></span>Online · เปิดรับลงทะเบียน</span><span class="req-pill">* ข้อมูลที่จำเป็น</span></div>
+  </div>
+
+  <div class="px-5 sm:px-9">
+   <!-- Page 1 -->
+   <div id="page-1">
+    <section class="sec" aria-labelledby="h1s">
+     <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">01</span>
+      <div><h2 id="h1s" class="text-2xl">ข้อมูลทั่วไปของชุดข้อมูล (General Info)</h2><p class="sub">รายละเอียดพื้นฐานเพื่อช่วยระบุและค้นหาชุดข้อมูล</p></div></div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="field sm:col-span-2">
+       <label for="dataset-name" class="field-label">ชื่อชุดข้อมูล (Dataset Name) <span class="req" aria-label="จำเป็น">*</span></label>
+       <input id="dataset-name" name="dataset_name" class="field-control" type="text" required maxlength="200" aria-describedby="dataset-name-help dataset-name-error">
+       <p id="dataset-name-help" class="field-help">กรุณาระบุชื่อชุดข้อมูลเต็มตาม Data Owner ที่มีการประกาศไว้</p>
+       <p id="dataset-name-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="description" class="field-label">คำอธิบายรายละเอียด (Description) <span class="req" aria-label="จำเป็น">*</span></label>
+       <textarea id="description" name="description" class="field-control" required maxlength="1000" aria-describedby="description-help description-error"></textarea>
+       <p id="description-help" class="field-help">คำอธิบายรายละเอียดที่สำคัญของชุดข้อมูลอย่างสั้น (ความยาวไม่เกิน 1,000 ตัวอักษร)</p>
+       <p id="description-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="tagstring" class="field-label">คำสำคัญ (Tag String) <span class="req" aria-label="จำเป็น">*</span></label>
+       <input id="tagstring" name="tagstring" class="field-control" type="text" required maxlength="1000" placeholder="ทีวีดิจิทัล, สถิติการรับชม, กสทช." aria-describedby="tagstring-help tagstring-error">
+       <p id="tagstring-help" class="field-help">ระบุคำสำคัญของชุดข้อมูล คั่นแต่ละคำด้วยเครื่องหมายจุลภาค ( , )</p>
+       <p id="tagstring-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="category" class="field-label">หมวดหมู่ข้อมูล (Category) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="category" name="category" class="field-control select-placeholder" required aria-describedby="category-help category-error"></select>
+       <p id="category-help" class="field-help">เลือกหมวดหมู่ที่ตรงกับเนื้อหาของชุดข้อมูลมากที่สุด</p>
+       <p id="category-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="data-type" class="field-label">ประเภทข้อมูล (Data Type) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="data-type" name="data_type" class="field-control select-placeholder" required aria-describedby="data-type-help data-type-error"></select>
+       <p id="data-type-help" class="field-help">เลือกประเภทข้อมูลตามลักษณะและวิธีการจัดเก็บของชุดข้อมูล</p>
+       <p id="data-type-error" class="field-error" aria-live="polite"></p>
+      </div>
+
+      <!-- ส่วน Dropdown Checkbox วัตถุประสงค์ (Objective) -->
+      <fieldset id="objective-container" class="field sm:col-span-2">
+       <legend class="field-label mb-[7px]">วัตถุประสงค์ (Objective) <span class="req" aria-label="จำเป็น">*</span> <span class="text-xs font-normal text-slate-500">(เลือกได้มากกว่า 1 ข้อ)</span></legend>
+       
+       <div id="objective-list" class="obj-grid"></div>
+
+       <p id="objective-help" class="field-help mt-1">อธิบายที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
+       <p id="objective-error" class="field-error" aria-live="polite"></p>
+      </fieldset>
+
+     </div>
+    </section>
+   </div>
+
+   <!-- Page 2 -->
+   <div id="page-2" hidden>
+    <section class="sec" aria-labelledby="h2s">
+     <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">02</span>
+      <div><h2 id="h2s" class="text-2xl">การกำกับดูแลและความปลอดภัย (Governance &amp; Security)</h2><p class="sub">ระบุความรับผิดชอบและข้อพิจารณาด้านความปลอดภัย</p></div></div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="field sm:col-span-2">
+       <label for="data-owner" class="field-label">องค์กร (Owner ORG) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="data-owner" name="data_owner" class="field-control select-placeholder" required aria-describedby="data-owner-help data-owner-error"></select>
+       <div id="other-owner-field" hidden>
+        <label for="other-owner" class="field-label mt-2">ระบุชื่อองค์กรที่รับผิดชอบชุดข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
+        <input id="other-owner" name="other_owner" class="field-control mt-1" type="text" maxlength="200">
+       </div>
+       <p id="data-owner-help" class="field-help">ชื่อองค์กรที่รับผิดชอบข้อมูล</p>
+       <p id="data-owner-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="data-custodian" class="field-label">หน่วยงานผู้ดูแล (Maintainer) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="data-custodian" name="data_custodian" class="field-control select-placeholder" required aria-describedby="data-custodian-help data-custodian-error"></select>
+       <p id="data-custodian-help" class="field-help">ชื่อกอง สำนัก หรือฝ่าย ที่ได้รับการมอบหมายให้รับผิดชอบข้อมูล</p>
+       <p id="data-custodian-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="maintainer-email" class="field-label">อีเมลผู้ติดต่อ (Maintainer Email) <span class="req" aria-label="จำเป็น">*</span></label>
+       <div class="email-group" id="maintainer-email-group">
+        <input id="maintainer-email" name="maintainer_email" type="text" placeholder="saraban_1100" required inputmode="email" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="64" aria-describedby="maintainer-email-help maintainer-email-error">
+        <span class="suffix" aria-hidden="true">@nbtc.go.th</span>
+       </div>
+       <p id="maintainer-email-help" class="field-help">อีเมลกลางของสำนักหรือฝ่ายที่ได้รับการมอบหมายให้รับผิดชอบข้อมูล</p>
+       <p id="maintainer-email-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="data-source" class="field-label">แหล่งที่มา (Data Source) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="data-source" name="data_source" class="field-control select-placeholder" required aria-describedby="data-source-help data-source-error"></select>
+       <div id="other-source-field" hidden>
+        <label for="other-source" class="field-label mt-2">ระบุแหล่งที่มา <span class="req" aria-label="จำเป็น">*</span></label>
+        <input id="other-source" name="other_source" class="field-control mt-1" type="text" maxlength="500">
+       </div>
+       <p id="data-source-help" class="field-help">ชุดข้อมูลสถิติการรับชม TV Digital ภาคพื้นดินในประเทศไทยของสำนักงาน กสทช. ต้องระบุแหล่งข้อมูลที่ใช้อ้างอิงที่แท้จริง</p>
+       <p id="data-source-error" class="field-error" aria-live="polite"></p>
+      </div>
+     </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h3s">
+     <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">03</span>
+      <div><h2 id="h3s" class="text-2xl">ข้อมูลทางเทคนิคและการเข้าถึง (Technical Details)</h2><p class="sub">รายละเอียดรูปแบบ ความถี่ และช่องทางเข้าถึงข้อมูล</p></div></div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="field sm:col-span-2">
+       <label for="data-format" class="field-label">รูปแบบไฟล์ / การจัดเก็บ (Data Format) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="data-format" name="data_format" class="field-control select-placeholder" required aria-describedby="data-format-help data-format-error"></select>
+       <p id="data-format-help" class="field-help">เลือกรูปแบบหลักที่ใช้จัดเก็บหรือให้บริการข้อมูล</p>
+       <p id="data-format-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="update-frequency" class="field-label">ความถี่ในการอัปเดต (Update Frequency) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="update-frequency" name="update_frequency" class="field-control select-placeholder" required aria-describedby="update-frequency-help update-frequency-error"></select>
+       <div id="other-frequency-field" hidden>
+        <label for="other-frequency" class="field-label mt-2">ระบุความถี่ในการอัปเดต <span class="req" aria-label="จำเป็น">*</span></label>
+        <input id="other-frequency" name="other_frequency" class="field-control mt-1" type="text" maxlength="200">
+       </div>
+       <p id="update-frequency-help" class="field-help">ระบุรอบการปรับปรุงข้อมูลตามการใช้งานจริง</p>
+       <p id="update-frequency-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="geo-coverage" class="field-label">ขอบเขตเชิงภูมิศาสตร์ หรือเชิงพื้นที่ (Geo Coverage) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="geo-coverage" name="geo_coverage" class="field-control select-placeholder" required aria-describedby="geo-coverage-error"></select>
+       <p id="geo-coverage-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="access-url" class="field-label">URL / API Endpoint สำหรับเข้าถึงข้อมูล</label>
+       <input id="access-url" name="access_url" class="field-control" type="url" inputmode="url" maxlength="2000" aria-describedby="access-url-help access-url-error">
+       <p id="access-url-help" class="field-help">หากมี ให้ระบุ URL แบบเต็มที่ขึ้นต้นด้วย https:// หรือ http://</p>
+       <p id="access-url-error" class="field-error" aria-live="polite"></p>
+      </div>
+     </div>
+    </section>
+   </div>
+
+   <!-- Page 3 -->
+   <div id="page-3" hidden>
+    <section class="sec" aria-labelledby="h4s">
+     <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">04</span>
+      <div><h2 id="h4s" class="text-2xl">ระดับความลับของข้อมูล (Data Classification)</h2><p class="sub">ระบุระดับความลับและการมีข้อมูลส่วนบุคคลของชุดข้อมูล</p></div></div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      
+      <!-- หมวดหมู่ข้อมูลตามธรรมาภิบาล (ฝั่งซ้าย) -->
+      <div class="field sm:col-span-1">
+       <label for="classification" class="field-label">หมวดหมู่ข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ (Data Category) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="classification" name="data_classification" class="field-control select-placeholder" required aria-describedby="classification-help classification-error"></select>
+       <p id="classification-help" class="field-help">เลือกหมวดหมู่ที่ตรงกับชุดข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ</p>
+       <p id="classification-error" class="field-error" aria-live="polite"></p>
+      </div>
+
+      <!-- ข้อมูลส่วนบุคคล PDPA (ฝั่งขวา) -->
+      <fieldset id="pdpa" class="field sm:col-span-1">
+       <legend class="field-label mb-[7px]">ข้อมูลส่วนบุคคล PDPA <span class="req" aria-label="จำเป็น">*</span></legend>
+       <div class="flex flex-wrap gap-2">
+        <label class="radio-choice"><input type="radio" name="pdpa" value="มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help"><span>มีข้อมูลส่วนบุคคล</span></label>
+        <label class="radio-choice"><input type="radio" name="pdpa" value="ไม่มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help"><span>ไม่มีข้อมูลส่วนบุคคล</span></label>
+       </div>
+       <p id="pdpa-help" class="field-help">ระบุว่าชุดข้อมูลมีข้อมูลที่ระบุตัวบุคคลได้หรือไม่</p>
+       <p id="pdpa-error" class="field-error" aria-live="polite"></p>
+      </fieldset>
+
+      <div class="field sm:col-span-2">
+       <label for="access-level" class="field-label">การจัดระดับชั้นความลับของข้อมูล/เงื่อนไขในการเข้าถึงข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="access-level" name="access_level" class="field-control select-placeholder" required aria-describedby="access-level-error"></select>
+       <p id="access-level-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="right-of-usage" class="field-label">สัญญาอนุญาตให้ใช้ข้อมูล (Right of usage) <span class="req" aria-label="จำเป็น">*</span></label>
+       <select id="right-of-usage" name="right_of_usage" class="field-control select-placeholder" required aria-describedby="right-of-usage-error"></select>
+       <p id="right-of-usage-error" class="field-error" aria-live="polite"></p>
+      </div>
+
+     </div>
+    </section>
+   </div>
+
+   <!-- Page 4 -->
+   <div id="page-4" hidden>
+    <section class="sec" aria-labelledby="h5s">
+     <div class="flex items-start gap-3 mb-6"><div><h2 id="h5s" class="text-2xl">ข้อมูลผู้กรอกแบบฟอร์ม (Submitter Info)</h2><p class="sub">ข้อมูลสำหรับติดต่อกลับผู้ที่กรอกข้อมูลชุดนี้</p></div></div>
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="field sm:col-span-2">
+       <label for="submitter-name" class="field-label">ชื่อ - นามสกุล / เบอร์ติดต่อ <span class="req" aria-label="จำเป็น">*</span></label>
+       <input id="submitter-name" name="submitter_name" class="field-control" type="text" required maxlength="200" autocomplete="name" aria-describedby="submitter-name-error">
+       <p id="submitter-name-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="field sm:col-span-2">
+       <label for="submitter-email" class="field-label">อีเมล <span class="req" aria-label="จำเป็น">*</span></label>
+       <input id="submitter-email" name="submitter_email" class="field-control" type="email" required inputmode="email" maxlength="200" autocomplete="email" autocapitalize="none" spellcheck="false" aria-describedby="submitter-email-error">
+       <p id="submitter-email-error" class="field-error" aria-live="polite"></p>
+      </div>
+     </div>
+    </section>
+   </div>
+  </div>
+
+  <div class="px-5 sm:px-9 py-6 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5" style="background:#F0EBE9;border-color:var(--line)">
+   <div>
+    <p id="page-indicator" class="font-semibold" style="color:var(--navy)">page 1 from 4</p>
+    <p class="sub max-w-md">โปรดตรวจสอบข้อมูลก่อนส่ง ระบบจะส่งรายการเข้าสู่กระบวนการตรวจสอบ</p>
+   </div>
+   <div class="flex flex-col-reverse sm:flex-row gap-3">
+    <button id="back-button" type="button" class="btn nav-char" aria-label="Previous page" hidden>&lt;</button>
+    <button id="next-button" type="button" class="btn nav-char" aria-label="Next page">&gt;</button>
+    <button id="submit-button" type="submit" class="btn inline-flex justify-center items-center gap-2" hidden>
+     <span id="submit-label">Submit</span><span id="loading-label" hidden>กำลังส่งข้อมูล...</span>
+    </button>
+   </div>
+  </div>
+ </form>
+  </div></section>
+<button type="button" id="helpBtn" class="help-fab" aria-expanded="false" aria-controls="helpPanel"><span class="q" aria-hidden="true">?</span><span>Help</span></button>
+<div id="helpPanel" class="help-panel" role="dialog" aria-label="Help" hidden>
+  <div class="help-head"><b>Help · คู่มือการกรอกฟอร์ม</b><button type="button" id="helpClose" aria-label="Close">×</button></div>
+  <div class="help-body">
+    <div class="help-item" data-p="1"><button type="button" class="help-q"><span>หน้า 1 · ข้อมูลทั่วไป</span><i></i></button><div class="help-a">กรอกชื่อชุดข้อมูล คำอธิบาย คำสำคัญ เลือกหมวดหมู่และประเภทข้อมูล แล้วติ๊กวัตถุประสงค์ในการจัดทำอย่างน้อย 1 ข้อ ช่องที่มีเครื่องหมาย * จำเป็นต้องกรอก</div></div>
+    <div class="help-item" data-p="2"><button type="button" class="help-q"><span>หน้า 2 · การกำกับดูแลและข้อมูลทางเทคนิค</span><i></i></button><div class="help-a">ระบุผู้รับผิดชอบและข้อพิจารณาด้านความปลอดภัย จากนั้นกรอกรูปแบบไฟล์ ความถี่ในการปรับปรุง และช่องทางเข้าถึงข้อมูล</div></div>
+    <div class="help-item" data-p="3"><button type="button" class="help-q"><span>หน้า 3 · ระดับความลับของข้อมูล</span><i></i></button><div class="help-a">เลือกระดับความลับของชุดข้อมูล และระบุว่ามีข้อมูลส่วนบุคคลตาม PDPA ในระดับใด</div></div>
+    <div class="help-item" data-p="4"><button type="button" class="help-q"><span>หน้า 4 · ข้อมูลผู้กรอกแบบฟอร์ม</span><i></i></button><div class="help-a">กรอกชื่อ-นามสกุล เบอร์ติดต่อ และอีเมลของผู้กรอก เพื่อให้ส่วนงานติดต่อกลับเมื่อต้องตรวจสอบข้อมูล แล้วกด Submit</div></div>
+    <p class="help-note">ข้อความคู่มือเป็นร่าง กรุณาแทนที่ด้วยคู่มือการกรอกฟอร์มของส่วนงาน · Draft text, replace with the official form manual.</p>
+  </div>
+</div>
+<div id="result-modal" class="modal-backdrop" hidden>
+ <div role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-message" class="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 sm:p-8 relative">
+  <button id="modal-close" type="button" aria-label="ปิดหน้าต่าง" class="absolute right-5 top-4 text-slate-500 hover:text-slate-900 rounded-lg p-1 text-2xl leading-none">×</button>
+  <div id="success-icon" aria-hidden="true" class="w-12 h-12 rounded-full bg-green-50 text-green-700 flex items-center justify-center text-2xl mb-5" hidden>✓</div>
+  <div id="error-icon" aria-hidden="true" class="w-12 h-12 rounded-full bg-red-50 text-red-700 flex items-center justify-center text-2xl mb-5" hidden>!</div>
+  <h2 id="modal-title" class="text-xl"></h2>
+  <p id="modal-message" class="mt-3 text-slate-600"></p>
+  <button id="modal-action" type="button" class="btn mt-7 w-full" style="background:var(--navy)">ปิดหน้าต่าง</button>
+ </div>
+</div>
+</div>
+</main>
+
+<footer id="contact">
+  <div class="wrap foot">
+    <div>
+      <b>Contact Us</b>
+      <div>E-mail: <a href="mailto:itdatacenter@nbtc.go.th">itdatacenter@nbtc.go.th</a></div>
+      <div>Tel: 2846 &nbsp;2854 &nbsp;2874 &nbsp;2815</div>
+    </div>
+    <div class="en">เอกสารและข้อมูลในเว็บนี้ใช้ภายในองค์กรเท่านั้น / For internal use only</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var chips=document.querySelectorAll('[data-f]');
+  chips.forEach(function(b){b.addEventListener('click',function(){
+    chips.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    var f=b.dataset.f;
+    document.querySelectorAll('#newsList li').forEach(function(li){li.hidden=!(f==='all'||li.dataset.c===f)});
+  })});
+  var AGENTS=[
+  ["ชื่อ-นามสกุล (ตัวอย่าง 1)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกิจการดาวเทียมสื่อสาร (ดบ.)", "xxxx", "name1@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 2)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการคลัง (ลย.)", "xxxx", "name2@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 3)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)", "xxxx", "name3@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 4)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)", "xxxx", "name4@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 5)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)", "xxxx", "name5@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 6)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคลื่นความถี่ (คบ.)", "xxxx", "name6@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 7)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการพัสดุและบริหารทรัพย์สิน (พย.)", "xxxx", "name7@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 8)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)", "xxxx", "name8@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 9)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)", "xxxx", "name9@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 10)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)", "xxxx", "name10@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 11)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกองทุนวิจัยและพัฒนา (ทบ.)", "xxxx", "name11@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 12)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคดีและนิติการ (นย.)", "xxxx", "name12@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 13)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)", "xxxx", "name13@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 14)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)", "xxxx", "name14@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 15)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)", "xxxx", "name15@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 16)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)", "xxxx", "name16@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 17)", "ตำแหน่ง (ตัวอย่าง)", "สำนักทรัพยากรบุคคล (บย.)", "xxxx", "name17@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 18)", "ตำแหน่ง (ตัวอย่าง)", "สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)", "xxxx", "name18@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 19)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)", "xxxx", "name19@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 20)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)", "xxxx", "name20@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 21)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสื่อสารองค์กร (สบ.)", "xxxx", "name21@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 22)", "ตำแหน่ง (ตัวอย่าง)", "สำนักยุทธศาสตร์และการงบประมาณ (ยย.)", "xxxx", "name22@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 23)", "ตำแหน่ง (ตัวอย่าง)", "สถาบันวิทยาการ (วย.)", "xxxx", "name23@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 24)", "ตำแหน่ง (ตัวอย่าง)", "สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)", "xxxx", "name24@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 25)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายโทรคมนาคม (มท.)", "xxxx", "name25@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 26)", "ตำแหน่ง (ตัวอย่าง)", "สำนักอำนวยการกลาง (อบ.)", "xxxx", "name26@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 27)", "ตำแหน่ง (ตัวอย่าง)", "สำนักเทคโนโลยีสารสนเทศ (นบ.)", "xxxx", "name27@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 28)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรดิจิทัล (ดย.)", "xxxx", "name28@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 29)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)", "xxxx", "name29@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 30)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)", "xxxx", "name30@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 31)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกรรมการและเลขาธิการ (กบ.)", "xxxx", "name31@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 32)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารข้อมูลกลาง (บบ.)", "xxxx", "name32@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 33)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการต่างประเทศ (ตย.)", "xxxx", "name33@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 34)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโครงข่าย สิ่งอำนวยความสะดวก และเครื่องวิทยุคมนาคม (ขส.)", "xxxx", "name34@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 35)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการกระจายเสียงและโทรทัศน์ (บส.)", "xxxx", "name35@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 36)", "ตำแหน่ง (ตัวอย่าง)", "สำนักประธานกรรมการและการประชุม (ปบ.)", "xxxx", "name36@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 37)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกิจการดาวเทียมสื่อสาร (ดบ.)", "xxxx", "name37@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 38)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการคลัง (ลย.)", "xxxx", "name38@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 39)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)", "xxxx", "name39@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 40)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)", "xxxx", "name40@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 41)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)", "xxxx", "name41@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 42)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคลื่นความถี่ (คบ.)", "xxxx", "name42@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 43)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการพัสดุและบริหารทรัพย์สิน (พย.)", "xxxx", "name43@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 44)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)", "xxxx", "name44@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 45)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)", "xxxx", "name45@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 46)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)", "xxxx", "name46@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 47)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกองทุนวิจัยและพัฒนา (ทบ.)", "xxxx", "name47@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 48)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคดีและนิติการ (นย.)", "xxxx", "name48@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 49)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)", "xxxx", "name49@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 50)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)", "xxxx", "name50@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 51)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)", "xxxx", "name51@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 52)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)", "xxxx", "name52@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 53)", "ตำแหน่ง (ตัวอย่าง)", "สำนักทรัพยากรบุคคล (บย.)", "xxxx", "name53@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 54)", "ตำแหน่ง (ตัวอย่าง)", "สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)", "xxxx", "name54@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 55)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)", "xxxx", "name55@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 56)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)", "xxxx", "name56@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 57)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสื่อสารองค์กร (สบ.)", "xxxx", "name57@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 58)", "ตำแหน่ง (ตัวอย่าง)", "สำนักยุทธศาสตร์และการงบประมาณ (ยย.)", "xxxx", "name58@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 59)", "ตำแหน่ง (ตัวอย่าง)", "สถาบันวิทยาการ (วย.)", "xxxx", "name59@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 60)", "ตำแหน่ง (ตัวอย่าง)", "สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)", "xxxx", "name60@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 61)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายโทรคมนาคม (มท.)", "xxxx", "name61@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 62)", "ตำแหน่ง (ตัวอย่าง)", "สำนักอำนวยการกลาง (อบ.)", "xxxx", "name62@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 63)", "ตำแหน่ง (ตัวอย่าง)", "สำนักเทคโนโลยีสารสนเทศ (นบ.)", "xxxx", "name63@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 64)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรดิจิทัล (ดย.)", "xxxx", "name64@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 65)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)", "xxxx", "name65@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 66)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)", "xxxx", "name66@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 67)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกรรมการและเลขาธิการ (กบ.)", "xxxx", "name67@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 68)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารข้อมูลกลาง (บบ.)", "xxxx", "name68@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 69)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการต่างประเทศ (ตย.)", "xxxx", "name69@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 70)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโครงข่าย สิ่งอำนวยความสะดวก และเครื่องวิทยุคมนาคม (ขส.)", "xxxx", "name70@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 71)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการกระจายเสียงและโทรทัศน์ (บส.)", "xxxx", "name71@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 72)", "ตำแหน่ง (ตัวอย่าง)", "สำนักประธานกรรมการและการประชุม (ปบ.)", "xxxx", "name72@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 73)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกิจการดาวเทียมสื่อสาร (ดบ.)", "xxxx", "name73@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 74)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการคลัง (ลย.)", "xxxx", "name74@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 75)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)", "xxxx", "name75@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 76)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)", "xxxx", "name76@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 77)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)", "xxxx", "name77@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 78)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคลื่นความถี่ (คบ.)", "xxxx", "name78@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 79)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการพัสดุและบริหารทรัพย์สิน (พย.)", "xxxx", "name79@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 80)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)", "xxxx", "name80@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 81)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)", "xxxx", "name81@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 82)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)", "xxxx", "name82@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 83)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกองทุนวิจัยและพัฒนา (ทบ.)", "xxxx", "name83@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 84)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคดีและนิติการ (นย.)", "xxxx", "name84@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 85)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)", "xxxx", "name85@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 86)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)", "xxxx", "name86@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 87)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)", "xxxx", "name87@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 88)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)", "xxxx", "name88@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 89)", "ตำแหน่ง (ตัวอย่าง)", "สำนักทรัพยากรบุคคล (บย.)", "xxxx", "name89@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 90)", "ตำแหน่ง (ตัวอย่าง)", "สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)", "xxxx", "name90@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 91)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)", "xxxx", "name91@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 92)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)", "xxxx", "name92@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 93)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสื่อสารองค์กร (สบ.)", "xxxx", "name93@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 94)", "ตำแหน่ง (ตัวอย่าง)", "สำนักยุทธศาสตร์และการงบประมาณ (ยย.)", "xxxx", "name94@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 95)", "ตำแหน่ง (ตัวอย่าง)", "สถาบันวิทยาการ (วย.)", "xxxx", "name95@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 96)", "ตำแหน่ง (ตัวอย่าง)", "สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)", "xxxx", "name96@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 97)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายโทรคมนาคม (มท.)", "xxxx", "name97@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 98)", "ตำแหน่ง (ตัวอย่าง)", "สำนักอำนวยการกลาง (อบ.)", "xxxx", "name98@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 99)", "ตำแหน่ง (ตัวอย่าง)", "สำนักเทคโนโลยีสารสนเทศ (นบ.)", "xxxx", "name99@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 100)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรดิจิทัล (ดย.)", "xxxx", "name100@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 101)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)", "xxxx", "name101@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 102)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)", "xxxx", "name102@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 103)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกรรมการและเลขาธิการ (กบ.)", "xxxx", "name103@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 104)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารข้อมูลกลาง (บบ.)", "xxxx", "name104@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 105)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการต่างประเทศ (ตย.)", "xxxx", "name105@example.go.th"]
+];
+  var st={unit:'',k:-1,dir:1,page:1,size:10};
+  var rowsEl=document.getElementById('agentRows'),pagerEl=document.getElementById('pager'),countEl=document.getElementById('agentCount'),unitIn=document.getElementById('unitSearch'),unitDL=document.getElementById('unitList');
+  function thSort(a,b){return String(a).localeCompare(String(b),'th')}
+  Array.from(new Set(AGENTS.map(function(r){return r[2]}))).sort(thSort).forEach(function(u){
+    var o=document.createElement('option');o.value=u;unitDL.appendChild(o);
+  });
+  function renderAgents(){
+    var u=st.unit.toLowerCase();
+    var list=AGENTS.filter(function(r){return !u||r[2].toLowerCase().indexOf(u)>-1});
+    if(st.k>-1)list=list.slice().sort(function(a,b){return thSort(a[st.k],b[st.k])*st.dir});
+    var pages=Math.max(1,Math.ceil(list.length/st.size));
+    if(st.page>pages)st.page=pages;
+    var start=(st.page-1)*st.size,slice=list.slice(start,start+st.size);
+    rowsEl.textContent='';
+    if(!slice.length){
+      var tr=document.createElement('tr'),td=document.createElement('td');
+      td.colSpan=5;td.className='empty';td.textContent='ไม่พบสำนักที่ตรงกับการค้นหา';tr.appendChild(td);rowsEl.appendChild(tr);
+    }
+    slice.forEach(function(r){
+      var tr=document.createElement('tr');
+      r.forEach(function(v,i){
+        var td=document.createElement('td');
+        if(i===4&&v.indexOf('@')>0){var a=document.createElement('a');a.href='mailto:'+v;a.textContent=v;td.appendChild(a)}
+        else td.textContent=v;
+        tr.appendChild(td);
+      });
+      rowsEl.appendChild(tr);
+    });
+    countEl.textContent=list.length?('แสดง '+(start+1)+'–'+(start+slice.length)+' จาก '+list.length+' คน'+(list.length<AGENTS.length?' (ทั้งหมด '+AGENTS.length+')':'')):('ไม่พบรายการ (ทั้งหมด '+AGENTS.length+' คน)');
+    document.querySelectorAll('.sort').forEach(function(b){
+      b.parentNode.setAttribute('aria-sort',+b.dataset.k===st.k?(st.dir===1?'ascending':'descending'):'none');
+    });
+    pagerEl.textContent='';
+    if(pages<2)return;
+    function btn(label,p,opts){
+      var b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.p=p;
+      if(opts&&opts.disabled)b.disabled=true;
+      if(opts&&opts.current)b.setAttribute('aria-current','page');
+      if(opts&&opts.aria)b.setAttribute('aria-label',opts.aria);
+      pagerEl.appendChild(b);
+    }
+    btn('‹',st.page-1,{disabled:st.page===1,aria:'หน้าก่อนหน้า'});
+    var last=0;
+    for(var p=1;p<=pages;p++){
+      if(p===1||p===pages||Math.abs(p-st.page)<=1){
+        if(last&&p-last>1){var g=document.createElement('span');g.className='gap';g.textContent='…';pagerEl.appendChild(g)}
+        btn(p,p,{current:p===st.page,aria:'หน้า '+p});last=p;
+      }
+    }
+    btn('›',st.page+1,{disabled:st.page===pages,aria:'หน้าถัดไป'});
+  }
+  unitIn.addEventListener('input',function(){st.unit=unitIn.value.trim();st.page=1;renderAgents()});
+  document.querySelectorAll('.sort').forEach(function(b){b.addEventListener('click',function(){
+    var k=+b.dataset.k;if(st.k===k)st.dir=-st.dir;else{st.k=k;st.dir=1}st.page=1;renderAgents();
+  })});
+  pagerEl.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b||b.disabled)return;
+    st.page=+b.dataset.p;renderAgents();
+    document.querySelector('.agent-tools').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  renderAgents();
+  var menuBtn=document.getElementById('menuBtn'),menuPanel=document.getElementById('menuPanel');
+  function menuOpen(o){menuPanel.classList.toggle('open',o);menuBtn.setAttribute('aria-expanded',o)}
+  menuBtn.addEventListener('click',function(e){e.stopPropagation();menuOpen(!menuPanel.classList.contains('open'))});
+  menuPanel.addEventListener('click',function(e){if(e.target.closest('a'))menuOpen(false)});
+  document.addEventListener('click',function(e){if(!menuPanel.contains(e.target)&&!menuBtn.contains(e.target))menuOpen(false)});
+  var ac=document.querySelectorAll('[data-a]');
+  ac.forEach(function(b){b.addEventListener('click',function(){
+    ac.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    var f=b.dataset.a;
+    document.querySelectorAll('#annList .acc').forEach(function(tr){tr.hidden=!(f==='all'||tr.dataset.t===f)});
+  })});
+  var track=document.getElementById('svcTrack'),prevB=document.getElementById('svcPrev'),nextB=document.getElementById('svcNext');
+  function svcUpdate(){
+    var cards=track.children,n=cards.length;if(!n||!track.clientWidth)return;
+    var gap=parseFloat(getComputedStyle(track).columnGap)||24,step=cards[0].offsetWidth+gap,idx=Math.round(track.scrollLeft/step),vis=Math.max(1,Math.floor((track.clientWidth+gap)/step));
+    prevB.disabled=track.scrollLeft<=2;nextB.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-2;
+  }
+  function svcMove(d){var c=track.children[0],gap=parseFloat(getComputedStyle(track).columnGap)||24;track.scrollBy({left:d*(c.offsetWidth+gap),behavior:'smooth'})}
+  prevB.addEventListener('click',function(){svcMove(-1)});
+  nextB.addEventListener('click',function(){svcMove(1)});
+  track.addEventListener('scroll',function(){window.requestAnimationFrame(svcUpdate)});
+  if(window.ResizeObserver)new ResizeObserver(svcUpdate).observe(track);
+  window.addEventListener('resize',svcUpdate);svcUpdate();
+  var home=document.getElementById('homeView'),agentP=document.getElementById('agentPage'),metaP=document.getElementById('metaPage'),dsP=document.getElementById('dsPage'),manualP=document.getElementById('manualPage'),ownerP=document.getElementById('ownerPage'),annP=document.getElementById('annPage'),gameP=document.getElementById('gamePage'),dashP=document.getElementById('dashPage'),knowP=document.getElementById('knowPage');
+  function show(v){home.hidden=v!=='home';agentP.hidden=v!=='agent';metaP.hidden=v!=='meta';dsP.hidden=v!=='ds';manualP.hidden=v!=='manual';ownerP.hidden=v!=='owner';annP.hidden=v!=='ann';gameP.hidden=v!=='game';dashP.hidden=v!=='dash';knowP.hidden=v!=='know';if(v==='dash')buildDashboard();if(v!=='home')window.scrollTo(0,0)}
+  window.__portalShow=show;
+  function route(){show(location.hash==='#data-agent'?'agent':location.hash==='#metadata'?'meta':location.hash==='#data-structure'?'ds':location.hash==='#manual'?'manual':location.hash==='#data-owner'?'owner':location.hash==='#announcements'?'ann':location.hash==='#game'?'game':location.hash==='#dashboard'?'dash':location.hash==='#knowledge'?'know':'home')}
+  [['#data-agent','agent'],['#metadata','meta'],['#data-structure','ds'],['#manual','manual'],['#data-owner','owner'],['#announcements','ann'],['#game','game'],['#dashboard','dash'],['#knowledge','know']].forEach(function(p){
+    document.querySelectorAll('a[href="'+p[0]+'"]').forEach(function(a){a.addEventListener('click',function(e){
+      e.preventDefault();show(p[1]);try{location.hash=p[0]}catch(err){}
+    })});
+  });
+  ['#top','#services','#news'].forEach(function(h){
+    document.querySelectorAll('a[href="'+h+'"]').forEach(function(a){a.addEventListener('click',function(e){
+      if(!home.hidden)return;
+      e.preventDefault();show('home');try{history.replaceState(null,'',h)}catch(err){}
+      var t=document.querySelector(h);if(t)t.scrollIntoView();
+    })});
+  });
+  window.addEventListener('hashchange',route);
+  route();
+
+  function buildDashboard(){
+    var k=document.getElementById('dashKpis');if(!k||k.dataset.built)return;k.dataset.built='1';
+    var units={};AGENTS.forEach(function(r){units[r[2]]=(units[r[2]]||0)+1});
+    var arr=Object.keys(units).map(function(n){return [n,units[n]]}).sort(function(a,b){return b[1]-a[1]||thSort(a[0],b[0])});
+    var kp=[[AGENTS.length,'Data Agent'],[arr.length,'สำนักที่มี Data Agent'],[38,'ชุดข้อมูลที่ลงทะเบียน (ตัวอย่าง)'],[9,'รอตรวจสอบ (ตัวอย่าง)']];
+    k.innerHTML=kp.map(function(x){return '<div class="kpi"><div class="kpi-n">'+x[0]+'</div><div class="kpi-l">'+x[1]+'</div></div>'}).join('');
+    var top=arr.slice(0,8),max=top[0]?top[0][1]:1;
+    document.getElementById('dashBars').innerHTML=top.map(function(x){return '<div class="bar-row"><span class="bar-l" title="'+x[0]+'">'+x[0]+'</span><span class="bar-t"><span class="bar-f" style="width:'+Math.round(x[1]/max*100)+'%"></span></span><span class="bar-v">'+x[1]+'</span></div>'}).join('');
+    var m=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],v=[2,3,2,5,7,6,9,8,11,10,13,12],W=600,H=220,pl=28,pb=26,pt=12,vm=14;
+    var pts=v.map(function(y,i){return [pl+i*(W-pl-12)/11,H-pb-y/vm*(H-pb-pt)]});
+    var line=pts.map(function(q){return q[0].toFixed(1)+','+q[1].toFixed(1)}).join(' ');
+    var area='M'+pts[0][0]+','+(H-pb)+' L'+line.replace(/ /g,' L')+' L'+pts[pts.length-1][0]+','+(H-pb)+' Z';
+    var grid=[0,7,14].map(function(g){var y=H-pb-g/vm*(H-pb-pt);return '<line class="dl-g" x1="'+pl+'" x2="'+(W-12)+'" y1="'+y+'" y2="'+y+'"/><text class="dl-t" x="'+(pl-6)+'" y="'+(y+4)+'" text-anchor="end">'+g+'</text>'}).join('');
+    var lab=pts.map(function(q,i){return '<text class="dl-t" x="'+q[0]+'" y="'+(H-8)+'" text-anchor="middle">'+m[i]+'</text>'}).join('');
+    var dots=pts.map(function(q){return '<circle class="dl-d" cx="'+q[0]+'" cy="'+q[1]+'" r="3"/>'}).join('');
+    document.getElementById('dashLine').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="กราฟการลงทะเบียนรายเดือน">'+grid+'<path class="dl-a" d="'+area+'"/><polyline class="dl-l" points="'+line+'"/>'+dots+lab+'</svg>';
+    var seg=[['เผยแพร่แล้ว',62,'#8B1A1A'],['อยู่ระหว่างทบทวน',25,'#9A8F8F'],['อยู่ระหว่างจัดทำ',13,'#D9D1CF']],R=52,C=2*Math.PI*R,off=0;
+    var rings=seg.map(function(x){var d=x[1]/100*C,r='<circle cx="70" cy="70" r="'+R+'" fill="none" stroke="'+x[2]+'" stroke-width="22" stroke-dasharray="'+d.toFixed(2)+' '+(C-d).toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'" transform="rotate(-90 70 70)"/>';off+=d;return r}).join('');
+    document.getElementById('dashDonut').innerHTML='<div class="donut"><svg viewBox="0 0 140 140" role="img" aria-label="สัดส่วนสถานะชุดข้อมูล">'+rings+'<text x="70" y="76" text-anchor="middle" class="dn-n">38</text></svg><ul class="legend">'+seg.map(function(x){return '<li><i style="background:'+x[2]+'"></i>'+x[0]+' <b>'+x[1]+'%</b></li>'}).join('')+'</ul></div>';
+  }
+
+  var VIEWS=[['homeView','home','Home','#top'],['agentPage','agent','Data Agent','#data-agent'],['dsPage','ds','Data Structure','#data-structure'],['metaPage','meta','Metadata Form','#metadata'],['annPage','ann','ประกาศ','#announcements'],['ownerPage','owner','Data Owner','#data-owner'],['manualPage','manual','Manual','#manual'],['gamePage','game','Game','#game'],['knowPage','know','Knowledge','#knowledge'],['dashPage','dash','Dashboard','#dashboard']];
+  var so=document.getElementById('searchOverlay'),soIn=document.getElementById('soInput'),soRes=document.getElementById('soResults'),soIdx=[],soList=[];
+  function soBuild(){
+    soIdx=[];var seen={};
+    VIEWS.forEach(function(v){
+      var root=document.getElementById(v[0]);if(!root)return;
+      root.querySelectorAll('h1,h2,h3,h4,p,li,dt,dd,.acc-h>span:first-child,label.field-label,legend,.kpi-l,.bar-l,td').forEach(function(el){
+        if(el.closest('#agentRows')||el.closest('#helpPanel')||el.closest('.so'))return;
+        var t=(el.textContent||'').replace(/\s+/g,' ').trim();if(t.length<2)return;
+        var key=v[1]+'|'+t;if(seen[key])return;seen[key]=1;
+        soIdx.push({t:t,v:v,el:el,w:/^(H1|H2|H3|H4|LEGEND|SPAN|LABEL)$/.test(el.tagName)?2:0});
+      });
+    });
+    AGENTS.forEach(function(r){soIdx.push({t:r[0]+' · '+r[1]+' · '+r[2]+' · '+r[4],v:VIEWS[1],agent:r,w:1})});
+  }
+  function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function soSnippet(t,terms){
+    var low=t.toLowerCase(),i=low.indexOf(terms[0]);if(i<0)i=0;
+    var a=Math.max(0,i-40),b=Math.min(t.length,i+110),out=(a>0?'…':'')+t.slice(a,b)+(b<t.length?'…':'');
+    out=esc(out);terms.forEach(function(w){if(!w)return;out=out.replace(new RegExp('('+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>')});return out;
+  }
+  function soRender(){
+    var q=soIn.value.trim().toLowerCase();soRes.textContent='';soList=[];
+    if(!q){soRes.innerHTML='<div class="so-empty">พิมพ์คำที่ต้องการค้นหา เช่น ชื่อหัวข้อ ชื่อสำนัก หรืออีเมล</div>';return}
+    var terms=q.split(/\s+/);
+    var hits=soIdx.filter(function(it){var l=it.t.toLowerCase();return terms.every(function(w){return l.indexOf(w)>-1})});
+    hits.sort(function(a,b){return (b.w-a.w)||(a.t.length-b.t.length)});
+    var agents=0;hits=hits.filter(function(h){if(h.agent){agents++;return agents<=8}return true}).slice(0,40);
+    soList=hits;
+    if(!hits.length){soRes.innerHTML='<div class="so-empty">ไม่พบผลลัพธ์สำหรับ “'+esc(soIn.value.trim())+'”</div>';return}
+    soRes.innerHTML=hits.map(function(h,i){return '<button type="button" class="so-item" data-i="'+i+'"><span class="so-t">'+soSnippet(h.t,terms)+'</span><span class="so-p">'+h.v[2]+'</span></button>'}).join('');
+  }
+  function soOpen(o){so.hidden=!o;if(o){soBuild();soIn.value='';soRender();setTimeout(function(){soIn.focus()},30)}}
+  function soGo(it){
+    soOpen(false);window.__portalShow(it.v[1]);try{history.replaceState(null,'',it.v[3])}catch(e){}
+    if(it.agent){
+      var acc=document.querySelector('#agentRows').closest('.acc');acc.classList.add('open');acc.querySelector('.acc-h').setAttribute('aria-expanded','true');
+      unitIn.value=it.agent[2];st.unit=it.agent[2];st.page=1;renderAgents();
+      setTimeout(function(){document.querySelector('.agent-tools').scrollIntoView({behavior:'smooth',block:'start'})},150);return;
+    }
+    var el=it.el,a=el.closest('.acc');
+    if(a){a.classList.add('open');var h=a.querySelector('.acc-h');if(h)h.setAttribute('aria-expanded','true')}
+    setTimeout(function(){el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('flash');setTimeout(function(){el.classList.remove('flash')},1800)},200);
+  }
+  document.getElementById('searchBtn').addEventListener('click',function(){soOpen(true)});
+  document.getElementById('soClose').addEventListener('click',function(){soOpen(false)});
+  so.addEventListener('click',function(e){if(e.target===so)soOpen(false)});
+  soIn.addEventListener('input',soRender);
+  soIn.addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&soList[0]){e.preventDefault();soGo(soList[0])}
+    if(e.key==='ArrowDown'){var f=soRes.querySelector('.so-item');if(f){e.preventDefault();f.focus()}}
+  });
+  soRes.addEventListener('click',function(e){var b=e.target.closest('.so-item');if(b)soGo(soList[+b.dataset.i])});
+  soRes.addEventListener('keydown',function(e){
+    var b=document.activeElement;
+    if(e.key==='ArrowDown'&&b.nextElementSibling){e.preventDefault();b.nextElementSibling.focus()}
+    if(e.key==='ArrowUp'){e.preventDefault();(b.previousElementSibling||soIn).focus()}
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!so.hidden)soOpen(false)});
+  var data={
+    '2570':[['บัญชีข้อมูลประจำปี 2570 (ตัวอย่าง)','หน่วยงาน ก','อยู่ระหว่างจัดทำ']],
+    '2569':[['ทะเบียนผู้รับใบอนุญาต (ตัวอย่าง)','หน่วยงาน ก','เผยแพร่แล้ว'],['สถิติการให้บริการรายไตรมาส (ตัวอย่าง)','หน่วยงาน ข','อยู่ระหว่างทบทวน']],
+    '2568':[['ข้อมูลเรื่องร้องเรียน (ตัวอย่าง)','หน่วยงาน ค','เผยแพร่แล้ว']]
+  };
+  var ownerEl=document.getElementById('ownerList');
+  Object.keys(data).sort().reverse().forEach(function(y){
+    var rows=data[y].map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td><span class="status">'+r[2]+'</span></td></tr>'}).join('');
+    var d=document.createElement('div');d.className='acc';
+    d.innerHTML='<button type="button" class="acc-h" aria-expanded="false"><span>พ.ศ. '+y+' ('+(+y-543)+')</span><span class="acc-i" aria-hidden="true"></span></button>'
+      +'<div class="acc-b"><div class="acc-in"><div class="tablewrap"><table><thead><tr><th>ชุดข้อมูล <span class="en">Dataset</span></th><th>เจ้าของข้อมูล <span class="en">Owner</span></th><th>สถานะ <span class="en">Status</span></th></tr></thead><tbody>'+rows+'</tbody></table></div></div></div>';
+    ownerEl.appendChild(d);
+  });
+  document.addEventListener('click',function(e){
+    var h=e.target.closest('.acc-h');if(!h||h.tagName==='A')return;
+    var a=h.parentNode,o=a.classList.toggle('open');h.setAttribute('aria-expanded',o);
+  });
+})();
+</script>
+<script>
+const $ = id => document.getElementById(id);
+
+const WEBHOOK_URL = 'https://pavilion-diaper-sequester.ngrok-free.dev/webhook/metadata-submission';
+
+const OPTIONS = {
+ category: [
+  ['', 'เลือกหมวดหมู่ข้อมูล'],
+  ['ด้านกฎหมาย', 'ด้านกฎหมาย'],
+  ['ด้านการคุ้มครองผู้ใช้บริการ', 'ด้านการคุ้มครองผู้ใช้บริการ'],
+  ['ด้านการบริหารงานทั่วไปและอำนวยการ', 'ด้านการบริหารงานทั่วไปและอำนวยการ'],
+  ['ด้านการอนุญาต', 'ด้านการอนุญาต'],
+  ['ด้านทรัพยากรบุคคล', 'ด้านทรัพยากรบุคคล'],
+  ['ด้านการบริหารทรัพยากร', 'ด้านการบริหารทรัพยากร'],
+  ['ด้านบริหารพัสดุและบริหารทรัพย์สิน', 'ด้านบริหารพัสดุและบริหารทรัพย์สิน'],
+  ['ด้านยุทธศาสตร์', 'ด้านยุทธศาสตร์'],
+  ['ด้านการกำกับดูแล ตรวจสอบ และรับรองมาตรฐาน', 'ด้านการกำกับดูแล ตรวจสอบ และรับรองมาตรฐาน'],
+  ['ด้านการจัดให้มีบริการภายใต้งบประมาณกองทุน กทปส.', 'ด้านการจัดให้มีบริการภายใต้งบประมาณกองทุน กทปส.'],
+  ['ด้านงบประมาณ บัญชี การเงิน', 'ด้านงบประมาณ บัญชี การเงิน'],
+  ['ด้านเทคโนโลยีสารสนเทศ', 'ด้านเทคโนโลยีสารสนเทศ'],
+  ['ด้านพัฒนาองค์ความรู้แก่ผู้ประกอบการและผู้ใช้บริการ', 'ด้านพัฒนาองค์ความรู้แก่ผู้ประกอบการและผู้ใช้บริการ'],
+  ['ด้านวิชาการ', 'ด้านวิชาการ']
+ ],
+ data_type: [['','เลือกประเภทข้อมูล'],
+  ['1= ข้อมูลระเบียน','1= ข้อมูลระเบียน — ข้อมูลที่จัดเก็บในฐานข้อมูลที่เกิดจากการบริหารงานหรือปฏิบัติงานรายวัน'],
+  ['2= ข้อมูลสถิติ','2= ข้อมูลสถิติ — ข้อความหรือตัวเลขที่แสดงผลที่ประมวลจากข้อมูลที่เก็บรวบรวมได้'],
+  ['3= ข้อมูลภูมิสารสนเทศ','3= ข้อมูลภูมิสารสนเทศ — ข้อมูลหรือสารสนเทศที่มีความสัมพันธ์กับตำแหน่งในเชิงพื้นที่ เช่น แผนที่ ภาพถ่ายทางอากาศ และภาพถ่ายดาวเทียม'],
+  ['4= ข้อมูลหลากหลายประเภท','4= ข้อมูลหลากหลายประเภท — ชุดข้อมูลที่รวบรวมมาจากข้อมูลหลากหลายประเภทมาจัดเป็นชุดข้อมูลตามความต้องการใช้งาน เช่น ชุดข้อมูลที่ประกอบด้วยข้อมูลระเบียน ข้อมูลสถิติ ข้อมูลภาพ เป็นต้น'],
+  ['5= ข้อมูลประเภทอื่นๆ','5= ข้อมูลประเภทอื่นๆ']],
+ geo_coverage: ['เลือกขอบเขตเชิงภูมิศาสตร์หรือเชิงพื้นที่','00= ไม่มี','01= โลก','02= ทวีป/กลุ่มประเทศในทวีป','03= กลุ่มประเทศทางเศรษฐกิจ','04= ประเทศ','05= ภาค','06= จังหวัด','07= อำเภอ','08= ตำบล','09= หมู่บ้าน','10= เทศบาล/องค์กรปกครองส่วนท้องถิ่น','11= พิกัด','98= ไม่ทราบ'],
+ access_level: [['','เลือกการจัดระดับชั้นความลับของข้อมูล'],
+  ['01= ชั้นเปิดเผย (Open)','01= ชั้นเปิดเผย (Open) คือ ไม่มีการจำกัดการเข้าถึงข้อมูล ข้อมูลทั่วไปที่ไม่ลับหรือไม่อ่อนไหว สามารถเปิดเผยให้แก่สาธารณชนได้'],
+  ['02= ชั้นเผยแพร่ภายในองค์กร (Private)','02= ชั้นเผยแพร่ภายในองค์กร (Private) คือ เฉพาะบุคคลภายในหน่วยงาน ข้อมูลที่มีเนื้อหาไม่ลับหรือไม่อ่อนไหว สามารถใช้งานร่วมกันได้ภายในสำนักงาน'],
+  ['03= ชั้นลับ (Confidential)','03= ชั้นลับ (Confidential) คือ ผ่านการอนุมัติจากผู้บริหารระดับผู้ช่วย ผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญ หากถูกเปิดเผยหรือรั่วไหลไปยังบุคคลที่ไม่เกี่ยวข้อง จะก่อให้เกิดความเสียหายในวงจำกัด หรือก่อให้เกิดความเสียหายในระดับตัวบุคคล'],
+  ['04= ชั้นลับมาก (Secret)','04= ชั้นลับมาก (Secret) คือ ผ่านการอนุมัติจากผู้บริหารระดับรองผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญมาก หากถูกเปิดเผยหรือรั่วไหลไปยังบุคคลที่ไม่เกี่ยวข้อง จะก่อให้เกิดความเสียหายในวงกว้าง หรือก่อให้เกิดความเสียหายในระดับองค์กร'],
+  ['05= ชั้นลับที่สุด (Top Secret)','05= ชั้นลับที่สุด (Top Secret) คือ ผ่านการอนุมัติจากผู้บริหารระดับผู้อำนวยการขึ้นไป หรือผู้บริหารที่มีอำนาจพิจารณา โดยเป็นข้อมูลที่เนื้อหามีความสำคัญสูงสุด หากถูกเปิดเผยจะก่อให้เกิดความเสียหายในระดับชาติ สถาบันพระมหากษัตริย์ระบบเศรษฐกิจ']],
+ right_of_usage: [['','เลือกสัญญาอนุญาตให้ใช้ข้อมูล'],
+  ['G0= Open Data Common','G0= Open Data Common คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ทำซ้ำแจกจ่าย หรือดัดแปลงงานนั้นได้ โดยไม่มีข้อจำกัด'],
+  ['G1= Creative Commons Attribution','G1= Creative Commons Attribution คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำแจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน'],
+  ['G2= Creative Commons Attribution-Non Commercial','G2= Creative Commons Attribution-Non Commercial คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และต้องไม่ใช่เพื่อการค้า'],
+  ['G3.1= Creative Commons Attribution-ShareAlike','G3.1= Creative Commons Attribution-ShareAlike คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้ แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และจะต้องกำกับด้วยสัญญาอนุญาตเงื่อนไขเดียวกันกับต้นฉบับ'],
+  ['G3.2= Creative Commons Attribution-NonCommercialShareAlike','G3.2= Creative Commons Attribution-NonCommercialShareAlike คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปใช้ ทำซ้ำ แจกจ่าย หรือดัดแปลงงานนั้นได้แต่ต้องไม่ใช่เพื่อการค้าและจะต้องกำกับด้วยสัญญาอนุญาตเงื่อนไขเดียวกันกับต้นฉบับ'],
+  ['G4.1= Creative Commons Attribution-NoDerivs','G4.1= Creative Commons Attribution-NoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น และต้องให้เครดิตที่มาของเจ้าของผลงาน'],
+  ['G4.2= Creative Commons Attribution-Non CommercialNoDerivs','G4.2= Creative Commons Attribution-Non CommercialNoDerivs คือ อนุญาตให้ผู้อื่นสามารถนำผลงานไปทำซ้ำ แจกจ่าย โดยห้ามแก้ไขหรือดัดแปลงผลงานนั้น แต่ต้องให้เครดิตที่มาของเจ้าของผลงาน และต้องไม่ใช่เพื่อการค้า'],
+  ['G5= Others License','G5= Others License คือ สัญญาอนุญาตให้ใช้ข้อมูลอื่นๆ โดยเงื่อนไขเป็นไปตามที่เจ้าของข้อมูลกำหนด และผู้ใช้ข้อมูลสามารถขอใช้ข้อมูลได้เป็นรายกรณี']],
+ objective: [
+  '01= ยุทธศาสตร์ชาติ',
+  '02= แผนพัฒนาเศรษฐกิจและสังคมแห่งชาติ',
+  '03= แผนความมั่นคงแห่งชาติ',
+  '04= แผนแม่บทภายใต้ยุทธศาสตร์ชาติ',
+  '05= แผนปฏิรูปประเทศ',
+  '06= แผนระดับที่ 3 (มติครม. 4 ธ.ค. 2560)',
+  '07= นโยบายรัฐบาล/ข้อสั่งการนายกรัฐมนตรี',
+  '08= มติคณะรัฐมนตรี',
+  '09= เพื่อการให้บริการประชาชน',
+  '10= กฎหมายที่เกี่ยวข้อง',
+  '11= พันธกิจหน่วยงาน',
+  '12= ดัชนี/ตัวชี้วัดระดับนานาชาติ',
+  '98= ไม่ทราบ',
+  '99= อื่นๆ'
+ ],
+ data_source: [['','เลือกแหล่งที่มา'],['สำนักงาน กสทช.','สำนักงาน กสทช.'],['OTHER','อื่นๆ: ระบุ...']],
+ data_owner: [['','เลือกองค์กร'],['สำนักงาน กสทช.','สำนักงาน กสทช.'],['OTHER','อื่นๆ: ระบุ...']],
+ data_custodian: ['เลือกหน่วยงาน','สำนักประธานกรรมการและการประชุม (ปบ.)','สำนักกรรมการและเลขาธิการ (กบ.)','สำนักอำนวยการกลาง (อบ.)','สำนักสื่อสารองค์กร (สบ.)','สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)','สำนักกองทุนวิจัยและพัฒนา (ทบ.)','สำนักบริหารคลื่นความถี่ (คบ.)','สำนักกิจการดาวเทียมสื่อสาร (ดบ.)','สำนักบริหารข้อมูลกลาง (บบ.)','สำนักเทคโนโลยีสารสนเทศ (นบ.)','สำนักยุทธศาสตร์และการงบประมาณ (ยย.)','สำนักทรัพยากรบุคคล (บย.)','สำนักบริหารคดีและนิติการ (นย.)','สำนักการพัสดุและบริหารทรัพย์สิน (พย.)','สำนักการคลัง (ลย.)','สำนักการต่างประเทศ (ตย.)','สำนักพัฒนาองค์กรดิจิทัล (ดย.)','สถาบันวิทยาการ (วย.)','สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)','สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)','สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)','สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)','สำนักการอนุญาตประกอบกิจการโครงข่าย สิ่งอำนวยความสะดวก และเครื่องวิทยุคมนาคม (ขส.)','สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)','สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)','สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)','สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)','สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)','สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)','สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการกระจายเสียงและโทรทัศน์ (บส.)','สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)','สำนักกฎหมายโทรคมนาคม (มท.)','สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)','สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)','สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)','สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)','สำนักเทคโนโลยีและมาตรฐานโทรคมนาคม (ทท.)','สำนักบริหารและจัดการเลขหมายโทรคมนาคม (จท.)','สำนักการอนุญาตวิทยุคมนาคม 1 (คท. 1)','สำนักการอนุญาตวิทยุคมนาคม 2 (คท. 2)','สำนักโครงข่ายพื้นฐาน การใช้และเชื่อมต่อโครงข่าย (ชท.)','สำนักบริการโทรคมนาคมโดยทั่วถึงและเพื่อสังคม (ถท.)','สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการโทรคมนาคม (รท.)','สำนักกิจการภูมิภาค (กภ.)','สำนักงาน กสทช. ภาค 1 (ภภ.1)','สำนักงาน กสทช. ภาค 2 (ภภ.2)','สำนักงาน กสทช. ภาค 3 (ภภ.3)','สำนักงาน กสทช. ภาค 4 (ภภ.4)','สำนักวิเคราะห์นโยบายเชิงปริมาณ (ปว.)','สำนักวิเคราะห์ข้อมูลเศรษฐกิจดิจิทัล (ศว.)','สำนักวิชาการต่างประเทศ (ตว.)','สำนักวิเคราะห์นโยบาย (วว.)','ศูนย์วิจัยและพัฒนาทางวิชาการ กสทช. (พว.)'],
+ classification: [['','เลือกหมวดหมู่ข้อมูล'],
+  ['1= ข้อมูลสาธารณะ','1= ข้อมูลสาธารณะ คือ ข้อมูลที่สามารถเปิดเผยได้ สามารถนำไปใช้ได้อย่างอิสระ ไม่ว่าจะเป็นข้อมูลข่าวสาร ข้อมูลส่วนบุคคล ข้อมูลอิเล็กทรอนิกส์ เป็นต้น'],
+  ['2= ข้อมูลใช้ภายในสำนักงาน กสทช.','2= ข้อมูลใช้ภายในสำนักงาน กสทช.'],
+  ['3= ข้อมูลส่วนบุคคล','3= ข้อมูลส่วนบุคคล คือ ข้อมูลเกี่ยวกับบุคคลซึ่งทำให้สามารถระบุตัวบุคคลนั้นได้ไม่ว่าทางตรงหรือทางอ้อม แต่ไม่รวมถึงข้อมูลของผู้ถึงแก่กรรมโดยเฉพาะ (พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562)'],
+  ['4= ข้อมูลความลับทางราชการ','4= ข้อมูลความลับทางราชการ คือ ข้อมูลที่อยู่ในความครอบครองหรือควบคุมดูแลของหน่วยงานของรัฐที่มีคำสั่งไม่ให้มีการเปิดเผย และมีการกำหนดชั้นความลับของข้อมูล'],
+  ['5= ข้อมูลความมั่นคง','5= ข้อมูลความมั่นคง คือ ข้อมูลเกี่ยวกับความมั่นคงของรัฐ ที่ทำให้เกิดความสงบเรียบร้อย การมีเสถียรภาพ ความเป็นปึกแผ่น ปลอดภัยจากภัยคุกคาม เป็นต้น']],
+ data_format: ['เลือกรูปแบบข้อมูล','01= Database (ฐานข้อมูล)','02= CSV','03= XML','04= Image','05= Video','06= Audio (ไฟล์เสียง)','07= Text (ตัวหนังสือ ข้อความ)','08= JSON','09= HTML','10= XLS, XLSX (Ms.Excel File)','11= PDF','12= RDF','13= NoSQL','14= Vector เช่น Shapefile SVG GML','15= Raster เช่น GeoTiff JPEG2000','99= อื่นๆ'],
+ update_frequency: [['','เลือกความถี่'],['A','A= รายปี'],['S','S= ทุกครึ่งปี'],['Q','Q= รายไตรมาส'],['M','M= รายเดือน'],['W','W= รายสัปดาห์'],['D','D= รายวัน'],['B','B= วันทำการ'],['H','H= รายชั่วโมง'],['N','N= ทุกนาที'],['R','R= ตามเวลาจริง'],['O','O= ไม่มีการปรับปรุงหลังจากการจัดเก็บข้อมูล'],['U','U= ไม่ทราบ'],['OTHER','อื่นๆ: ระบุ...']]
+};
+
+const FIELD_ID = {category:'category',data_type:'data-type',right_of_usage:'right-of-usage',access_level:'access-level',geo_coverage:'geo-coverage',data_owner:'data-owner',data_source:'data-source',data_custodian:'data-custodian',classification:'classification',data_format:'data-format',update_frequency:'update-frequency'};
+
+function updateSelectColor(sel) {
+ if (!sel.value) {
+  sel.classList.add('select-placeholder');
+ } else {
+  sel.classList.remove('select-placeholder');
+ }
+}
+
+for (const [key, list] of Object.entries(OPTIONS)) {
+ if (key === 'objective') continue;
+ const sel = $(FIELD_ID[key]);
+ if (!sel) continue;
+ list.forEach((item, i) => {
+  const [value, label] = Array.isArray(item) ? item : [i === 0 ? '' : item, item];
+  sel.add(new Option(label, value));
+ });
+ sel.addEventListener('change', () => updateSelectColor(sel));
+}
+
+const classificationSelect = $('classification');
+const accessLevelSelect = $('access-level');
+const rightOfUsageSelect = $('right-of-usage');
+
+function selectOptionByPrefix(selectElement, prefix) {
+ for (let i = 0; i < selectElement.options.length; i++) {
+  if (selectElement.options[i].value.startsWith(prefix)) {
+   selectElement.selectedIndex = i;
+   break;
+  }
+ }
+}
+
+if (classificationSelect) {
+ classificationSelect.addEventListener('change', (e) => {
+  const selectedVal = e.target.value;
+  if (selectedVal.startsWith('1=')) {
+   selectOptionByPrefix(accessLevelSelect, '01=');
+   selectOptionByPrefix(rightOfUsageSelect, 'G0=');
+  } else if (selectedVal.startsWith('2=')) {
+   selectOptionByPrefix(accessLevelSelect, '02=');
+   selectOptionByPrefix(rightOfUsageSelect, 'G5=');
+  }
+  updateSelectColor(accessLevelSelect);
+  updateSelectColor(rightOfUsageSelect);
+ });
+}
+
+const objectiveListEl = $('objective-list');
+if (objectiveListEl) {
+ OPTIONS.objective.forEach(item => {
+  const label = document.createElement('label');
+  label.className = 'checkbox-choice';
+  label.innerHTML = `<input type="checkbox" name="objective" value="${item}"><span>${item}</span>`;
+  objectiveListEl.appendChild(label);
+ });
+}
+
+function updateObjectiveText() {
+ const checked = document.querySelectorAll('input[name="objective"]:checked');
+ const objErr = $('objective-error');
+ if (objErr && checked.length > 0) objErr.textContent = '';
+}
+$('objective-list').addEventListener('change', updateObjectiveText);
+
+function setupOtherToggle(selectId, fieldId, reqInputId) {
+ const sel = $(selectId);
+ const field = $(fieldId);
+ const input = $(reqInputId);
+ if (!sel || !field) return;
+ sel.addEventListener('change', () => {
+  if (sel.value === 'OTHER' || sel.value === '99= อื่นๆ') {
+   field.removeAttribute('hidden');
+   if (input) input.setAttribute('required', '');
+  } else {
+   field.setAttribute('hidden', '');
+   if (input) {
+    input.removeAttribute('required');
+    input.value = '';
+   }
+  }
+ });
+}
+
+setupOtherToggle('data-owner', 'other-owner-field', 'other-owner');
+setupOtherToggle('data-source', 'other-source-field', 'other-source');
+setupOtherToggle('update-frequency', 'other-frequency-field', 'other-frequency');
+
+let currentPage = 1;
+const totalPages = 4;
+
+function updatePageUI() {
+ for (let i = 1; i <= totalPages; i++) {
+  const page = $(`page-${i}`);
+  if (page) {
+   if (i === currentPage) {
+    page.removeAttribute('hidden');
+   } else {
+    page.setAttribute('hidden', '');
+   }
+  }
+ }
+ $('page-indicator').textContent = `page ${currentPage} from ${totalPages}`;
+ if (window.helpSync) window.helpSync(currentPage);
+ $('back-button').hidden = currentPage === 1;
+ if (currentPage === totalPages) {
+  $('next-button').hidden = true;
+  $('submit-button').hidden = false;
+ } else {
+  $('next-button').hidden = false;
+  $('submit-button').hidden = true;
+ }
+ window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validatePage(pageNum) {
+ let isValid = true;
+ const pageEl = $(`page-${pageNum}`);
+ if (!pageEl) return true;
+
+ const inputs = pageEl.querySelectorAll('input[required], select[required], textarea[required]');
+ inputs.forEach(input => {
+  const errEl = $(`${input.id}-error`);
+  if (!input.value.trim()) {
+   isValid = false;
+   input.setAttribute('aria-invalid', 'true');
+   if (errEl) errEl.textContent = 'กรุณากรอกข้อมูลในช่องนี้';
+  } else {
+   input.removeAttribute('aria-invalid');
+   if (errEl) errEl.textContent = '';
+  }
+ });
+
+ if (pageNum === 1) {
+  const checkedObjs = document.querySelectorAll('input[name="objective"]:checked');
+  const objErr = $('objective-error');
+  if (checkedObjs.length === 0) {
+   isValid = false;
+   if (objErr) objErr.textContent = 'กรุณาเลือกวัตถุประสงค์อย่างน้อย 1 ข้อ';
+  } else {
+   if (objErr) objErr.textContent = '';
+  }
+ }
+
+ if (pageNum === 3) {
+  const pdpaChecked = document.querySelector('input[name="pdpa"]:checked');
+  const pdpaErr = $('pdpa-error');
+  if (!pdpaChecked) {
+   isValid = false;
+   if (pdpaErr) pdpaErr.textContent = 'กรุณาเลือกระดับข้อมูลส่วนบุคคล PDPA';
+  } else {
+   if (pdpaErr) pdpaErr.textContent = '';
+  }
+ }
+
+ return isValid;
+}
+
+$('next-button').addEventListener('click', () => {
+ if (validatePage(currentPage)) {
+  if (currentPage < totalPages) {
+   currentPage++;
+   updatePageUI();
+  }
+ }
+});
+
+$('back-button').addEventListener('click', () => {
+ if (currentPage > 1) {
+  currentPage--;
+  updatePageUI();
+ }
+});
+
+function showModal(title, msg, isSuccess = true) {
+ $('modal-title').textContent = title;
+ $('modal-message').textContent = msg;
+ $('success-icon').hidden = !isSuccess;
+ $('error-icon').hidden = isSuccess;
+ $('result-modal').removeAttribute('hidden');
+}
+
+function hideModal() {
+ $('result-modal').setAttribute('hidden', '');
+}
+
+$('modal-close').addEventListener('click', hideModal);
+$('modal-action').addEventListener('click', hideModal);
+
+$('metadata-form').addEventListener('submit', async (e) => {
+ e.preventDefault();
+ if (!validatePage(currentPage)) return;
+
+ const submitBtn = $('submit-button');
+ const submitLabel = $('submit-label');
+ const loadingLabel = $('loading-label');
+
+ submitBtn.disabled = true;
+ submitLabel.hidden = true;
+ loadingLabel.hidden = false;
+
+ const formData = new FormData(e.target);
+ const data = {};
+
+ formData.forEach((value, key) => {
+  if (key === 'objective') {
+   if (!data[key]) data[key] = [];
+   data[key].push(value);
+  } else {
+   data[key] = value;
+  }
+ });
+
+ if (data.maintainer_email) {
+  data.maintainer_email = data.maintainer_email + '@nbtc.go.th';
+ }
+
+ try {
+  const res = await fetch(WEBHOOK_URL, {
+   method: 'POST',
+   headers: { 'Content-Type': 'application/json' },
+   body: JSON.stringify(data)
+  });
+
+  if (res.ok) {
+   showModal('ลงทะเบียนสำเร็จ!', 'ข้อมูล Metadata ของคุณถูกส่งเข้าสู่ระบบเรียบร้อยแล้ว', true);
+   e.target.reset();
+   document.querySelectorAll('select.field-control').forEach(sel => sel.classList.add('select-placeholder'));
+   currentPage = 1;
+   updatePageUI();
+   updateObjectiveText();
+  } else {
+   throw new Error('Server responded with error');
+  }
+ } catch (err) {
+  showModal('เกิดข้อผิดพลาด!', 'ไม่สามารถส่งข้อมูลได้ กรุณาตรวจสอบการเชื่อมต่อแล้วลองใหม่อีกครั้ง', false);
+ } finally {
+  submitBtn.disabled = false;
+  submitLabel.hidden = false;
+  loadingLabel.hidden = true;
+ }
+});
+
+(function(){
+ const btn=$('helpBtn'),panel=$('helpPanel'),items=Array.from(document.querySelectorAll('.help-item'));
+ function setOpen(o){panel.hidden=!o;btn.setAttribute('aria-expanded',o)}
+ btn.addEventListener('click',()=>setOpen(panel.hidden));
+ $('helpClose').addEventListener('click',()=>setOpen(false));
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)setOpen(false)});
+ items.forEach(it=>it.querySelector('.help-q').addEventListener('click',()=>it.classList.toggle('open')));
+ window.helpSync=function(p){items.forEach(it=>it.classList.toggle('open',+it.dataset.p===p))};
+ window.helpSync(1);
+})();
+</script>
+</body>
+</html>
