@@ -912,7 +912,6 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
   <div class="px-5 sm:px-9 py-6 border-b flex flex-wrap items-center justify-between gap-3" style="border-color:var(--line)">
    <div>
     <h2 class="text-2xl">ลงทะเบียน</h2>
-    <p class="sub mt-1">กรอกข้อมูลที่เกี่ยวข้องเพื่อส่งชุดข้อมูลเข้าสู่กระบวนการตรวจสอบ</p>
    </div>
    <div class="flex flex-wrap items-center gap-3"><span class="status-online" role="status"><span class="dot" aria-hidden="true"></span>Online · เปิดรับลงทะเบียน</span></div>
   </div>
@@ -927,7 +926,7 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
       <div class="field sm:col-span-2">
        <label for="dataset-name" class="field-label">ชื่อชุดข้อมูล (Dataset Name) <span class="req" aria-label="จำเป็น">*</span></label>
        <input id="dataset-name" name="dataset_name" class="field-control" type="text" required maxlength="200" aria-describedby="dataset-name-help dataset-name-error">
-       <p id="dataset-name-help" class="field-help">กรุณาระบุชื่อชุดข้อมูลเต็มตาม Data Owner ที่มีการประกาศไว้</p>
+       <p id="dataset-name-help" class="field-help">ชื่อชุดข้อมูลตาม Data Owner ที่มีการประกาศไว้</p>
        <p id="dataset-name-error" class="field-error" aria-live="polite"></p>
       </div>
       <div class="field sm:col-span-2">
@@ -939,7 +938,7 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
       <div class="field sm:col-span-2">
        <label for="tagstring" class="field-label">คำสำคัญ (Tag String) <span class="req" aria-label="จำเป็น">*</span></label>
        <input id="tagstring" name="tagstring" class="field-control" type="text" required maxlength="1000" placeholder="ทีวีดิจิทัล, สถิติการรับชม, กสทช." aria-describedby="tagstring-help tagstring-error">
-       <p id="tagstring-help" class="field-help">ระบุคำสำคัญของชุดข้อมูล คั่นแต่ละคำด้วยเครื่องหมายจุลภาค ( , )</p>
+       <p id="tagstring-help" class="field-help">คำสำคัญของชุดข้อมูลโดยคั่นแต่ละคำด้วยเครื่องหมายจุลภาค ( , )</p>
        <p id="tagstring-error" class="field-error" aria-live="polite"></p>
       </div>
       <div class="field sm:col-span-2">
@@ -951,7 +950,7 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
       <div class="field sm:col-span-2">
        <label for="data-type" class="field-label">ประเภทข้อมูล (Data Type) <span class="req" aria-label="จำเป็น">*</span></label>
        <select id="data-type" name="data_type" class="field-control select-placeholder" required aria-describedby="data-type-help data-type-error"></select>
-       <p id="data-type-help" class="field-help">เลือกประเภทข้อมูลตามลักษณะและวิธีการจัดเก็บของชุดข้อมูล</p>
+       <p id="data-type-help" class="field-help">ประเภทข้อมูลตามลักษณะและวิธีการจัดเก็บของชุดข้อมูล</p>
        <p id="data-type-error" class="field-error" aria-live="polite"></p>
       </div>
 
@@ -961,7 +960,7 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
        
        <div id="objective-list" class="obj-grid"></div>
 
-       <p id="objective-help" class="field-help mt-1">อธิบายที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
+       <p id="objective-help" class="field-help mt-1">ที่มาและวัตถุประสงค์ของการจัดทำชุดข้อมูล (รายละเอียดคำอธิบายตามภาคผนวก ก.)</p>
        <p id="objective-error" class="field-error" aria-live="polite"></p>
       </fieldset>
 
@@ -973,7 +972,7 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
    <div id="page-2" hidden>
     <section class="sec" aria-labelledby="h2s">
      <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">02</span>
-      <div><h2 id="h2s" class="text-2xl">การกำกับดูแลและความปลอดภัย (Governance &amp; Security)</h2><p class="sub">ระบุความรับผิดชอบและข้อพิจารณาด้านความปลอดภัย</p></div></div>
+      <div><h2 id="h2s" class="text-2xl">การกำกับดูแลและความปลอดภัย (Governance &amp; Security)</h2></div></div>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="field sm:col-span-2">
        <label for="data-owner" class="field-label">องค์กร (Owner ORG) <span class="req" aria-label="จำเป็น">*</span></label>
@@ -1007,7 +1006,7 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
         <label for="other-source" class="field-label mt-2">ระบุแหล่งที่มา <span class="req" aria-label="จำเป็น">*</span></label>
         <input id="other-source" name="other_source" class="field-control mt-1" type="text" maxlength="500">
        </div>
-       <p id="data-source-help" class="field-help">ชุดข้อมูลสถิติการรับชม TV Digital ภาคพื้นดินในประเทศไทยของสำนักงาน กสทช. ต้องระบุแหล่งข้อมูลที่ใช้อ้างอิงที่แท้จริง</p>
+       <p id="data-source-help" class="field-help">แหล่งข้อมูลที่ใช้อ้างอิงที่แท้จริง</p>
        <p id="data-source-error" class="field-error" aria-live="polite"></p>
       </div>
      </div>
@@ -1015,12 +1014,12 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
 
     <section class="sec" aria-labelledby="h3s">
      <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">03</span>
-      <div><h2 id="h3s" class="text-2xl">ข้อมูลทางเทคนิคและการเข้าถึง (Technical Details)</h2><p class="sub">รายละเอียดรูปแบบ ความถี่ และช่องทางเข้าถึงข้อมูล</p></div></div>
+      <div><h2 id="h3s" class="text-2xl">ข้อมูลทางเทคนิคและการเข้าถึง (Technical Details)</h2></div></div>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="field sm:col-span-2">
        <label for="data-format" class="field-label">รูปแบบไฟล์ / การจัดเก็บ (Data Format) <span class="req" aria-label="จำเป็น">*</span></label>
        <select id="data-format" name="data_format" class="field-control select-placeholder" required aria-describedby="data-format-help data-format-error"></select>
-       <p id="data-format-help" class="field-help">เลือกรูปแบบหลักที่ใช้จัดเก็บหรือให้บริการข้อมูล</p>
+       <p id="data-format-help" class="field-help">รูปแบบหลักที่ใช้จัดเก็บหรือให้บริการข้อมูล</p>
        <p id="data-format-error" class="field-error" aria-live="polite"></p>
       </div>
       <div class="field sm:col-span-2">
@@ -1030,7 +1029,7 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
         <label for="other-frequency" class="field-label mt-2">ระบุความถี่ในการอัปเดต <span class="req" aria-label="จำเป็น">*</span></label>
         <input id="other-frequency" name="other_frequency" class="field-control mt-1" type="text" maxlength="200">
        </div>
-       <p id="update-frequency-help" class="field-help">ระบุรอบการปรับปรุงข้อมูลตามการใช้งานจริง</p>
+       <p id="update-frequency-help" class="field-help">รอบการปรับปรุงข้อมูลตามการใช้งานจริง</p>
        <p id="update-frequency-error" class="field-error" aria-live="polite"></p>
       </div>
       <div class="field sm:col-span-2">
@@ -1052,14 +1051,13 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
    <div id="page-3" hidden>
     <section class="sec" aria-labelledby="h4s">
      <div class="flex items-start gap-3 mb-6"><span class="num" aria-hidden="true">04</span>
-      <div><h2 id="h4s" class="text-2xl">ระดับความลับของข้อมูล (Data Classification)</h2><p class="sub">ระบุระดับความลับและการมีข้อมูลส่วนบุคคลของชุดข้อมูล</p></div></div>
+      <div><h2 id="h4s" class="text-2xl">ระดับความลับของข้อมูล (Data Classification)</h2></div></div>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       
       <!-- หมวดหมู่ข้อมูลตามธรรมาภิบาล (ฝั่งซ้าย) -->
       <div class="field sm:col-span-1">
        <label for="classification" class="field-label">หมวดหมู่ข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ (Data Category) <span class="req" aria-label="จำเป็น">*</span></label>
        <select id="classification" name="data_classification" class="field-control select-placeholder" required aria-describedby="classification-help classification-error"></select>
-       <p id="classification-help" class="field-help">เลือกหมวดหมู่ที่ตรงกับชุดข้อมูลตามธรรมาภิบาลข้อมูลภาครัฐ</p>
        <p id="classification-error" class="field-error" aria-live="polite"></p>
       </div>
 
@@ -1070,7 +1068,6 @@ h2,.story2 h4,.card h3,.step h4,.svc h3,aside h3,.foot b{font-weight:600}
         <label class="radio-choice"><input type="radio" name="pdpa" value="มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help"><span>มีข้อมูลส่วนบุคคล</span></label>
         <label class="radio-choice"><input type="radio" name="pdpa" value="ไม่มีข้อมูลส่วนบุคคล" aria-describedby="pdpa-help"><span>ไม่มีข้อมูลส่วนบุคคล</span></label>
        </div>
-       <p id="pdpa-help" class="field-help">ระบุว่าชุดข้อมูลมีข้อมูลที่ระบุตัวบุคคลได้หรือไม่</p>
        <p id="pdpa-error" class="field-error" aria-live="polite"></p>
       </fieldset>
 
