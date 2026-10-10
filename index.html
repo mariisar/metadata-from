@@ -883,7 +883,7 @@ footer a{text-underline-offset:3px}
      <div class="flex items-start gap-3 mb-6"><div><h2 id="h5s" class="text-2xl">ข้อมูลผู้กรอกแบบฟอร์ม (Submitter Info)</h2><p class="sub">ข้อมูลสำหรับติดต่อกลับผู้ที่กรอกข้อมูลชุดนี้</p></div></div>
      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="field sm:col-span-2">
-       <label for="submitter-name" class="field-label">ชื่อ - นามสกุล / เบอร์ติดต่อ ผู้กรอกข้อมูล <span class="req" aria-label="จำเป็น">*</span></label>
+       <label for="submitter-name" class="field-label">ชื่อ - นามสกุล / เบอร์ติดต่อ <span class="req" aria-label="จำเป็น">*</span></label>
        <input id="submitter-name" name="submitter_name" class="field-control" type="text" required maxlength="200" autocomplete="name" aria-describedby="submitter-name-error">
        <p id="submitter-name-error" class="field-error" aria-live="polite"></p>
       </div>
@@ -899,14 +899,14 @@ footer a{text-underline-offset:3px}
 
   <div class="px-5 sm:px-9 py-6 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5" style="background:#F0EBE9;border-color:var(--line)">
    <div>
-    <p id="page-indicator" class="font-semibold" style="color:var(--navy)">หน้า 1 จาก 3</p>
+    <p id="page-indicator" class="font-semibold" style="color:var(--navy)">page 1 from 3</p>
     <p class="sub max-w-md">โปรดตรวจสอบข้อมูลก่อนส่ง ระบบจะส่งรายการเข้าสู่กระบวนการตรวจสอบ</p>
    </div>
    <div class="flex flex-col-reverse sm:flex-row gap-3">
     <button id="back-button" type="button" class="btn" style="background:#fff;color:var(--navy);border:1px solid var(--edge);box-shadow:none" hidden>‹ ย้อนกลับ</button>
-    <button id="next-button" type="button" class="btn inline-flex justify-center items-center gap-2"><span>หน้าถัดไป</span><span aria-hidden="true">›</span></button>
+    <button id="next-button" type="button" class="btn inline-flex justify-center items-center gap-2"><span>Next</span><span aria-hidden="true">›</span></button>
     <button id="submit-button" type="submit" class="btn inline-flex justify-center items-center gap-2" hidden>
-     <span id="submit-label">บันทึกข้อมูล (Submit Metadata)</span><span id="loading-label" hidden>กำลังส่งข้อมูล...</span>
+     <span id="submit-label">Submit</span><span id="loading-label" hidden>กำลังส่งข้อมูล...</span>
     </button>
    </div>
   </div>
