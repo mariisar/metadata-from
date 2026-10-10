@@ -1,82 +1,697 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Metadata Management System</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Data Analysis and Technical Support | พอร์ทัลส่วนงาน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Serif+Thai:wght@400;500&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#1E3A8A;--blue:#2563EB;--ink:#172b4d;--muted:#64748b;--line:#e7edf5}
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --green:#8B1A1A; --grad:linear-gradient(90deg,#8B1A1A 0%,#7B3636 45%,#666464 100%); --cream:#FFFFFF; --hl:#F6EAE8; --on-cream:#2A1C1C;
+  --bg:#F2EFEE; --surface:#F8F6F5; --ink:#2A1C1C; --muted:#6B5F5F; --line:#D9D1CF; --soft:#E9E3E1; --tag:#8B1A1A;
+  --serif:"Newsreader","Noto Serif Thai",Georgia,serif;
+  --sans:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --green:#6E1515; --grad:linear-gradient(90deg,#6E1515 0%,#522A2A 50%,#3F3C3C 100%); --hl:#3A2424; --bg:#1B1515; --surface:#251B1B; --ink:#F1E9E9; --muted:#B8A8A8; --line:#3D2F2F; --soft:#2D2121; --tag:#E8A0A0;
+  }
+}
+:root[data-theme="dark"]{
+  --green:#6E1515; --grad:linear-gradient(90deg,#6E1515 0%,#522A2A 50%,#3F3C3C 100%); --bg:#1B1515; --surface:#251B1B; --ink:#F1E9E9; --muted:#B8A8A8; --line:#3D2F2F; --soft:#2D2121; --tag:#E8A0A0;
+}
+html{font-size:clamp(15px,calc(10px + .4167vw),22px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 4.5rem);scroll-behavior:smooth}
 *{box-sizing:border-box}
-body{font-family:'Sarabun','Noto Sans Thai',system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 100% 0%,#e7f0ff 0,transparent 32%),#F8FAFC;font-size:16px;line-height:1.6}
-h1,h2{color:var(--navy);font-weight:700}
-.kicker{color:var(--blue);font-size:12px;letter-spacing:.12rem;font-weight:600}
-.sub{color:var(--muted);font-size:14px}
-.field{display:flex;flex-direction:column;gap:7px;min-width:0}
-.field-label{font-weight:600;color:#243b63;line-height:1.45}
-.req{color:#b42336}
-.field-control{width:100%;min-height:46px;border:1px solid #cbd7e6;border-radius:11px;background:#fff;padding:10px 13px;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}
-.field-control:focus,.radio-choice:focus-within,.checkbox-choice:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
-.field-control[aria-invalid="true"]{border-color:#bd3046}
-.field-control::placeholder{color:#94a3b8}
-.field-control:focus::placeholder{color:transparent}
-select.field-control{color:FieldText}
-select.field-control.select-placeholder{color:#94a3b8}
-select.field-control option{color:FieldText;background:Field}
-textarea.field-control{min-height:112px;resize:vertical}
-.field-help{font-size:13px;color:var(--muted)}
-.field-error{font-size:13px;font-weight:600;color:#b42336}
-.field-error:empty{display:none}
-.radio-choice, .checkbox-choice{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:8px;cursor:pointer;background:#fff;font-size:14px;transition:background-color .15s}
-.checkbox-choice:hover{background-color:#f1f5f9}
-.radio-choice input, .checkbox-choice input{accent-color:var(--blue);width:17px;height:17px;flex-shrink:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.7;font-size:1rem}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+header :focus-visible,.hero :focus-visible,footer :focus-visible{outline-color:var(--cream)}
+.en{color:var(--muted);font-weight:400}
+.wrap{max-width:75rem;margin:0 auto;padding:0 2rem}
 
-/* Multi-select Dropdown Custom Style */
-.dropdown-checkbox-container{position:relative;width:100%}
-.dropdown-checkbox-btn{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;text-align:left;height:auto;min-height:46px;padding:8px 13px}
-.dropdown-checkbox-menu{position:absolute;top:100%;left:0;right:0;z-index:30;margin-top:4px;max-height:260px;overflow-y:auto;background:#fff;border:1px solid #cbd7e6;border-radius:11px;box-shadow:0 10px 25px -5px rgba(0,0,0,0.1);padding:6px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--grad);color:var(--cream)}
+header .wrap{display:flex;align-items:center;gap:1.75rem;height:4.375rem}
+.brand{display:block;flex:none;text-decoration:none}
+.brand img{height:2.875rem;width:auto;display:block}
+nav{display:flex;gap:2px;align-self:stretch;min-width:0;flex:1 1 auto}
+nav>a,.dd-btn{display:flex;align-items:center;align-self:center;height:2.5rem;padding:0 1rem;text-decoration:none;font-size:0.875rem;white-space:nowrap;opacity:.9;border-radius:62.4375rem;transition:opacity .2s ease,background-color .2s ease}
+nav>a:hover,.dd:hover .dd-btn,.dd:focus-within .dd-btn,.dd.open .dd-btn{opacity:1;background:rgba(255,255,255,.16)}
+.dd{position:relative;display:flex;align-items:stretch}
+.dd-btn::after{content:"";width:0.375rem;height:0.375rem;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 0.5625rem;transition:transform .25s ease,margin .25s ease}
+.dd:hover .dd-btn::after,.dd:focus-within .dd-btn::after,.dd.open .dd-btn::after{transform:rotate(-135deg);margin-top:0.25rem}
+.dd-menu{position:absolute;top:calc(100% + 0.5rem);left:0;min-width:min(18.75rem,90vw);padding:0.5rem;background:var(--green);color:#fff;border:1px solid rgba(255,255,255,.22);border-radius:1.125rem;box-shadow:0 1.125rem 2rem -0.75rem rgba(30,10,10,.55);
+  opacity:0;visibility:hidden;transform:translateY(-0.5rem);pointer-events:none;transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s}
+.dd:hover .dd-menu,.dd:focus-within .dd-menu,.dd.open .dd-menu{opacity:1;visibility:visible;transform:none;pointer-events:auto;transition:opacity .22s ease,transform .22s ease,visibility 0s}
+.dd-menu::before{content:"";position:absolute;left:0;right:0;top:-0.625rem;height:0.625rem}
+.dd.shut .dd-menu{opacity:0;visibility:hidden;transform:translateY(-0.5rem);pointer-events:none;transition:opacity .12s ease,transform .12s ease,visibility 0s linear .12s}
+.dd-menu a{display:block;padding:0.6875rem 1rem;border-radius:0.75rem;font-size:0.875rem;text-decoration:none;color:#fff;opacity:0;transform:translateY(-0.25rem);box-shadow:inset 0 0 0 0 #fff;transition:opacity .25s ease,transform .25s ease,background-color .18s ease,box-shadow .18s ease,padding .18s ease}
+.dd:hover .dd-menu a,.dd:focus-within .dd-menu a,.dd.open .dd-menu a{opacity:.92;transform:none}
+.dd:hover .dd-menu a:nth-child(1),.dd:focus-within .dd-menu a:nth-child(1),.dd.open .dd-menu a:nth-child(1){transition-delay:.02s,.02s,0s,0s,0s}
+.dd:hover .dd-menu a:nth-child(2),.dd:focus-within .dd-menu a:nth-child(2),.dd.open .dd-menu a:nth-child(2){transition-delay:.05s,.05s,0s,0s,0s}
+.dd:hover .dd-menu a:nth-child(3),.dd:focus-within .dd-menu a:nth-child(3),.dd.open .dd-menu a:nth-child(3){transition-delay:.08s,.08s,0s,0s,0s}
+.dd:hover .dd-menu a:nth-child(4),.dd:focus-within .dd-menu a:nth-child(4),.dd.open .dd-menu a:nth-child(4){transition-delay:.11s,.11s,0s,0s,0s}
+.dd:hover .dd-menu a:nth-child(5),.dd:focus-within .dd-menu a:nth-child(5),.dd.open .dd-menu a:nth-child(5){transition-delay:.14s,.14s,0s,0s,0s}
+.dd:hover .dd-menu a:nth-child(6),.dd:focus-within .dd-menu a:nth-child(6),.dd.open .dd-menu a:nth-child(6){transition-delay:.17s,.17s,0s,0s,0s}
+.dd .dd-menu a:hover,.dd .dd-menu a:focus-visible{opacity:1;background:rgba(255,255,255,.16);padding-left:1.25rem}
+.dd-menu a:focus-visible{outline:2px solid #fff;outline-offset:-2px}
+@media(prefers-reduced-motion:reduce){.dd-menu,.dd-menu a,.dd-btn::after,.svc{transition:none!important}.svc:hover{transform:none}}
+.hbtn{flex:none;margin-left:auto;white-space:nowrap;font-size:0.875rem;text-decoration:none;padding:0.625rem 1.5rem;border:1px solid rgba(255,255,255,.6);border-radius:62.4375rem}
+.hbtn:hover{background:rgba(255,255,255,.12)}
+@media(max-width:600px){header .wrap{gap:0.75rem;padding:0 1rem}.hbtn{padding:0.5rem 0.75rem}}
 
-.email-group{display:flex;align-items:stretch;border:1px solid #cbd7e6;border-radius:11px;background:#fff;overflow:hidden;transition:border-color .18s,box-shadow .18s}
-.email-group:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.16)}
-.email-group[data-invalid="true"]{border-color:#bd3046}
-.email-group input{flex:1;min-width:0;border:0;background:transparent;padding:10px 13px;min-height:44px;outline:none;color:var(--ink)}
-.email-group input::placeholder{color:#94a3b8}
-.email-group input:focus::placeholder{color:transparent}
-.email-group .suffix{display:flex;align-items:center;justify-content:center;min-width:170px;padding:0 24px;font-size:16px;font-weight:400;background:#f1f5f9;border-left:1px solid #cbd7e6;color:#475569;white-space:nowrap}
-.num{width:36px;height:36px;border-radius:8px;background:#eff6ff;color:var(--blue);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sec{padding:32px 0;border-bottom:1px solid var(--line)}
-.sec:last-of-type{border-bottom:0}
-:focus-visible{outline:3px solid #60a5fa;outline-offset:3px}
-.field-control:focus-visible{outline:none}
+.hero{position:relative;overflow:hidden;background:var(--grad);color:var(--cream);min-height:min(88vh,50rem);display:flex;flex-direction:column;justify-content:flex-end}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 55% at 62% 0%,rgba(255,200,200,.18),transparent 70%)}
+.dots{position:absolute;inset:0;pointer-events:none;
+  background-image:
+   radial-gradient(circle,rgba(255,236,236,.22) 0 1rem,rgba(255,236,236,.08) 1.0625rem,transparent 1.625rem),
+   radial-gradient(circle,rgba(255,236,236,.2) 0 0.4375rem,transparent 0.6875rem),
+   radial-gradient(circle,rgba(255,236,236,.5) 0 2px,transparent 3px),
+   radial-gradient(circle,rgba(255,236,236,.32) 0 1.5px,transparent 2.5px);
+  background-size:32.5rem 27.5rem,19.375rem 16.875rem,11.875rem 10.625rem,7.5rem 9.375rem;
+  background-position:3.75rem 2.5rem,11.25rem 7.5rem,0 0,3.125rem 4.375rem;
+  animation:drift 100s linear infinite}
+@keyframes drift{to{background-position:3.75rem -25rem,11.25rem -9.375rem,0 -21.25rem,3.125rem -14.375rem}}
+.hero .wrap{position:relative;width:100%;padding-top:8.75rem}
+.badge{display:inline-block;font-size:0.8125rem;padding:3px 0.875rem;border:1px solid rgba(255,255,255,.5);border-radius:6.1875rem;margin-bottom:1.5rem}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.75rem,8.5vw,7rem);line-height:1.05;letter-spacing:-.015em;margin:0 0 2.75rem}
+.row{border-top:1px solid rgba(255,255,255,.35);padding:1.75rem 0 2.75rem;display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap}
+.row p{margin:0;max-width:30em;font-size:1rem;line-height:1.65}
+.row p b{display:block;font-weight:500;margin-bottom:0.25rem}
+.btn{display:inline-block;padding:0.8125rem 1.625rem;background:var(--cream);color:var(--on-cream);text-decoration:none;font-weight:500;border-radius:0.25rem;white-space:nowrap}
+.btn:hover{filter:brightness(.93)}
+@media(prefers-reduced-motion:reduce){.dots{animation:none}html{scroll-behavior:auto}}
+
+section{padding:4.5rem 0;border-top:1px solid var(--line)}
+section.first{border-top:0}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.875rem,4vw,2.625rem);margin:0 0 0.5rem;line-height:1.2}
+h2 .en{font-family:var(--sans);font-size:.5em;margin-left:0.625rem}
+.sub{color:var(--muted);margin:0 0 2.25rem}
+#services h2{margin-bottom:2.25rem}
 [hidden]{display:none!important}
-.modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(12,31,65,.62);display:flex;align-items:center;justify-content:center;padding:20px}
-.btn{background:var(--blue);color:#fff;font-weight:700;border-radius:12px;min-height:48px;padding:0 24px;box-shadow:0 6px 16px rgba(37,99,235,.22);cursor:pointer}
-.btn:hover{filter:brightness(1.1)}
-.btn:disabled{opacity:.7;cursor:wait}
+.hero.short{min-height:0}
+.hero.short .wrap{padding-top:4.5rem}
+.hero.short h1{font-size:clamp(2.5rem,6vw,5rem);margin-bottom:2rem}
+.back{display:inline-block;margin-bottom:1.75rem;font-size:0.875rem;text-decoration:none;opacity:.9;border-bottom:1px solid rgba(255,255,255,.5)}
+.back:hover{opacity:1;border-bottom-color:var(--cream)}
+
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(18.75rem,1fr));gap:1.25rem}
+.svc{display:block;text-decoration:none;border:1px solid var(--line);border-radius:1.375rem;padding:2.25rem 2rem 2rem;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.svc:hover{border-color:var(--ink);transform:translateY(-3px);box-shadow:0 0.875rem 1.75rem -1rem rgba(42,28,28,.35)}
+.svc svg{width:4.25rem;height:4.25rem;stroke:var(--ink);fill:none;stroke-width:1.4;margin-bottom:1.75rem;display:block}
+.svc h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:0 0 0.5rem;line-height:1.3}
+.svc p{margin:0;color:var(--muted);font-size:0.875rem}
+
+.split{display:grid;grid-template-columns:2fr 1fr;gap:3rem}
+@media(max-width:820px){.split{grid-template-columns:1fr}}
+.chips{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.chip{font:inherit;font-size:0.875rem;padding:0.375rem 1rem;border-radius:6.1875rem;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--green);color:var(--cream);border-color:var(--green)}
+.news{list-style:none;margin:0;padding:0}
+.news li{display:grid;grid-template-columns:6rem 1fr;gap:1rem;padding:1.125rem 0;border-bottom:1px solid var(--line)}
+.news time{color:var(--muted);font-size:0.875rem}
+.news b{display:block;font-weight:500;font-size:1.0625rem}
+.tag{font-size:0.8125rem;color:var(--tag);font-weight:600}
+aside .box{border:1px solid var(--line);border-radius:3px;padding:1.5rem}
+aside h3{font-family:var(--serif);font-weight:400;margin:0 0 0.625rem;font-size:1.375rem}
+aside ul{margin:0;padding-left:1.125rem;color:var(--muted);font-size:0.875rem}
+
+.tools{margin-bottom:1rem}
+input[type=search]{font:inherit;padding:0.625rem 0.875rem;border:1px solid var(--line);border-radius:3px;background:var(--surface);color:var(--ink);min-width:min(21.25rem,100%)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px}
+table{border-collapse:collapse;width:100%;min-width:48.75rem;font-size:0.9375rem}
+th,td{text-align:left;padding:0.875rem 1.125rem;border-bottom:1px solid var(--line)}
+th{font-weight:500;font-size:0.875rem;background:var(--soft)}
+tr:last-child td{border-bottom:0}
+.status{font-size:0.8125rem;padding:2px 0.75rem;border-radius:6.1875rem;background:var(--soft);border:1px solid var(--line)}
+.note{font-size:0.8125rem;color:var(--muted);margin-top:0.75rem}
+.agent-tools{display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+.agent-tools input[type=search]{flex:1 1 17.5rem;min-width:0}
+select#unitFilter{font:inherit;padding:0.625rem 0.875rem;border:1px solid var(--line);border-radius:3px;background:var(--surface);color:var(--ink);max-width:100%;flex:0 1 20rem}
+.count{margin-left:auto;color:var(--muted);font-size:0.875rem}
+.sort{font:inherit;font-weight:500;background:none;border:0;padding:0;cursor:pointer;color:inherit}
+th[aria-sort="ascending"] .sort::after{content:" \25B2";font-size:0.625rem}
+th[aria-sort="descending"] .sort::after{content:" \25BC";font-size:0.625rem}
+.pager{display:flex;gap:0.375rem;flex-wrap:wrap;justify-content:center;margin-top:1.25rem}
+.pager button{min-width:2.375rem;height:2.375rem;padding:0 0.625rem;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:0.25rem;cursor:pointer;font:inherit;font-size:0.875rem}
+.pager button:hover:not(:disabled){border-color:var(--ink)}
+.pager button[aria-current="page"]{background:var(--green);color:#fff;border-color:var(--green)}
+.pager button:disabled{opacity:.4;cursor:default}
+.pager .gap{align-self:center;color:var(--muted)}
+td a{color:inherit}
+.hero.short h1.long{font-size:clamp(1.75rem,4.4vw,3.5rem);line-height:1.2;max-width:22em}
+.duties{list-style:none;margin:0;padding:0;max-width:52em}
+.duty{display:flex;gap:1.125rem;align-items:flex-start;padding:1.25rem 0;border-bottom:1px solid var(--line);font-size:1.0625rem}
+.duty .n{flex:none;width:2.375rem;height:2.375rem;border-radius:50%;background:var(--green);color:#fff;font-family:var(--serif);font-size:1.125rem;display:flex;align-items:center;justify-content:center}
+.soon{border:1px dashed var(--line);border-radius:1.375rem;padding:4rem 2rem;text-align:center;color:var(--muted);font-size:1.125rem}
+/* ===== Our Services: minimal cards in a scrolling row ===== */
+#services h2{margin:0 0 2rem}
+.car-wrap{position:relative;flex:1;display:flex;flex-direction:column;min-height:0}
+.car-wrap>.track{flex:1}
+#services{min-height:min(calc(100svh - 4.4rem),60rem);display:flex;flex-direction:column;justify-content:center}
+#services>.wrap{width:100%;flex:1;display:flex;flex-direction:column}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:2.625rem;height:2.625rem;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:1.25rem;font-weight:500;line-height:1;padding:0 0 2px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0.375rem 1rem -0.5rem rgba(42,28,28,.35);transition:opacity .2s ease,border-color .2s ease,background-color .2s ease}
+.car-btn.prev{left:-1.25rem}.car-btn.next{right:-1.25rem}
+.car-btn:hover:not(:disabled){border-color:var(--ink);background:var(--bg)}
+.car-btn:disabled{opacity:0;pointer-events:none}
+.track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 4.5rem)/4);grid-template-rows:auto 1fr auto;column-gap:1.5rem;row-gap:0;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0.375rem 0.625rem 1.75rem 0.375rem;margin:0 -0.625rem 0 -0.375rem;scroll-padding-left:0.375rem}
+.track::-webkit-scrollbar{display:none}
+.card{scroll-snap-align:start;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:1.375rem;padding:1.75rem 1.25rem 1.625rem;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease,background-color .25s ease}
+@supports (grid-template-rows:subgrid){.card{display:grid;grid-template-rows:subgrid;grid-row:span 3}}
+.card:hover,.card:focus-visible{transform:translateY(-3px);border-color:var(--ink);background:var(--hl);box-shadow:0 1rem 1.875rem -1.125rem rgba(42,28,28,.4)}
+.card h3{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.25;margin:0;text-align:center;align-self:center;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis;padding:0.25rem 0 0.25rem}
+.card .ic{width:4rem;height:4rem;stroke:var(--ink);fill:none;stroke-width:1.4;margin:1rem auto 2rem;display:block;align-self:center;justify-self:center;transition:stroke .2s ease}
+.card:hover .ic,.card:focus-visible .ic{stroke:var(--green)}
+.go-wrap{margin-top:auto;padding-top:1rem;display:block;text-align:center}
+.go{display:inline-flex;align-items:center;justify-content:center;gap:0.375rem;border:1px solid var(--line);border-radius:62.4375rem;padding:0.3125rem 0.875rem;font-weight:400;font-size:0.8125rem;color:var(--muted);transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.go .arr{width:0.875rem;height:0.875rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+.card:hover .go,.card:focus-visible .go{background:var(--green);border-color:var(--green);color:#fff}
+.card:hover .go .arr{transform:translateX(0.25rem)}
+@media(max-width:1199px){.track{grid-auto-columns:calc((100% - 3rem)/3)}}
+@media(max-width:819px){.track{grid-auto-columns:calc((100% - 1.5rem)/2)}}
+@media(max-width:559px){.track{grid-auto-columns:86%}.car-btn{width:2.25rem;height:2.25rem;font-size:1.0625rem}.car-btn.prev{left:-0.375rem}.car-btn.next{right:-0.375rem}}
+@media(prefers-reduced-motion:reduce){.card,.card .ic,.car-btn,.go,.go .arr{transition:none!important}.track{scroll-behavior:auto}.card:hover{transform:none}}
+/* ===== accordion rows (label + plus) ===== */
+.acc-list{border-top:0}
+.acc{border-bottom:1px solid var(--line)}
+.acc-h{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left;background:none;border:0;padding:1.2rem 0;font:inherit;font-size:1.1rem;color:var(--ink);cursor:pointer;transition:color .2s ease}
+.acc-h:hover{color:var(--green)}
+a.acc-h{text-decoration:none}
+.acc-go{flex:none;width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+a.acc-h:hover .acc-go{transform:translateX(0.25rem)}
+.acc-h:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:4px}
+.acc-i{position:relative;flex:none;width:0.95rem;height:0.95rem}
+.acc-i::before,.acc-i::after{content:"";position:absolute;left:0;top:50%;width:100%;height:1.5px;background:currentColor;transform:translateY(-50%);transition:transform .28s ease}
+.acc-i::after{transform:translateY(-50%) rotate(90deg)}
+.acc.open .acc-i::after{transform:translateY(-50%) rotate(0deg)}
+.acc-b{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .3s ease,visibility 0s linear .3s}
+.acc.open .acc-b{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .3s ease,visibility 0s}
+.acc-in{overflow:hidden;min-height:0}
+.acc-in>*:first-child{margin-top:0.25rem}
+.acc-in>*:last-child{margin-bottom:1.5rem}
+.meta{display:grid;grid-template-columns:max-content 1fr;gap:0.5rem 2rem;margin:0.25rem 0 1.5rem;font-size:0.95rem}
+.meta dt{color:var(--muted)}.meta dd{margin:0}
+@media(prefers-reduced-motion:reduce){.acc-b,.acc-i::before,.acc-i::after,.acc-h{transition:none!important}}
+/* ===== storytelling steps with layered plates ===== */
+.story{margin:0.5rem 0 1rem}
+.step{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center;gap:2.5rem}
+.step .plate{margin:-1rem 0}
+.step svg{display:block;width:100%;max-width:27rem;height:auto;margin:0 auto}
+.step .kick{display:block;font-size:0.8rem;letter-spacing:.04em;color:var(--green);margin-bottom:0.35rem}
+.step h4{font-family:var(--serif);font-weight:500;font-size:1.45rem;line-height:1.3;margin:0 0 0.6rem}
+.step p{margin:0;color:var(--muted);font-size:0.97rem;line-height:1.8;max-width:30rem}
+.pe{fill:var(--line)}
+.pt{fill:var(--surface);stroke:var(--line);stroke-width:1.5;stroke-linejoin:round}
+.pg{stroke:var(--line);stroke-width:.8;opacity:.55}
+.pd{fill:var(--line)}
+.tl{fill:var(--line)}.tr{fill:var(--soft)}
+.tt,.tg,.tk{stroke:var(--muted);stroke-width:1.1;stroke-linejoin:round}
+.tt{fill:var(--bg)}.tg{fill:var(--soft)}.tk{fill:var(--green);stroke:var(--green)}
+.cn{fill:none;stroke:var(--muted);stroke-width:1.1;opacity:.8}
+.gl{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:44rem){.step{grid-template-columns:1fr;gap:0.25rem;margin-bottom:1.25rem}.step svg{max-width:20rem}.step .plate{margin:-0.5rem 0}}
+/* ===== storytelling: headline + paragraph with a scene illustration ===== */
+.story2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:3rem;align-items:center;margin:0.5rem 0 1rem}
+.s2-kick{display:block;font-size:0.85rem;color:var(--muted);margin-bottom:1.25rem}
+.story2 h4{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.4vw,3.1rem);line-height:1.2;letter-spacing:-.01em;margin:0 0 1.5rem}
+.story2 p{margin:0;font-size:1.02rem;line-height:1.9;max-width:34rem}
+.s2-img svg{display:block;width:100%;height:auto}
+.w1{fill:var(--soft);stroke:var(--line);stroke-width:1.2}
+.w2{fill:var(--surface);opacity:.75}
+.w3{fill:var(--bg);stroke:var(--line);stroke-width:1.2}
+.fl1{fill:var(--surface);stroke:var(--line);stroke-width:1.2;stroke-linejoin:round}
+.fl2{fill:var(--bg);stroke:var(--line);stroke-width:1.2;stroke-linejoin:round}
+.fl3{fill:var(--line)}
+.fs{fill:var(--ink);opacity:.1}
+.fg{fill:var(--ink);opacity:.82}
+.fm{fill:var(--muted);opacity:.85}
+.gb{fill:none;stroke:var(--ink);stroke-width:1;opacity:.6}
+.tg2{fill:var(--bg);stroke:var(--line);stroke-width:1}
+.tg3{font:500 13px var(--sans);fill:var(--ink)}
+@media(max-width:52rem){.story2{grid-template-columns:1fr;gap:1.5rem}}
+td.empty{text-align:center;color:var(--muted);padding:2rem 1.125rem}
+
+
+footer{background:var(--grad);color:var(--cream);padding:2.25rem 0;font-size:0.875rem}
+footer .en{color:inherit;opacity:.72}
+.foot{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;align-items:flex-end}
+.foot b{font-family:var(--serif);font-weight:400;font-size:1.375rem;display:block;margin-bottom:0.375rem}
+footer a{text-underline-offset:3px}
+/* ===== Metadata form page (scoped) ===== */
+
+#metaPage{--navy:#8B1A1A;--blue:#8B1A1A;--ink:#2A1C1C;--muted:#6B5F5F;--line:#D9D1CF;--surface:#F8F6F5;--soft:#E9E3E1;--edge:#D0C6C4}
+#metaPage .wrap>#metadata-form{color:var(--ink)}
+#metaPage .modal-backdrop{color:var(--ink)}
+#metaPage h2{font-family:var(--serif);font-weight:400;color:var(--navy);margin:0;line-height:1.3}
+#metaPage p{margin:0}
+#metaPage .sub{color:var(--muted);font-size:0.875rem;margin:0}
+#metaPage fieldset{margin:0;padding:0;border:0;min-width:0}
+#metaPage legend{padding:0}
+#metaPage input,#metaPage select,#metaPage textarea,#metaPage button{font:inherit;margin:0}
+#metaPage svg{display:block}
+#metaPage .btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;border:0;white-space:normal;line-height:1.3;font-weight:600}
+#metaPage .btn:hover{filter:brightness(1.18)}
+#metaPage .wrap>#metadata-form{margin:0}
+#metaPage .section-first{padding-top:3.5rem}
+/* utilities used by the form markup (scoped, replaces Tailwind) */
+#metaPage .flex{display:flex}#metaPage .inline-flex{display:inline-flex}#metaPage .grid{display:grid}
+#metaPage .flex-col{flex-direction:column}#metaPage .flex-col-reverse{flex-direction:column-reverse}#metaPage .flex-wrap{flex-wrap:wrap}
+#metaPage .items-center{align-items:center}#metaPage .items-start{align-items:flex-start}
+#metaPage .justify-between{justify-content:space-between}#metaPage .justify-center{justify-content:center}
+#metaPage .gap-2{gap:.5rem}#metaPage .gap-3{gap:.75rem}#metaPage .gap-5{gap:1.25rem}#metaPage .gap-6{gap:1.5rem}
+#metaPage .grid-cols-1{grid-template-columns:minmax(0,1fr)}
+#metaPage .mb-5{margin-bottom:1.25rem}#metaPage .mb-6{margin-bottom:1.5rem}#metaPage .mb-\[0.4375rem\]{margin-bottom:0.4375rem}
+#metaPage .mt-1{margin-top:.25rem}#metaPage .mt-2{margin-top:.5rem}#metaPage .mt-3{margin-top:.75rem}#metaPage .mt-7{margin-top:1.75rem}
+#metaPage .mr-2{margin-right:.5rem}#metaPage .ml-auto{margin-left:auto}
+#metaPage .px-3{padding-left:.75rem;padding-right:.75rem}#metaPage .px-5{padding-left:1.25rem;padding-right:1.25rem}
+#metaPage .py-1\.5{padding-top:.375rem;padding-bottom:.375rem}#metaPage .py-6{padding-top:1.5rem;padding-bottom:1.5rem}
+#metaPage .p-1{padding:.25rem}#metaPage .p-6{padding:1.5rem}
+#metaPage .border-b{border-bottom:1px solid}#metaPage .border-t{border-top:1px solid}
+#metaPage .absolute{position:absolute}#metaPage .relative{position:relative}#metaPage .right-5{right:1.25rem}#metaPage .top-4{top:1rem}
+#metaPage .w-12{width:3rem}#metaPage .h-12{height:3rem}#metaPage .w-4{width:1rem}#metaPage .h-4{height:1rem}#metaPage .w-full{width:100%}#metaPage .max-w-md{max-width:28rem}
+#metaPage .rounded-full{border-radius:624.9375rem}#metaPage .rounded-lg{border-radius:.5rem}#metaPage .rounded-2xl{border-radius:1rem}
+#metaPage .shadow-2xl{box-shadow:0 1.5625rem 3.125rem -0.75rem rgba(0,0,0,.25)}
+#metaPage .text-2xl{font-size:1.5rem;line-height:2rem}#metaPage .text-xl{font-size:1.25rem;line-height:1.75rem}#metaPage .text-xs{font-size:.75rem;line-height:1rem}
+#metaPage .font-semibold{font-weight:600}#metaPage .font-medium{font-weight:500}#metaPage .font-normal{font-weight:400}
+#metaPage .leading-none{line-height:1}#metaPage .leading-relaxed{line-height:1.625}#metaPage .break-words{overflow-wrap:break-word}
+#metaPage .shrink-0{flex-shrink:0}#metaPage .transition-transform{transition:transform .2s}#metaPage .duration-200{transition-duration:.2s}
+#metaPage .bg-white{background:#fff}#metaPage .bg-green-50{background:#f0fdf4}#metaPage .bg-red-50{background:#fef2f2}
+#metaPage .text-green-700{color:#15803d}#metaPage .text-red-700{color:#b91c1c}
+#metaPage .text-slate-400{color:#94a3b8}#metaPage .text-slate-500{color:#64748b}#metaPage .text-slate-600{color:#475569}#metaPage .text-slate-800{color:#1e293b}
+#metaPage .hover\:text-slate-900:hover{color:#0f172a}
+#metaPage .px-5{padding-left:1.25rem;padding-right:1.25rem}
+@media(min-width:640px){
+#metaPage .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+#metaPage .sm\:col-span-1{grid-column:span 1/span 1}#metaPage .sm\:col-span-2{grid-column:span 2/span 2}
+#metaPage .sm\:flex-row{flex-direction:row}#metaPage .sm\:items-center{align-items:center}#metaPage .sm\:justify-between{justify-content:space-between}
+#metaPage .sm\:px-9{padding-left:2.25rem;padding-right:2.25rem}#metaPage .sm\:p-8{padding:2rem}
+}
+#metaPage #metadata-form{background:var(--surface);border:1px solid var(--line);border-radius:0.25rem}
+#metaPage #metadata-form > div:last-child{border-radius:0 0 3px 3px}
+#metaPage .field{display:flex;flex-direction:column;gap:0.4375rem;min-width:0}
+#metaPage .field-label{font-weight:600;color:#2A1C1C;line-height:1.45}
+#metaPage .req{color:#b42336}
+#metaPage .field-control{width:100%;min-height:2.875rem;border:1px solid var(--edge);border-radius:0.25rem;background:#fff;padding:0.625rem 0.8125rem;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}
+#metaPage .field-control:focus,#metaPage .radio-choice:focus-within,#metaPage .checkbox-choice:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(139,26,26,.2)}
+#metaPage .field-control[aria-invalid="true"]{border-color:#bd3046}
+#metaPage .field-control::placeholder{color:#A39898}
+#metaPage .field-control:focus::placeholder{color:transparent}
+#metaPage select.field-control{color:FieldText}
+#metaPage select.field-control.select-placeholder{color:#A39898}
+#metaPage select.field-control option{color:FieldText;background:Field}
+#metaPage textarea.field-control{min-height:7rem;resize:vertical}
+#metaPage .field-help{font-size:0.8125rem;color:var(--muted)}
+#metaPage .field-error{font-size:0.8125rem;font-weight:600;color:#b42336}
+#metaPage .field-error:empty{display:none}
+#metaPage .radio-choice,#metaPage .checkbox-choice{display:flex;align-items:center;gap:0.5625rem;padding:0.5rem 0.75rem;border-radius:0.25rem;cursor:pointer;background:#fff;font-size:0.875rem;transition:background-color .15s}
+#metaPage .radio-choice{border:1px solid var(--edge)}
+#metaPage .checkbox-choice:hover{background-color:var(--soft)}
+#metaPage .radio-choice input,#metaPage .checkbox-choice input{accent-color:var(--blue);width:1.0625rem;height:1.0625rem;flex-shrink:0}
+#metaPage .dropdown-checkbox-container{position:relative;width:100%}
+#metaPage .dropdown-checkbox-btn{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;text-align:left;height:auto;min-height:2.875rem;padding:0.5rem 0.8125rem}
+#metaPage .dropdown-checkbox-menu{position:absolute;top:100%;left:0;right:0;z-index:30;margin-top:0.25rem;max-height:16.25rem;overflow-y:auto;background:#fff;border:1px solid var(--edge);border-radius:0.25rem;box-shadow:0 0.625rem 1.5625rem -0.3125rem rgba(42,28,28,.18);padding:0.375rem}
+#metaPage .email-group{display:flex;align-items:stretch;border:1px solid var(--edge);border-radius:0.25rem;background:#fff;overflow:hidden;transition:border-color .18s,box-shadow .18s}
+#metaPage .email-group:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(139,26,26,.2)}
+#metaPage .email-group[data-invalid="true"]{border-color:#bd3046}
+#metaPage .email-group input{flex:1;min-width:0;border:0;background:transparent;padding:0.625rem 0.8125rem;min-height:2.75rem;outline:none;color:var(--ink)}
+#metaPage .email-group input::placeholder{color:#A39898}
+#metaPage .email-group input:focus::placeholder{color:transparent}
+#metaPage .email-group .suffix{display:flex;align-items:center;justify-content:center;min-width:10.625rem;padding:0 1.5rem;font-size:1rem;font-weight:400;background:var(--soft);border-left:1px solid var(--edge);color:#5E5252;white-space:nowrap}
+#metaPage .num{width:2.25rem;height:2.25rem;border-radius:0.25rem;background:var(--navy);color:var(--cream);font-family:var(--serif);font-size:1.0625rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#metaPage .sec{padding:2rem 0;border-bottom:1px solid var(--line)}
+#metaPage .sec:last-of-type{border-bottom:0}
+#metaPage :focus-visible{outline:3px solid #8B1A1A;outline-offset:3px}
+#metaPage .field-control:focus-visible{outline:none}
+#metaPage .modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(30,15,15,.65);display:flex;align-items:center;justify-content:center;padding:1.25rem}
+#metaPage .btn{background:var(--navy);color:var(--cream);font-weight:600;border-radius:0.25rem;min-height:3rem;padding:0 1.5rem;cursor:pointer}
+#metaPage .btn:hover{filter:brightness(1.18)}
+#metaPage .btn:disabled{opacity:.7;cursor:wait}
 </style>
 </head>
 <body>
-<header class="border-b border-blue-100 bg-white/80">
- <div class="max-w-5xl mx-auto px-5 sm:px-8 py-5 flex items-center gap-4">
-  <div aria-hidden="true" class="w-11 h-11 rounded-xl bg-[#1E3A8A] text-white flex items-center justify-center shadow-sm">
-   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="w-6 h-6"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg>
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Home"><img src="data:image/png;base64,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" alt="Division logo" height="46"></a>
+    <nav aria-label="Main menu">
+      <div class="dd" id="svcDD">
+        <a class="dd-btn" href="#services" aria-haspopup="true">Service</a>
+        <div class="dd-menu">
+          <a href="#data-agent">Data Agent</a>
+          <a href="#data-structure">Data Structure</a>
+          <a href="#announcements">ประกาศ</a>
+          <a href="#data-owner">Data Owner</a>
+          <a href="#manual">Manual</a>
+          <a href="#game">Game</a>
+        </div>
+      </div>
+      <a href="#news">News</a>
+    </nav>
+    <a class="hbtn" href="#contact">Contact Us</a>
   </div>
-  <div>
-   <p class="kicker">INTERNAL DATA PLATFORM</p>
-   <p class="font-semibold" style="color:var(--navy)">Metadata Governance Portal</p>
-  </div>
- </div>
 </header>
 
-<main class="max-w-5xl mx-auto px-4 sm:px-8 py-10 sm:py-14">
- <div class="mb-8">
-  <span class="inline-block rounded-full px-3 py-1 mb-4 text-xs font-semibold" style="background:#dbeafe;color:var(--navy)">DATA GOVERNANCE / ลงทะเบียนข้อมูล</span>
-  <h1 class="text-[32px] leading-tight max-w-3xl">Metadata Management System</h1>
-  <p class="mt-3 text-lg" style="color:#475569">ระบบลงทะเบียน ค้นหา และกำกับดูแลชุดข้อมูลองค์กร</p>
- </div>
+<main id="top">
+<div id="homeView">
+  <div class="hero">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Data Analysis<br>and Technical Support</h1>
+      <div class="row">
+        <p><b>ส่วนวิเคราะห์ข้อมูลและสนับสนุนทางเทคนิค</b>
+      </div>
+    </div>
+  </div>
 
- <form id="metadata-form" novalidate>
+  <section id="services" class="first"><div class="wrap">
+    <h2>Our Services.</h2>
+    <div class="car-wrap">
+      <button type="button" class="car-btn prev" id="svcPrev" aria-label="Previous"><span aria-hidden="true">&lt;</span></button>
+      <button type="button" class="car-btn next" id="svcNext" aria-label="Next"><span aria-hidden="true">&gt;</span></button>
+    <div class="track" id="svcTrack">
+      <a class="card" href="#data-agent" id="agentCard">
+        <h3>Data Agent</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="21" r="13"/><path d="M6 64a28 28 0 0 1 56 0z"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#data-structure" id="metaLink">
+        <h3>Data Structure</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="34" r="32"/><circle cx="34" cy="34" r="23"/><circle cx="34" cy="34" r="13"/><path d="M26 42l16-16"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#announcements" id="annCard">
+        <h3>ประกาศ</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 3L65 64H3z"/><path d="M34 3v44M3 64l31-17 31 17"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#data-owner" id="ownerCard">
+        <h3>Data Owner</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 2l30 32-30 32L4 34z"/><path d="M34 14l18 20-18 20-18-20z"/><path d="M4 34h60"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#manual" id="manualCard">
+        <h3>Manual</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 14C26 8 14 8 4 12v46c10-4 22-4 30 2 8-6 20-6 30-2V12C54 8 42 8 34 14z"/><path d="M34 14v46"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+      <a class="card" href="#game" id="gameCard">
+        <h3>Game</h3>
+        <svg class="ic" viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="16" r="12.7"/><circle cx="16" cy="34" r="12.7"/><circle cx="52" cy="34" r="12.7"/><circle cx="34" cy="52" r="12.7"/></svg>
+        <span class="go-wrap"><span class="go">Open <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+      </a>
+    </div>
+    </div>
+  </div></section>
+
+  <section id="news"><div class="wrap">
+    <div>
+      <h2>News.</h2>
+      <div class="chips" role="group" aria-label="กรองประเภท">
+        <button class="chip" data-f="all" aria-pressed="true">ทั้งหมด</button>
+        <button class="chip" data-f="ประกาศใช้" aria-pressed="false">ประกาศ</button>
+        <button class="chip" data-f="กิจกรรม" aria-pressed="false">กิจกรรม</button>
+        <button class="chip" data-f="ทั่วไป" aria-pressed="false">ทั่วไป</button>
+      </div>
+      <ul class="news" id="newsList">
+        <li data-c="ประกาศใช้"><time>ตัวอย่าง</time><div><span class="tag">ประกาศใช้</span><b>ประกาศใช้แนวปฏิบัติการจัดทำ Metadata (ตัวอย่างหัวข้อ)</b><span class="en">Metadata guideline takes effect — sample</span></div></li>
+        <li data-c="กิจกรรม"><time>ตัวอย่าง</time><div><span class="tag">กิจกรรม</span><b>อบรม Data Agent รุ่นที่ 1 (ตัวอย่างหัวข้อ)</b><span class="en">Data Agent training, batch 1 — sample</span></div></li>
+        <li data-c="ทั่วไป"><time>ตัวอย่าง</time><div><span class="tag">ทั่วไป</span><b>เปิดให้กรอกแบบสำรวจ Metadata รอบประจำปี (ตัวอย่างหัวข้อ)</b><span class="en">Annual Metadata survey is open — sample</span></div></li>
+      </ul>
+    </div>
+  </div></section>
+
+
+</div>
+
+<div id="agentPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Data Agent</h1>
+      <div class="row">
+        <p>Data Agent คือ ผู้ประสานงานด้านข้อมูลประจำแต่ละสำนัก ทำหน้าที่เป็นจุดติดต่อระหว่างสำนักกับส่วนวิเคราะห์ข้อมูลและสนับสนุนทางเทคนิค ในการรวบรวมและปรับปรุงข้อมูลชุดข้อมูล (Metadata) และบัญชีข้อมูลของสำนักตน</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="acc-list">
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>ตรวจสอบรายชื่อผู้แทนสำนัก (Data Agent) ประจำปี 2570</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><div class="agent-tools">
+      <input type="search" id="q" placeholder="ค้นหาชื่อ ตำแหน่ง สำนัก หรืออีเมล" aria-label="ค้นหา Data Agent">
+      <select id="unitFilter" aria-label="กรองตามสำนัก"><option value="">ทุกสำนัก</option></select>
+      <span id="agentCount" class="count" aria-live="polite"></span>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr>
+        <th aria-sort="none"><button type="button" class="sort" data-k="0">ชื่อ-นามสกุล</button></th>
+        <th aria-sort="none"><button type="button" class="sort" data-k="1">ตำแหน่ง</button></th>
+        <th aria-sort="none"><button type="button" class="sort" data-k="2">สำนัก</button></th>
+        <th>เบอร์ติดต่อ</th><th>อีเมล</th>
+      </tr></thead>
+      <tbody id="agentRows"></tbody>
+    </table></div>
+    <div class="pager" id="pager" role="navigation" aria-label="เปลี่ยนหน้า"></div>
+    <p class="note">ข้อมูลในตารางเป็นตัวอย่าง 105 แถว กรุณาแทนที่ด้วยรายชื่อจริง · Sample rows, replace with real entries.</p></div></div>
+    </div>
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>บทบาทหน้าที่ของผู้แทนสำนัก (Data Agent)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><div class="story2">
+      <div class="s2-txt">
+        <h5>บทบาทหน้าที่</h5>
+        <p>ผู้แทนสำนัก (Data Agent) ทำหน้าที่ประสานงานด้านข้อมูลระหว่างสำนักกับส่วนวิเคราะห์ข้อมูลและสนับสนุนทางเทคนิค รวบรวมและปรับปรุง Metadata และบัญชีข้อมูลของสำนักให้เป็นปัจจุบัน ตรวจสอบความครบถ้วนและความถูกต้องก่อนลงทะเบียนชุดข้อมูล และสื่อสารประกาศและแนวปฏิบัติด้านข้อมูลให้บุคลากรในสำนักทราบ</p>
+      </div>
+      <div class="s2-img"><svg viewBox="0 0 660 440" role="img" aria-label="ภาพประกอบ ผู้แทนสำนักในแต่ละสำนัก">
+<path class="w1" d="M52 232 C52 128 170 84 300 96 C402 104 452 138 548 78 L584 62 L584 238 L52 238 Z"/>
+<path class="w2" d="M60 238 C80 160 180 118 300 124 C400 130 450 160 548 112 L548 238 Z"/>
+<path class="w3" d="M520 66 H584 V190 H540 V108 Q540 76 520 66 Z"/>
+<polygon class="fl1" points="30,340 88,236 604,236 650,340"/>
+<polygon class="fl2" points="120,382 178,306 506,306 560,382"/>
+<rect class="fl3" x="120" y="382" width="440" height="30"/>
+<ellipse class="fs" cx="340" cy="414" rx="240" ry="9"/>
+<ellipse class="fs" cx="282.0" cy="237.0" rx="6.3" ry="1.5"/><rect class="fm" x="278.5" y="229.0" width="2.8" height="7.0"/><rect class="fm" x="282.7" y="229.0" width="2.8" height="7.0"/><path class="fm" d="M277.1,217.1 Q282.0,214.3 286.9,217.1 L286.2,229.0 L277.8,229.0 Z"/><circle class="fm" cx="282.0" cy="212.2" r="3.5"/><ellipse class="fs" cx="440.0" cy="241.0" rx="6.8" ry="1.7"/><rect class="fg" x="436.2" y="232.5" width="3.0" height="7.5"/><rect class="fg" x="440.8" y="232.5" width="3.0" height="7.5"/><path class="fg" d="M434.8,219.8 Q440.0,216.8 445.2,219.8 L444.5,232.5 L435.5,232.5 Z"/><circle class="fg" cx="440.0" cy="214.5" r="3.8"/><ellipse class="fs" cx="208.0" cy="243.0" rx="6.8" ry="1.7"/><rect class="fg" x="204.2" y="234.5" width="3.0" height="7.5"/><rect class="fg" x="208.8" y="234.5" width="3.0" height="7.5"/><path class="fg" d="M202.8,221.8 Q208.0,218.8 213.2,221.8 L212.5,234.5 L203.5,234.5 Z"/><circle class="fg" cx="208.0" cy="216.5" r="3.8"/><ellipse class="fs" cx="604.0" cy="263.0" rx="7.6" ry="1.9"/><rect class="fg" x="599.8" y="253.5" width="3.4" height="8.5"/><rect class="fg" x="604.9" y="253.5" width="3.4" height="8.5"/><path class="fg" d="M598.0,239.1 Q604.0,235.7 610.0,239.1 L609.1,253.5 L598.9,253.5 Z"/><circle class="fg" cx="604.0" cy="233.1" r="4.2"/><ellipse class="fs" cx="484.0" cy="267.0" rx="7.6" ry="1.9"/><rect class="fm" x="479.8" y="257.5" width="3.4" height="8.5"/><rect class="fm" x="484.9" y="257.5" width="3.4" height="8.5"/><path class="fm" d="M478.1,243.1 Q484.0,239.7 489.9,243.1 L489.1,257.5 L478.9,257.5 Z"/><circle class="fm" cx="484.0" cy="237.1" r="4.2"/><ellipse class="fs" cx="150.0" cy="273.0" rx="8.1" ry="2.0"/><rect class="fm" x="145.5" y="263.0" width="3.6" height="9.0"/><rect class="fm" x="150.9" y="263.0" width="3.6" height="9.0"/><path class="fm" d="M143.7,247.7 Q150.0,244.1 156.3,247.7 L155.4,263.0 L144.6,263.0 Z"/><circle class="fm" cx="150.0" cy="241.4" r="4.5"/><ellipse class="fs" cx="528.0" cy="293.0" rx="8.5" ry="2.1"/><rect class="fg" x="523.2" y="282.5" width="3.8" height="9.5"/><rect class="fg" x="529.0" y="282.5" width="3.8" height="9.5"/><path class="fg" d="M521.4,266.4 Q528.0,262.6 534.6,266.4 L533.7,282.5 L522.3,282.5 Z"/><circle class="fg" cx="528.0" cy="259.7" r="4.8"/><ellipse class="fs" cx="576.0" cy="309.0" rx="9.0" ry="2.2"/><rect class="fm" x="571.0" y="298.0" width="4.0" height="10.0"/><rect class="fm" x="577.0" y="298.0" width="4.0" height="10.0"/><path class="fm" d="M569.0,281.0 Q576.0,277.0 583.0,281.0 L582.0,298.0 L570.0,298.0 Z"/><circle class="fm" cx="576.0" cy="274.0" r="5.0"/><ellipse class="fs" cx="92.0" cy="313.0" rx="9.0" ry="2.2"/><rect class="fg" x="87.0" y="302.0" width="4.0" height="10.0"/><rect class="fg" x="93.0" y="302.0" width="4.0" height="10.0"/><path class="fg" d="M85.0,285.0 Q92.0,281.0 99.0,285.0 L98.0,302.0 L86.0,302.0 Z"/><circle class="fg" cx="92.0" cy="278.0" r="5.0"/>
+<rect class="gb" x="232" y="272" width="190" height="130" rx="3"/>
+<line class="gb" x1="327" y1="252" x2="327" y2="272"/>
+<rect class="tg2" x="276" y="226" width="102" height="26" rx="4"/>
+<text class="tg3" x="327" y="244" text-anchor="middle">ผู้แทนสำนัก</text>
+<ellipse class="fs" cx="256.0" cy="389.0" rx="15.8" ry="3.9"/><rect class="fg" x="247.2" y="370.5" width="7.0" height="17.5"/><rect class="fg" x="257.8" y="370.5" width="7.0" height="17.5"/><path class="fg" d="M243.8,340.8 Q256.0,333.8 268.2,340.8 L266.5,370.5 L245.5,370.5 Z"/><circle class="fg" cx="256.0" cy="328.5" r="8.8"/><ellipse class="fs" cx="290.0" cy="391.0" rx="15.3" ry="3.7"/><rect class="fm" x="281.5" y="373.0" width="6.8" height="17.0"/><rect class="fm" x="291.7" y="373.0" width="6.8" height="17.0"/><path class="fm" d="M278.1,344.1 Q290.0,337.3 301.9,344.1 L300.2,373.0 L279.8,373.0 Z"/><circle class="fm" cx="290.0" cy="332.2" r="8.5"/><ellipse class="fs" cx="324.0" cy="389.0" rx="16.2" ry="4.0"/><rect class="fg" x="315.0" y="370.0" width="7.2" height="18.0"/><rect class="fg" x="325.8" y="370.0" width="7.2" height="18.0"/><path class="fg" d="M311.4,339.4 Q324.0,332.2 336.6,339.4 L334.8,370.0 L313.2,370.0 Z"/><circle class="fg" cx="324.0" cy="326.8" r="9.0"/><ellipse class="fs" cx="358.0" cy="392.0" rx="15.3" ry="3.7"/><rect class="fm" x="349.5" y="374.0" width="6.8" height="17.0"/><rect class="fm" x="359.7" y="374.0" width="6.8" height="17.0"/><path class="fm" d="M346.1,345.1 Q358.0,338.3 369.9,345.1 L368.2,374.0 L347.8,374.0 Z"/><circle class="fm" cx="358.0" cy="333.2" r="8.5"/><ellipse class="fs" cx="392.0" cy="389.0" rx="16.7" ry="4.1"/><rect class="fg" x="382.8" y="369.5" width="7.4" height="18.5"/><rect class="fg" x="393.9" y="369.5" width="7.4" height="18.5"/><path class="fg" d="M379.1,338.1 Q392.0,330.6 404.9,338.1 L403.1,369.5 L380.9,369.5 Z"/><circle class="fg" cx="392.0" cy="325.1" r="9.2"/></svg></div>
+    </div>
+    <p class="note">ข้อความอธิบายเป็นร่าง กรุณาแก้ไขให้ตรงกับหน้าที่จริงตามคำสั่งหรือประกาศของสำนักงาน · Draft text, please edit to match the official duties.</p></div></div>
+    </div>
+    </div>
+  </div></section>
+</div>
+
+<div id="ownerPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Data Owner</h1>
+      <div class="row">
+        <p>รายการถือครองรายการบัญชีข้อมูลของสำนักงาน กสทช. ประจำปี 2570</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="acc-list" id="ownerList"></div>
+    <p class="note">รายการเป็นตัวอย่างเพื่อแสดงรูปแบบ · Sample entries to show the layout.</p>
+  </div></section>
+</div>
+
+<div id="annPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>ประกาศ</h1>
+      <div class="row">
+        <p>ประกาศ แนวปฏิบัติ และมาตรฐานข้อมูลที่มีผลบังคับใช้</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="chips" role="group" aria-label="กรองประเภท">
+      <button class="chip" data-a="all" aria-pressed="true">ทั้งหมด</button>
+      <button class="chip" data-a="ประกาศ" aria-pressed="false">ประกาศ</button>
+      <button class="chip" data-a="แนวปฏิบัติ" aria-pressed="false">แนวปฏิบัติ</button>
+      <button class="chip" data-a="มาตรฐานข้อมูล" aria-pressed="false">มาตรฐานข้อมูล</button>
+    </div>
+    <div class="acc-list" id="annList">
+    <div class="acc" data-t="ประกาศ">
+      <button type="button" class="acc-h" aria-expanded="false"><span>ประกาศ (ตัวอย่างหัวข้อ 1)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>ประเภท</dt><dd>ประกาศ</dd><dt>วันที่ประกาศใช้</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    <div class="acc" data-t="แนวปฏิบัติ">
+      <button type="button" class="acc-h" aria-expanded="false"><span>แนวปฏิบัติการจัดทำ Metadata (ตัวอย่างหัวข้อ)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>ประเภท</dt><dd>แนวปฏิบัติ</dd><dt>วันที่ประกาศใช้</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    <div class="acc" data-t="มาตรฐานข้อมูล">
+      <button type="button" class="acc-h" aria-expanded="false"><span>มาตรฐานข้อมูล (ตัวอย่างหัวข้อ)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>ประเภท</dt><dd>มาตรฐานข้อมูล</dd><dt>วันที่ประกาศใช้</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    </div>
+    <p class="note">รายการเป็นตัวอย่าง กรุณาแทนที่ด้วยประกาศจริงของส่วนงานและลิงก์ไฟล์ · Sample entries, replace with the division's actual announcements.</p>
+  </div></section>
+</div>
+
+<div id="gamePage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Game</h1>
+      <div class="row">
+        <p>เนื้อหากำลังจัดทำ</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="soon">เร็ว ๆ นี้ · Coming soon</div>
+  </div></section>
+</div>
+
+<div id="manualPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Manual</h1>
+      <div class="row">
+        <p>คู่มือการใช้งานระบบและแนวปฏิบัติสำหรับผู้กรอกข้อมูลและ Data Agent</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="acc-list">
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>คู่มือการกรอกแบบฟอร์ม Metadata (ตัวอย่าง)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>รายละเอียด</dt><dd>ขั้นตอนการลงทะเบียนชุดข้อมูล</dd><dt>ปรับปรุงล่าสุด</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>คู่มือสำหรับ Data Agent (ตัวอย่าง)</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><dl class="meta"><dt>รายละเอียด</dt><dd>บทบาทและแนวปฏิบัติของผู้ประสานงานข้อมูล</dd><dt>ปรับปรุงล่าสุด</dt><dd>ตัวอย่าง</dd><dt>ไฟล์</dt><dd>รอไฟล์จริง</dd></dl></div></div>
+    </div>
+    </div>
+    <p class="note">รายการเป็นตัวอย่าง กรุณาแทนที่ด้วยคู่มือจริงและลิงก์ดาวน์โหลด · Sample entries, replace with real manuals and download links.</p>
+  </div></section>
+</div>
+
+<div id="dsPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Data Structure</h1>
+      <div class="row">
+        <p>ขั้นตอนการจัดทำโครงสร้างข้อมูลและการลงทะเบียน Metadata ชุดข้อมูลของสำนักงาน กสทช.</p>
+      </div>
+    </div>
+  </div>
+  <section class="first"><div class="wrap">
+    <div class="acc-list">
+    <div class="acc">
+      <button type="button" class="acc-h" aria-expanded="false"><span>ขั้นตอนการดำเนินการจัดทำโครงสร้างข้อมูลของสำนักงาน กสทช.</span><span class="acc-i" aria-hidden="true"></span></button>
+      <div class="acc-b"><div class="acc-in"><div class="story">
+      <div class="step">
+        <div class="plate"><svg viewBox="0 0 420 246" role="img" aria-label="ภาพประกอบ การสำรวจข้อมูล">
+<polygon class="pe" points="14.0,120.0 210.0,218.0 406.0,120.0 406.0,129.0 210.0,227.0 14.0,129.0"/>
+<polygon class="pt" points="210.0,22.0 406.0,120.0 210.0,218.0 14.0,120.0"/>
+<line class="pg" x1="185.5" y1="34.2" x2="381.5" y2="132.2"/>
+<line class="pg" x1="234.5" y1="34.2" x2="38.5" y2="132.2"/>
+<line class="pg" x1="161.0" y1="46.5" x2="357.0" y2="144.5"/>
+<line class="pg" x1="259.0" y1="46.5" x2="63.0" y2="144.5"/>
+<line class="pg" x1="136.5" y1="58.8" x2="332.5" y2="156.8"/>
+<line class="pg" x1="283.5" y1="58.8" x2="87.5" y2="156.8"/>
+<line class="pg" x1="112.0" y1="71.0" x2="308.0" y2="169.0"/>
+<line class="pg" x1="308.0" y1="71.0" x2="112.0" y2="169.0"/>
+<line class="pg" x1="87.5" y1="83.2" x2="283.5" y2="181.2"/>
+<line class="pg" x1="332.5" y1="83.2" x2="136.5" y2="181.2"/>
+<line class="pg" x1="63.0" y1="95.5" x2="259.0" y2="193.5"/>
+<line class="pg" x1="357.0" y1="95.5" x2="161.0" y2="193.5"/>
+<line class="pg" x1="38.5" y1="107.8" x2="234.5" y2="205.8"/>
+<line class="pg" x1="381.5" y1="107.8" x2="185.5" y2="205.8"/>
+<circle class="pd" cx="210.0" cy="30.8" r="3"/>
+<circle class="pd" cx="388.4" cy="120.0" r="3"/>
+<circle class="pd" cx="210.0" cy="209.2" r="3"/>
+<circle class="pd" cx="31.6" cy="120.0" r="3"/>
+<path class="cn" d="M150,112 Q176,84 205,86"/><path class="cn" d="M205,86 Q242,78 262,112"/><path class="cn" d="M205,86 Q190,125 205,148"/><path class="cn" d="M262,112 C300,90 320,72 336,50"/><polygon class="tl" points="130.0,112.0 150.0,123.0 150.0,129.0 130.0,118.0"/><polygon class="tr" points="170.0,112.0 150.0,123.0 150.0,129.0 170.0,118.0"/><polygon class="tt" points="150.0,101.0 170.0,112.0 150.0,123.0 130.0,112.0"/><circle class="gl" cx="150" cy="105" r="2.8"/><path class="gl" d="M145,112.5a5,4 0 0 1 10,0"/><polygon class="tl" points="185.0,86.0 205.0,97.0 205.0,103.0 185.0,92.0"/><polygon class="tr" points="225.0,86.0 205.0,97.0 205.0,103.0 225.0,92.0"/><polygon class="tt" points="205.0,75.0 225.0,86.0 205.0,97.0 185.0,86.0"/><path class="gl" d="M201,78h8M201,82h8M201,86h5"/><polygon class="tl" points="242.0,112.0 262.0,123.0 262.0,129.0 242.0,118.0"/><polygon class="tr" points="282.0,112.0 262.0,123.0 262.0,129.0 282.0,118.0"/><polygon class="tk" points="262.0,101.0 282.0,112.0 262.0,123.0 242.0,112.0"/><polygon class="tl" points="185.0,148.0 205.0,159.0 205.0,165.0 185.0,154.0"/><polygon class="tr" points="225.0,148.0 205.0,159.0 205.0,165.0 225.0,154.0"/><polygon class="tt" points="205.0,137.0 225.0,148.0 205.0,159.0 185.0,148.0"/><path class="gl" d="M200,145l3,3 6,-6"/><polygon class="tl" points="286.0,138.0 306.0,149.0 306.0,155.0 286.0,144.0"/><polygon class="tr" points="326.0,138.0 306.0,149.0 306.0,155.0 326.0,144.0"/><polygon class="tt" points="306.0,127.0 326.0,138.0 306.0,149.0 286.0,138.0"/><polygon class="tl" points="323.0,44.0 338.0,52.5 338.0,57.5 323.0,49.0"/><polygon class="tr" points="353.0,44.0 338.0,52.5 338.0,57.5 353.0,49.0"/><polygon class="tt" points="338.0,35.5 353.0,44.0 338.0,52.5 323.0,44.0"/>
+</svg></div>
+        <div class="txt"><span class="kick">ขั้นตอนที่ 1</span><h4>สำรวจข้อมูลภายในองค์กร</h4><p>ปรึกษา EA ได้ทำการสำรวจข้อมูลภายในองค์กรโดยอิงตามภารกิจของสำนักงาน กสทช. เพื่อให้ทราบถึงข้อมูลว่าแต่ละสำนักมีข้อมูลใดบ้างภายใต้ภารกิจของตน และทำการระบุเจ้าของข้อมูล แหล่งที่มา เพื่อให้เห็นภาพรวมว่ามีข้อมูลอะไรอยู่ที่ใดบ้าง</p></div>
+      </div>
+      <div class="step">
+        <div class="plate"><svg viewBox="0 0 420 246" role="img" aria-label="ภาพประกอบ การกำหนดโครงสร้างข้อมูล">
+<polygon class="pe" points="14.0,120.0 210.0,218.0 406.0,120.0 406.0,129.0 210.0,227.0 14.0,129.0"/>
+<polygon class="pt" points="210.0,22.0 406.0,120.0 210.0,218.0 14.0,120.0"/>
+<line class="pg" x1="185.5" y1="34.2" x2="381.5" y2="132.2"/>
+<line class="pg" x1="234.5" y1="34.2" x2="38.5" y2="132.2"/>
+<line class="pg" x1="161.0" y1="46.5" x2="357.0" y2="144.5"/>
+<line class="pg" x1="259.0" y1="46.5" x2="63.0" y2="144.5"/>
+<line class="pg" x1="136.5" y1="58.8" x2="332.5" y2="156.8"/>
+<line class="pg" x1="283.5" y1="58.8" x2="87.5" y2="156.8"/>
+<line class="pg" x1="112.0" y1="71.0" x2="308.0" y2="169.0"/>
+<line class="pg" x1="308.0" y1="71.0" x2="112.0" y2="169.0"/>
+<line class="pg" x1="87.5" y1="83.2" x2="283.5" y2="181.2"/>
+<line class="pg" x1="332.5" y1="83.2" x2="136.5" y2="181.2"/>
+<line class="pg" x1="63.0" y1="95.5" x2="259.0" y2="193.5"/>
+<line class="pg" x1="357.0" y1="95.5" x2="161.0" y2="193.5"/>
+<line class="pg" x1="38.5" y1="107.8" x2="234.5" y2="205.8"/>
+<line class="pg" x1="381.5" y1="107.8" x2="185.5" y2="205.8"/>
+<circle class="pd" cx="210.0" cy="30.8" r="3"/>
+<circle class="pd" cx="388.4" cy="120.0" r="3"/>
+<circle class="pd" cx="210.0" cy="209.2" r="3"/>
+<circle class="pd" cx="31.6" cy="120.0" r="3"/>
+<polygon class="tl" points="189.0,76.0 210.0,87.5 210.0,93.5 189.0,82.0"/><polygon class="tr" points="231.0,76.0 210.0,87.5 210.0,93.5 231.0,82.0"/><polygon class="tg" points="210.0,64.5 231.0,76.0 210.0,87.5 189.0,76.0"/><polygon class="tl" points="149.0,97.0 170.0,108.5 170.0,114.5 149.0,103.0"/><polygon class="tr" points="191.0,97.0 170.0,108.5 170.0,114.5 191.0,103.0"/><polygon class="tt" points="170.0,85.5 191.0,97.0 170.0,108.5 149.0,97.0"/><polygon class="tl" points="229.0,97.0 250.0,108.5 250.0,114.5 229.0,103.0"/><polygon class="tr" points="271.0,97.0 250.0,108.5 250.0,114.5 271.0,103.0"/><polygon class="tt" points="250.0,85.5 271.0,97.0 250.0,108.5 229.0,97.0"/><polygon class="tl" points="109.0,118.0 130.0,129.5 130.0,135.5 109.0,124.0"/><polygon class="tr" points="151.0,118.0 130.0,129.5 130.0,135.5 151.0,124.0"/><polygon class="tt" points="130.0,106.5 151.0,118.0 130.0,129.5 109.0,118.0"/><polygon class="tl" points="189.0,118.0 210.0,129.5 210.0,135.5 189.0,124.0"/><polygon class="tr" points="231.0,118.0 210.0,129.5 210.0,135.5 231.0,124.0"/><polygon class="tk" points="210.0,106.5 231.0,118.0 210.0,129.5 189.0,118.0"/><polygon class="tl" points="269.0,118.0 290.0,129.5 290.0,135.5 269.0,124.0"/><polygon class="tr" points="311.0,118.0 290.0,129.5 290.0,135.5 311.0,124.0"/><polygon class="tt" points="290.0,106.5 311.0,118.0 290.0,129.5 269.0,118.0"/><polygon class="tl" points="149.0,139.0 170.0,150.5 170.0,156.5 149.0,145.0"/><polygon class="tr" points="191.0,139.0 170.0,150.5 170.0,156.5 191.0,145.0"/><polygon class="tt" points="170.0,127.5 191.0,139.0 170.0,150.5 149.0,139.0"/><polygon class="tl" points="229.0,139.0 250.0,150.5 250.0,156.5 229.0,145.0"/><polygon class="tr" points="271.0,139.0 250.0,150.5 250.0,156.5 271.0,145.0"/><polygon class="tt" points="250.0,127.5 271.0,139.0 250.0,150.5 229.0,139.0"/><polygon class="tl" points="189.0,160.0 210.0,171.5 210.0,177.5 189.0,166.0"/><polygon class="tr" points="231.0,160.0 210.0,171.5 210.0,177.5 231.0,166.0"/><polygon class="tg" points="210.0,148.5 231.0,160.0 210.0,171.5 189.0,160.0"/>
+</svg></div>
+        <div class="txt"><span class="kick">ขั้นตอนที่ 2</span><h4>กำหนดโครงสร้างให้ข้อมูล</h4><p>เป็นขั้นตอนที่สำคัญ โดยมอบหมายให้เจ้าของข้อมูล (Data Owner) และผู้แทนของสำนัก (Data Agent) ดำเนินการร่วมกันเพื่อกำหนดรายละเอียดของแต่ละชุดข้อมูล เช่น ชื่อ คำอธิบาย หมวดหมู่ ความถี่ในการปรับปรุง และพจนานุกรมข้อมูล (Data Dictionary) เพื่อให้ผู้ใช้อ่านและตีความข้อมูลได้ตรงกันเกี่ยวกับตัวข้อมูล และเพื่อความสะดวกในการที่บุคลากรภายในองคืกรจะสามารถนำข้อมูลเหล่านั้นไปใช้งานต่อได้อย่างมีประสิทธิภาพ</p></div>
+      </div>
+      <div class="step">
+        <div class="plate"><svg viewBox="0 0 420 246" role="img" aria-label="ภาพประกอบ การนำเข้าระบบ Data Catalog">
+<polygon class="pe" points="14.0,120.0 210.0,218.0 406.0,120.0 406.0,129.0 210.0,227.0 14.0,129.0"/>
+<polygon class="pt" points="210.0,22.0 406.0,120.0 210.0,218.0 14.0,120.0"/>
+<line class="pg" x1="185.5" y1="34.2" x2="381.5" y2="132.2"/>
+<line class="pg" x1="234.5" y1="34.2" x2="38.5" y2="132.2"/>
+<line class="pg" x1="161.0" y1="46.5" x2="357.0" y2="144.5"/>
+<line class="pg" x1="259.0" y1="46.5" x2="63.0" y2="144.5"/>
+<line class="pg" x1="136.5" y1="58.8" x2="332.5" y2="156.8"/>
+<line class="pg" x1="283.5" y1="58.8" x2="87.5" y2="156.8"/>
+<line class="pg" x1="112.0" y1="71.0" x2="308.0" y2="169.0"/>
+<line class="pg" x1="308.0" y1="71.0" x2="112.0" y2="169.0"/>
+<line class="pg" x1="87.5" y1="83.2" x2="283.5" y2="181.2"/>
+<line class="pg" x1="332.5" y1="83.2" x2="136.5" y2="181.2"/>
+<line class="pg" x1="63.0" y1="95.5" x2="259.0" y2="193.5"/>
+<line class="pg" x1="357.0" y1="95.5" x2="161.0" y2="193.5"/>
+<line class="pg" x1="38.5" y1="107.8" x2="234.5" y2="205.8"/>
+<line class="pg" x1="381.5" y1="107.8" x2="185.5" y2="205.8"/>
+<circle class="pd" cx="210.0" cy="30.8" r="3"/>
+<circle class="pd" cx="388.4" cy="120.0" r="3"/>
+<circle class="pd" cx="210.0" cy="209.2" r="3"/>
+<circle class="pd" cx="31.6" cy="120.0" r="3"/>
+<path class="cn" d="M122,96 C170,96 190,118 224,128"/><path class="cn" d="M150,128 C180,128 195,134 224,138"/><path class="cn" d="M122,152 C170,152 190,146 224,146"/><path class="cn" d="M178,84 C200,92 210,112 232,122"/><path class="cn" d="M282,140 C330,142 372,150 400,168"/><polygon class="tl" points="106.0,96.0 122.0,105.0 122.0,110.0 106.0,101.0"/><polygon class="tr" points="138.0,96.0 122.0,105.0 122.0,110.0 138.0,101.0"/><polygon class="tt" points="122.0,87.0 138.0,96.0 122.0,105.0 106.0,96.0"/><polygon class="tl" points="134.0,128.0 150.0,137.0 150.0,142.0 134.0,133.0"/><polygon class="tr" points="166.0,128.0 150.0,137.0 150.0,142.0 166.0,133.0"/><polygon class="tt" points="150.0,119.0 166.0,128.0 150.0,137.0 134.0,128.0"/><polygon class="tl" points="106.0,152.0 122.0,161.0 122.0,166.0 106.0,157.0"/><polygon class="tr" points="138.0,152.0 122.0,161.0 122.0,166.0 138.0,157.0"/><polygon class="tt" points="122.0,143.0 138.0,152.0 122.0,161.0 106.0,152.0"/><polygon class="tl" points="162.0,84.0 178.0,93.0 178.0,98.0 162.0,89.0"/><polygon class="tr" points="194.0,84.0 178.0,93.0 178.0,98.0 194.0,89.0"/><polygon class="tt" points="178.0,75.0 194.0,84.0 178.0,93.0 162.0,84.0"/><polygon class="tl" points="212.0,140.0 258.0,165.0 258.0,175.0 212.0,150.0"/><polygon class="tr" points="304.0,140.0 258.0,165.0 258.0,175.0 304.0,150.0"/><polygon class="tk" points="258.0,115.0 304.0,140.0 258.0,165.0 212.0,140.0"/>
+</svg></div>
+        <div class="txt"><span class="kick">ขั้นตอนที่ 3</span><h4>เชื่อข้อมูลขึ้นระบบ Data Catalog </h4><p>หลังจากที่ข้อมูลมีความครบถ้วนและได้รับการตรวจสอบความถูกต้องจากทีมงานส่วนวิเคราะห์ข้อมูลเรียบร้อยแล้ว จะทำการเชื่อมข้อมูลขึ้นระบบ Datacatalog.go.th เพื่อเผยแพร่ให้ผู้ที่เกี่ยวข้องค้นหา รับรู้ และนำข้อมูลไปใช้ประโยชน์ต่อได้</p></div>
+      </div>
+    </div>
+    <p class="note">ข้อความอธิบายขั้นตอนเป็นร่าง กรุณาแก้ไขให้ตรงกับขั้นตอนจริงของสำนักงาน · Draft text, please edit to match the official process.</p></div></div>
+    </div>
+    <div class="acc">
+      <a class="acc-h" href="#metadata"><span>ฟอร์มสำหรับการลงทะเบียน Metadata ข้อมูล</span><svg class="acc-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    </div>
+  </div></section>
+</div>
+
+<div id="metaPage" hidden>
+  <div class="hero short">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Metadata &amp; Data Dictionary</h1>
+      <div class="row">
+        <p>ฟอร์มสำหรับกรอกลงทะเบียนชุดข้อมูลของสำนักงาน กสทช.</p>
+      </div>
+    </div>
+  </div>
+  <section class="first section-first"><div class="wrap">
+<form id="metadata-form" novalidate>
   <div class="px-5 sm:px-9 py-6 border-b flex flex-wrap items-center justify-between gap-3" style="border-color:var(--line)">
    <div>
     <h2 class="text-2xl">ลงทะเบียน Metadata ชุดข้อมูล</h2>
@@ -284,13 +899,13 @@ textarea.field-control{min-height:112px;resize:vertical}
    </div>
   </div>
 
-  <div class="px-5 sm:px-9 py-6 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5" style="background:#f8faff;border-color:var(--line)">
+  <div class="px-5 sm:px-9 py-6 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5" style="background:#F0EBE9;border-color:var(--line)">
    <div>
     <p id="page-indicator" class="font-semibold" style="color:var(--navy)">หน้า 1 จาก 3</p>
     <p class="sub max-w-md">โปรดตรวจสอบข้อมูลก่อนส่ง ระบบจะส่งรายการเข้าสู่กระบวนการตรวจสอบ</p>
    </div>
    <div class="flex flex-col-reverse sm:flex-row gap-3">
-    <button id="back-button" type="button" class="btn" style="background:#fff;color:var(--navy);border:1px solid #cbd7e6;box-shadow:none" hidden>‹ ย้อนกลับ</button>
+    <button id="back-button" type="button" class="btn" style="background:#fff;color:var(--navy);border:1px solid var(--edge);box-shadow:none" hidden>‹ ย้อนกลับ</button>
     <button id="next-button" type="button" class="btn inline-flex justify-center items-center gap-2"><span>หน้าถัดไป</span><span aria-hidden="true">›</span></button>
     <button id="submit-button" type="submit" class="btn inline-flex justify-center items-center gap-2" hidden>
      <span id="submit-label">บันทึกข้อมูล (Submit Metadata)</span><span id="loading-label" hidden>กำลังส่งข้อมูล...</span>
@@ -298,9 +913,7 @@ textarea.field-control{min-height:112px;resize:vertical}
    </div>
   </div>
  </form>
-</main>
-<footer class="max-w-5xl mx-auto px-5 pb-9 text-center sub">Internal Use Only • Metadata Governance Portal</footer>
-
+  </div></section>
 <div id="result-modal" class="modal-backdrop" hidden>
  <div role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-message" class="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 sm:p-8 relative">
   <button id="modal-close" type="button" aria-label="ปิดหน้าต่าง" class="absolute right-5 top-4 text-slate-500 hover:text-slate-900 rounded-lg p-1 text-2xl leading-none">×</button>
@@ -311,7 +924,263 @@ textarea.field-control{min-height:112px;resize:vertical}
   <button id="modal-action" type="button" class="btn mt-7 w-full" style="background:var(--navy)">ปิดหน้าต่าง</button>
  </div>
 </div>
+</div>
+</main>
 
+<footer id="contact">
+  <div class="wrap foot">
+    <div>
+      <b>Contact Us</b>
+      <div>E-mail: <a href="mailto:itdatacenter@nbtc.go.th">itdatacenter@nbtc.go.th</a></div>
+      <div>Tel: 2846 &nbsp;2854 &nbsp;2874 &nbsp;2815</div>
+    </div>
+    <div class="en">เอกสารและข้อมูลในเว็บนี้ใช้ภายในองค์กรเท่านั้น / For internal use only</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var chips=document.querySelectorAll('[data-f]');
+  chips.forEach(function(b){b.addEventListener('click',function(){
+    chips.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    var f=b.dataset.f;
+    document.querySelectorAll('#newsList li').forEach(function(li){li.hidden=!(f==='all'||li.dataset.c===f)});
+  })});
+  /* ===== รายชื่อ Data Agent: แก้ไข/วางรายชื่อจริงที่นี่ (ชื่อ-นามสกุล, ตำแหน่ง, สำนัก, เบอร์ติดต่อ, อีเมล) ===== */
+  var AGENTS=[
+  ["ชื่อ-นามสกุล (ตัวอย่าง 1)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกิจการดาวเทียมสื่อสาร (ดบ.)", "xxxx", "name1@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 2)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการคลัง (ลย.)", "xxxx", "name2@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 3)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)", "xxxx", "name3@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 4)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)", "xxxx", "name4@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 5)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)", "xxxx", "name5@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 6)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคลื่นความถี่ (คบ.)", "xxxx", "name6@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 7)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการพัสดุและบริหารทรัพย์สิน (พย.)", "xxxx", "name7@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 8)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)", "xxxx", "name8@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 9)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)", "xxxx", "name9@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 10)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)", "xxxx", "name10@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 11)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกองทุนวิจัยและพัฒนา (ทบ.)", "xxxx", "name11@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 12)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคดีและนิติการ (นย.)", "xxxx", "name12@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 13)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)", "xxxx", "name13@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 14)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)", "xxxx", "name14@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 15)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)", "xxxx", "name15@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 16)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)", "xxxx", "name16@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 17)", "ตำแหน่ง (ตัวอย่าง)", "สำนักทรัพยากรบุคคล (บย.)", "xxxx", "name17@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 18)", "ตำแหน่ง (ตัวอย่าง)", "สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)", "xxxx", "name18@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 19)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)", "xxxx", "name19@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 20)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)", "xxxx", "name20@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 21)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสื่อสารองค์กร (สบ.)", "xxxx", "name21@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 22)", "ตำแหน่ง (ตัวอย่าง)", "สำนักยุทธศาสตร์และการงบประมาณ (ยย.)", "xxxx", "name22@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 23)", "ตำแหน่ง (ตัวอย่าง)", "สถาบันวิทยาการ (วย.)", "xxxx", "name23@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 24)", "ตำแหน่ง (ตัวอย่าง)", "สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)", "xxxx", "name24@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 25)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายโทรคมนาคม (มท.)", "xxxx", "name25@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 26)", "ตำแหน่ง (ตัวอย่าง)", "สำนักอำนวยการกลาง (อบ.)", "xxxx", "name26@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 27)", "ตำแหน่ง (ตัวอย่าง)", "สำนักเทคโนโลยีสารสนเทศ (นบ.)", "xxxx", "name27@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 28)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรดิจิทัล (ดย.)", "xxxx", "name28@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 29)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)", "xxxx", "name29@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 30)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)", "xxxx", "name30@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 31)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกรรมการและเลขาธิการ (กบ.)", "xxxx", "name31@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 32)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารข้อมูลกลาง (บบ.)", "xxxx", "name32@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 33)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการต่างประเทศ (ตย.)", "xxxx", "name33@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 34)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโครงข่าย สิ่งอำนวยความสะดวก และเครื่องวิทยุคมนาคม (ขส.)", "xxxx", "name34@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 35)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการกระจายเสียงและโทรทัศน์ (บส.)", "xxxx", "name35@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 36)", "ตำแหน่ง (ตัวอย่าง)", "สำนักประธานกรรมการและการประชุม (ปบ.)", "xxxx", "name36@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 37)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกิจการดาวเทียมสื่อสาร (ดบ.)", "xxxx", "name37@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 38)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการคลัง (ลย.)", "xxxx", "name38@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 39)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)", "xxxx", "name39@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 40)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)", "xxxx", "name40@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 41)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)", "xxxx", "name41@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 42)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคลื่นความถี่ (คบ.)", "xxxx", "name42@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 43)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการพัสดุและบริหารทรัพย์สิน (พย.)", "xxxx", "name43@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 44)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)", "xxxx", "name44@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 45)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)", "xxxx", "name45@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 46)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)", "xxxx", "name46@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 47)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกองทุนวิจัยและพัฒนา (ทบ.)", "xxxx", "name47@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 48)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคดีและนิติการ (นย.)", "xxxx", "name48@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 49)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)", "xxxx", "name49@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 50)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)", "xxxx", "name50@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 51)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)", "xxxx", "name51@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 52)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)", "xxxx", "name52@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 53)", "ตำแหน่ง (ตัวอย่าง)", "สำนักทรัพยากรบุคคล (บย.)", "xxxx", "name53@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 54)", "ตำแหน่ง (ตัวอย่าง)", "สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)", "xxxx", "name54@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 55)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)", "xxxx", "name55@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 56)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)", "xxxx", "name56@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 57)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสื่อสารองค์กร (สบ.)", "xxxx", "name57@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 58)", "ตำแหน่ง (ตัวอย่าง)", "สำนักยุทธศาสตร์และการงบประมาณ (ยย.)", "xxxx", "name58@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 59)", "ตำแหน่ง (ตัวอย่าง)", "สถาบันวิทยาการ (วย.)", "xxxx", "name59@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 60)", "ตำแหน่ง (ตัวอย่าง)", "สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)", "xxxx", "name60@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 61)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายโทรคมนาคม (มท.)", "xxxx", "name61@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 62)", "ตำแหน่ง (ตัวอย่าง)", "สำนักอำนวยการกลาง (อบ.)", "xxxx", "name62@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 63)", "ตำแหน่ง (ตัวอย่าง)", "สำนักเทคโนโลยีสารสนเทศ (นบ.)", "xxxx", "name63@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 64)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรดิจิทัล (ดย.)", "xxxx", "name64@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 65)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)", "xxxx", "name65@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 66)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)", "xxxx", "name66@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 67)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกรรมการและเลขาธิการ (กบ.)", "xxxx", "name67@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 68)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารข้อมูลกลาง (บบ.)", "xxxx", "name68@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 69)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการต่างประเทศ (ตย.)", "xxxx", "name69@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 70)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโครงข่าย สิ่งอำนวยความสะดวก และเครื่องวิทยุคมนาคม (ขส.)", "xxxx", "name70@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 71)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับเรื่องร้องเรียนและคุ้มครองผู้บริโภคในกิจการกระจายเสียงและโทรทัศน์ (บส.)", "xxxx", "name71@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 72)", "ตำแหน่ง (ตัวอย่าง)", "สำนักประธานกรรมการและการประชุม (ปบ.)", "xxxx", "name72@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 73)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกิจการดาวเทียมสื่อสาร (ดบ.)", "xxxx", "name73@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 74)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการคลัง (ลย.)", "xxxx", "name74@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 75)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการกระจายเสียงและโทรทัศน์ (ปส.)", "xxxx", "name75@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 76)", "ตำแหน่ง (ตัวอย่าง)", "สำนักรับรองมาตรฐานวิศวกรรมในกิจการกระจายเสียงและโทรทัศน์ (รส.)", "xxxx", "name76@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 77)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับดูแลกิจการโทรคมนาคม (ดท.)", "xxxx", "name77@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 78)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคลื่นความถี่ (คบ.)", "xxxx", "name78@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 79)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการพัสดุและบริหารทรัพย์สิน (พย.)", "xxxx", "name79@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 80)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการกระจายเสียงและโทรทัศน์ (นส.)", "xxxx", "name80@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 81)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิศวกรรมและเทคโนโลยีในกิจการกระจายเสียงและโทรทัศน์ (ทส.)", "xxxx", "name81@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 82)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 2 (ปท. 2)", "xxxx", "name82@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 83)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกองทุนวิจัยและพัฒนา (ทบ.)", "xxxx", "name83@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 84)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารคดีและนิติการ (นย.)", "xxxx", "name84@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 85)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายกระจายเสียงและโทรทัศน์ (มส.)", "xxxx", "name85@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 86)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรวิชาชีพและส่งเสริมการบริการทั่วถึง (ชส.)", "xxxx", "name86@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 87)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการอนุญาตประกอบกิจการโทรคมนาคม 1 (ปท. 1)", "xxxx", "name87@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 88)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสนับสนุนการตรวจสอบภายใน ติดตามประเมินผล และต่อต้านการทุจริต (ตบ.)", "xxxx", "name88@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 89)", "ตำแหน่ง (ตัวอย่าง)", "สำนักทรัพยากรบุคคล (บย.)", "xxxx", "name89@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 90)", "ตำแหน่ง (ตัวอย่าง)", "สำนักนโยบายและวิชาการกระจายเสียงและโทรทัศน์ (วส.)", "xxxx", "name90@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 91)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับผัง เนื้อหารายการและพัฒนาผู้ประกาศในกิจการกระจายเสียงและโทรทัศน์ (ผส.)", "xxxx", "name91@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 92)", "ตำแหน่ง (ตัวอย่าง)", "สำนักค่าธรรมเนียมและอัตราค่าบริการในกิจการโทรคมนาคม (นท.)", "xxxx", "name92@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 93)", "ตำแหน่ง (ตัวอย่าง)", "สำนักสื่อสารองค์กร (สบ.)", "xxxx", "name93@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 94)", "ตำแหน่ง (ตัวอย่าง)", "สำนักยุทธศาสตร์และการงบประมาณ (ยย.)", "xxxx", "name94@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 95)", "ตำแหน่ง (ตัวอย่าง)", "สถาบันวิทยาการ (วย.)", "xxxx", "name95@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 96)", "ตำแหน่ง (ตัวอย่าง)", "สำนักส่งเสริมการแข่งขันและกำกับดูแลกันเอง (สส.)", "xxxx", "name96@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 97)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกฎหมายโทรคมนาคม (มท.)", "xxxx", "name97@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 98)", "ตำแหน่ง (ตัวอย่าง)", "สำนักอำนวยการกลาง (อบ.)", "xxxx", "name98@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 99)", "ตำแหน่ง (ตัวอย่าง)", "สำนักเทคโนโลยีสารสนเทศ (นบ.)", "xxxx", "name99@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 100)", "ตำแหน่ง (ตัวอย่าง)", "สำนักพัฒนาองค์กรดิจิทัล (ดย.)", "xxxx", "name100@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 101)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกำกับการใช้คลื่นความถี่ในกิจการกระจายเสียงและโทรทัศน์ (คส.)", "xxxx", "name101@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 102)", "ตำแหน่ง (ตัวอย่าง)", "สำนักวิชาการและจัดการทรัพยากรโทรคมนาคม (วท.)", "xxxx", "name102@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 103)", "ตำแหน่ง (ตัวอย่าง)", "สำนักกรรมการและเลขาธิการ (กบ.)", "xxxx", "name103@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 104)", "ตำแหน่ง (ตัวอย่าง)", "สำนักบริหารข้อมูลกลาง (บบ.)", "xxxx", "name104@example.go.th"],
+  ["ชื่อ-นามสกุล (ตัวอย่าง 105)", "ตำแหน่ง (ตัวอย่าง)", "สำนักการต่างประเทศ (ตย.)", "xxxx", "name105@example.go.th"]
+];
+  var st={q:'',unit:'',k:-1,dir:1,page:1,size:20};
+  var rowsEl=document.getElementById('agentRows'),pagerEl=document.getElementById('pager'),countEl=document.getElementById('agentCount'),unitSel=document.getElementById('unitFilter');
+  function thSort(a,b){return String(a).localeCompare(String(b),'th')}
+  Array.from(new Set(AGENTS.map(function(r){return r[2]}))).sort(thSort).forEach(function(u){
+    var o=document.createElement('option');o.value=u;o.textContent=u;unitSel.appendChild(o);
+  });
+  function renderAgents(){
+    var q=st.q.toLowerCase();
+    var list=AGENTS.filter(function(r){
+      return (!st.unit||r[2]===st.unit)&&(!q||r.join(' ').toLowerCase().indexOf(q)>-1);
+    });
+    if(st.k>-1)list=list.slice().sort(function(a,b){return thSort(a[st.k],b[st.k])*st.dir});
+    var pages=Math.max(1,Math.ceil(list.length/st.size));
+    if(st.page>pages)st.page=pages;
+    var start=(st.page-1)*st.size,slice=list.slice(start,start+st.size);
+    rowsEl.textContent='';
+    if(!slice.length){
+      var tr=document.createElement('tr'),td=document.createElement('td');
+      td.colSpan=5;td.className='empty';td.textContent='ไม่พบรายชื่อที่ตรงกับการค้นหา';tr.appendChild(td);rowsEl.appendChild(tr);
+    }
+    slice.forEach(function(r){
+      var tr=document.createElement('tr');
+      r.forEach(function(v,i){
+        var td=document.createElement('td');
+        if(i===4&&v.indexOf('@')>0){var a=document.createElement('a');a.href='mailto:'+v;a.textContent=v;td.appendChild(a)}
+        else td.textContent=v;
+        tr.appendChild(td);
+      });
+      rowsEl.appendChild(tr);
+    });
+    countEl.textContent=list.length?('แสดง '+(start+1)+'–'+(start+slice.length)+' จาก '+list.length+' คน'+(list.length<AGENTS.length?' (ทั้งหมด '+AGENTS.length+')':'')):('ไม่พบรายการ (ทั้งหมด '+AGENTS.length+' คน)');
+    document.querySelectorAll('.sort').forEach(function(b){
+      b.parentNode.setAttribute('aria-sort',+b.dataset.k===st.k?(st.dir===1?'ascending':'descending'):'none');
+    });
+    pagerEl.textContent='';
+    if(pages<2)return;
+    function btn(label,p,opts){
+      var b=document.createElement('button');b.type='button';b.textContent=label;b.dataset.p=p;
+      if(opts&&opts.disabled)b.disabled=true;
+      if(opts&&opts.current)b.setAttribute('aria-current','page');
+      if(opts&&opts.aria)b.setAttribute('aria-label',opts.aria);
+      pagerEl.appendChild(b);
+    }
+    btn('‹',st.page-1,{disabled:st.page===1,aria:'หน้าก่อนหน้า'});
+    var last=0;
+    for(var p=1;p<=pages;p++){
+      if(p===1||p===pages||Math.abs(p-st.page)<=1){
+        if(last&&p-last>1){var g=document.createElement('span');g.className='gap';g.textContent='…';pagerEl.appendChild(g)}
+        btn(p,p,{current:p===st.page,aria:'หน้า '+p});last=p;
+      }
+    }
+    btn('›',st.page+1,{disabled:st.page===pages,aria:'หน้าถัดไป'});
+  }
+  document.getElementById('q').addEventListener('input',function(e){st.q=e.target.value.trim();st.page=1;renderAgents()});
+  unitSel.addEventListener('change',function(){st.unit=unitSel.value;st.page=1;renderAgents()});
+  document.querySelectorAll('.sort').forEach(function(b){b.addEventListener('click',function(){
+    var k=+b.dataset.k;if(st.k===k)st.dir=-st.dir;else{st.k=k;st.dir=1}st.page=1;renderAgents();
+  })});
+  pagerEl.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b||b.disabled)return;
+    st.page=+b.dataset.p;renderAgents();
+    document.querySelector('.agent-tools').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  renderAgents();
+  var dd=document.getElementById('svcDD'),noHover=window.matchMedia('(hover:none)');
+  dd.addEventListener('click',function(e){
+    if(e.target.closest('.dd-btn')&&noHover.matches){e.preventDefault();e.stopPropagation();dd.classList.toggle('open')}
+  },true);
+  dd.querySelectorAll('.dd-menu a').forEach(function(a){a.addEventListener('click',function(){
+    dd.classList.remove('open');dd.classList.add('shut');a.blur();
+  })});
+  dd.addEventListener('mouseleave',function(){dd.classList.remove('shut')});
+  document.addEventListener('click',function(e){if(!dd.contains(e.target))dd.classList.remove('open')});
+  var ac=document.querySelectorAll('[data-a]');
+  ac.forEach(function(b){b.addEventListener('click',function(){
+    ac.forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    var f=b.dataset.a;
+    document.querySelectorAll('#annList .acc').forEach(function(tr){tr.hidden=!(f==='all'||tr.dataset.t===f)});
+  })});
+  var track=document.getElementById('svcTrack'),prevB=document.getElementById('svcPrev'),nextB=document.getElementById('svcNext');
+  function svcUpdate(){
+    var cards=track.children,n=cards.length;if(!n||!track.clientWidth)return;
+    var gap=parseFloat(getComputedStyle(track).columnGap)||24,step=cards[0].offsetWidth+gap,idx=Math.round(track.scrollLeft/step),vis=Math.max(1,Math.floor((track.clientWidth+gap)/step));
+    prevB.disabled=track.scrollLeft<=2;nextB.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-2;
+  }
+  function svcMove(d){var c=track.children[0],gap=parseFloat(getComputedStyle(track).columnGap)||24;track.scrollBy({left:d*(c.offsetWidth+gap),behavior:'smooth'})}
+  prevB.addEventListener('click',function(){svcMove(-1)});
+  nextB.addEventListener('click',function(){svcMove(1)});
+  track.addEventListener('scroll',function(){window.requestAnimationFrame(svcUpdate)});
+  if(window.ResizeObserver)new ResizeObserver(svcUpdate).observe(track);
+  window.addEventListener('resize',svcUpdate);svcUpdate();
+  var home=document.getElementById('homeView'),agentP=document.getElementById('agentPage'),metaP=document.getElementById('metaPage'),dsP=document.getElementById('dsPage'),manualP=document.getElementById('manualPage'),ownerP=document.getElementById('ownerPage'),annP=document.getElementById('annPage'),gameP=document.getElementById('gamePage');
+  function show(v){home.hidden=v!=='home';agentP.hidden=v!=='agent';metaP.hidden=v!=='meta';dsP.hidden=v!=='ds';manualP.hidden=v!=='manual';ownerP.hidden=v!=='owner';annP.hidden=v!=='ann';gameP.hidden=v!=='game';if(v!=='home')window.scrollTo(0,0)}
+  function route(){show(location.hash==='#data-agent'?'agent':location.hash==='#metadata'?'meta':location.hash==='#data-structure'?'ds':location.hash==='#manual'?'manual':location.hash==='#data-owner'?'owner':location.hash==='#announcements'?'ann':location.hash==='#game'?'game':'home')}
+  [['#data-agent','agent'],['#metadata','meta'],['#data-structure','ds'],['#manual','manual'],['#data-owner','owner'],['#announcements','ann'],['#game','game']].forEach(function(p){
+    document.querySelectorAll('a[href="'+p[0]+'"]').forEach(function(a){a.addEventListener('click',function(e){
+      e.preventDefault();show(p[1]);try{location.hash=p[0]}catch(err){}
+    })});
+  });
+  ['#top','#services','#news'].forEach(function(h){
+    document.querySelectorAll('a[href="'+h+'"]').forEach(function(a){a.addEventListener('click',function(e){
+      if(!home.hidden)return;
+      e.preventDefault();show('home');try{history.replaceState(null,'',h)}catch(err){}
+      var t=document.querySelector(h);if(t)t.scrollIntoView();
+    })});
+  });
+  window.addEventListener('hashchange',route);
+  route();
+  var data={
+    '2570':[['บัญชีข้อมูลประจำปี 2570 (ตัวอย่าง)','หน่วยงาน ก','อยู่ระหว่างจัดทำ']],
+    '2569':[['ทะเบียนผู้รับใบอนุญาต (ตัวอย่าง)','หน่วยงาน ก','เผยแพร่แล้ว'],['สถิติการให้บริการรายไตรมาส (ตัวอย่าง)','หน่วยงาน ข','อยู่ระหว่างทบทวน']],
+    '2568':[['ข้อมูลเรื่องร้องเรียน (ตัวอย่าง)','หน่วยงาน ค','เผยแพร่แล้ว']]
+  };
+  var ownerEl=document.getElementById('ownerList');
+  Object.keys(data).sort().reverse().forEach(function(y){
+    var rows=data[y].map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td><span class="status">'+r[2]+'</span></td></tr>'}).join('');
+    var d=document.createElement('div');d.className='acc';
+    d.innerHTML='<button type="button" class="acc-h" aria-expanded="false"><span>พ.ศ. '+y+' ('+(+y-543)+')</span><span class="acc-i" aria-hidden="true"></span></button>'
+      +'<div class="acc-b"><div class="acc-in"><div class="tablewrap"><table><thead><tr><th>ชุดข้อมูล <span class="en">Dataset</span></th><th>เจ้าของข้อมูล <span class="en">Owner</span></th><th>สถานะ <span class="en">Status</span></th></tr></thead><tbody>'+rows+'</tbody></table></div></div></div>';
+    ownerEl.appendChild(d);
+  });
+  document.addEventListener('click',function(e){
+    var h=e.target.closest('.acc-h');if(!h||h.tagName==='A')return;
+    var a=h.parentNode,o=a.classList.toggle('open');h.setAttribute('aria-expanded',o);
+  });
+})();
+</script>
 <script>
 const $ = id => document.getElementById(id);
 
@@ -341,7 +1210,7 @@ const OPTIONS = {
   ['3= ข้อมูลภูมิสารสนเทศ','3= ข้อมูลภูมิสารสนเทศ — ข้อมูลหรือสารสนเทศที่มีความสัมพันธ์กับตำแหน่งในเชิงพื้นที่ เช่น แผนที่ ภาพถ่ายทางอากาศ และภาพถ่ายดาวเทียม'],
   ['4= ข้อมูลหลากหลายประเภท','4= ข้อมูลหลากหลายประเภท — ชุดข้อมูลที่รวบรวมมาจากข้อมูลหลากหลายประเภทมาจัดเป็นชุดข้อมูลตามความต้องการใช้งาน เช่น ชุดข้อมูลที่ประกอบด้วยข้อมูลระเบียน ข้อมูลสถิติ ข้อมูลภาพ เป็นต้น'],
   ['5= ข้อมูลประเภทอื่นๆ','5= ข้อมูลประเภทอื่นๆ']],
- geo_coverage: ['เลือกขอบเขตเชิงภูมิศาสตร์หรือเชิงพื้นที่','00= ไม่มี','01= โลก','02= ทวีป/กลุ่มประเทศในทวีป','03= กลุ่มประเทศทางเศรษฐกิจ','04= ประเทศ','05= ภาค','06= จังหวัด','08= ตำบล','09= หมู่บ้าน','10= เทศบาล/องค์กรปกครองส่วนท้องถิ่น','11= พิกัด','98= ไม่ทราบ'],
+ geo_coverage: ['เลือกขอบเขตเชิงภูมิศาสตร์หรือเชิงพื้นที่','00= ไม่มี','01= โลก','02= ทวีป/กลุ่มประเทศในทวีป','03= กลุ่มประเทศทางเศรษฐกิจ','04= ประเทศ','05= ภาค','06= จังหวัด','07= อำเภอ','08= ตำบล','09= หมู่บ้าน','10= เทศบาล/องค์กรปกครองส่วนท้องถิ่น','11= พิกัด','98= ไม่ทราบ'],
  access_level: [['','เลือกการจัดระดับชั้นความลับของข้อมูล'],
   ['01= ชั้นเปิดเผย (Open)','01= ชั้นเปิดเผย (Open) คือ ไม่มีการจำกัดการเข้าถึงข้อมูล ข้อมูลทั่วไปที่ไม่ลับหรือไม่อ่อนไหว สามารถเปิดเผยให้แก่สาธารณชนได้'],
   ['02= ชั้นเผยแพร่ภายในองค์กร (Private)','02= ชั้นเผยแพร่ภายในองค์กร (Private) คือ เฉพาะบุคคลภายในหน่วยงาน ข้อมูลที่มีเนื้อหาไม่ลับหรือไม่อ่อนไหว สามารถใช้งานร่วมกันได้ภายในสำนักงาน'],
@@ -681,6 +1550,7 @@ $('metadata-form').addEventListener('submit', async (e) => {
   loadingLabel.hidden = true;
  }
 });
+
 </script>
 </body>
 </html>
