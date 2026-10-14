@@ -11,13 +11,13 @@ A responsive web portal designed for the **Data Analysis and Technical Support S
 - **Data Owner & Knowledge Hub:** Tracking data ownership and resource sharing.
 - **Integrated Services:** Quick access links to Data Catalog, Data Center, and Open Data platforms.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **HTML5 / CSS3 / JavaScript (Vanilla JS)**
 - **Responsive Layout & Modern CSS Variables** (Supports light/dark themes and secure-area-inset adaptation)
 - **Zero-Dependency Architecture:** Lightweight and fast-loading single-file / multi-view component layout.
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 ├── division-portal.html     # Main Single-Page Application (SPA) view container
